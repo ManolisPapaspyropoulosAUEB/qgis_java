@@ -1,0 +1,8 @@
+New log file opened at Sun Jun 14 01:03:48 EEST 2020 by 9348@DESKTOP-JSAM71T
+Taking next connection to: 52379
+Checking to see if clients are empty...
+No non-daemon clients connected after 3 min. Shutting down.
+Server socket thread exiting.
+0 clients open, will close them...
+All client sockets have been closed.
+Closing the 9348@DESKTOP-JSAM71T logs at Sun Jun 14 01:06:48 EEST 2020, goodbye.

@@ -1,0 +1,58 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# An example controller showing a sample home page
+GET         /                             controllers.HomeController.index
+# An example controller showing how to use dependency injection
+GET         /count                        controllers.CountController.count
+# An example controller showing how to write asynchronous code
+GET         /message                      controllers.AsyncController.message
+#books
+#OPTIONS /*all                           controllers.Application.preflight(all)
+
+
+# Map static resources from the /public folder to the /iets URL path
+GET         /assets/*file                 controllers.Assets.versioned(path="/public", file: Asset)
+GET         /app/*file                    controllers.WebAppAssets.at(path="webapp/", file: String)
+
+
+
+#GeneralController
+
+POST        /getAllProvinces              GeneralApi.GeneralController.getAllProvinces()
+POST        /getAllDistricts              GeneralApi.GeneralController.getAllDistricts()
+
+#GeneralController
+POST        /getAllCriteriaMaster         GeneralApi.CoreDataController.getAllCriteriaMaster()
+
+
+#RoadsController
+
+POST        /getAllFromRoads              controllers.RoadController.getAllFromRoads()
+POST        /calculateCriteria            controllers.RoadController.calculateCriteria()
+POST        /resetCriteria                controllers.RoadController.resetCriteria()
+POST        /updateSoftwareAccount        controllers.RoadController.updateSoftwareAccount()
+
+
+#FacilitiesController
+
+POST        /getAllFacilities             controllers.FacilitiesController.getAllFacilities()
+
+
+#VillagesController
+
+POST        /getAllVillages               controllers.VillageController.getAllVillages()
+
+
+
+
+
+
+
+
+
+
+
+
+

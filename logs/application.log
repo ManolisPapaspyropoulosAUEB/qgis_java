@@ -1,0 +1,282 @@
+2020-07-20 11:19:37,977 [WARN] from application in ForkJoinPool-1-worker-2 - Logger configuration in conf files is deprecated and has no effect. Use a logback configuration file instead.
+2020-07-20 11:19:38,695 [WARN] from application in ForkJoinPool-1-worker-2 - application.conf @ file:/C:/developm/qgis_angular/back/target/scala-2.11/classes/application.conf: 137: user is deprecated, use username instead
+2020-07-20 11:19:38,733 [INFO] from application in ForkJoinPool-1-worker-2 - Creating Pool for datasource 'default'
+2020-07-20 11:19:39,331 [INFO] from play.api.db.HikariCPConnectionPool in ForkJoinPool-1-worker-2 - datasource [default] bound to JNDI as DefaultDS
+2020-07-20 11:19:39,349 [INFO] from play.api.db.DefaultDBApi in ForkJoinPool-1-worker-2 - Database [default] connected at jdbc:mysql://localhost:3306/afggis_db?characterEncoding=UTF-8
+2020-07-20 11:19:39,718 [INFO] from application in ForkJoinPool-1-worker-2 - ApplicationTimer demo: Starting application at 2020-07-20T08:19:39.717Z
+2020-07-20 11:19:40,191 [INFO] from play.api.Play in ForkJoinPool-1-worker-2 - Application started (Dev)
+2020-07-20 13:18:06,513 [INFO] from application in application-akka.actor.default-dispatcher-2 - ApplicationTimer demo: Stopping application at 2020-07-20T10:18:06.513Z after 7107s.
+2020-07-20 13:18:06,516 [INFO] from application in application-akka.actor.default-dispatcher-2 - Shutting down connection pool.
+2020-07-20 13:18:06,598 [WARN] from application in application-akka.actor.default-dispatcher-2 - Logger configuration in conf files is deprecated and has no effect. Use a logback configuration file instead.
+2020-07-20 13:18:06,662 [WARN] from application in application-akka.actor.default-dispatcher-2 - application.conf @ file:/C:/developm/qgis_angular/back/target/scala-2.11/classes/application.conf: 137: user is deprecated, use username instead
+2020-07-20 13:18:06,662 [INFO] from application in application-akka.actor.default-dispatcher-2 - Creating Pool for datasource 'default'
+2020-07-20 13:18:06,669 [INFO] from play.api.db.HikariCPConnectionPool in application-akka.actor.default-dispatcher-2 - datasource [default] bound to JNDI as DefaultDS
+2020-07-20 13:18:06,674 [INFO] from play.api.db.DefaultDBApi in application-akka.actor.default-dispatcher-2 - Database [default] connected at jdbc:mysql://localhost:3306/afggis_db?characterEncoding=UTF-8
+2020-07-20 13:18:06,681 [INFO] from application in application-akka.actor.default-dispatcher-2 - ApplicationTimer demo: Starting application at 2020-07-20T10:18:06.681Z
+2020-07-20 13:18:06,767 [INFO] from play.api.Play in application-akka.actor.default-dispatcher-2 - Application started (Dev)
+2020-07-20 13:23:25,666 [INFO] from application in application-akka.actor.default-dispatcher-14 - ApplicationTimer demo: Stopping application at 2020-07-20T10:23:25.666Z after 319s.
+2020-07-20 13:23:25,667 [INFO] from application in application-akka.actor.default-dispatcher-14 - Shutting down connection pool.
+2020-07-20 13:23:25,747 [WARN] from application in application-akka.actor.default-dispatcher-14 - Logger configuration in conf files is deprecated and has no effect. Use a logback configuration file instead.
+2020-07-20 13:23:25,827 [WARN] from application in application-akka.actor.default-dispatcher-14 - application.conf @ file:/C:/developm/qgis_angular/back/target/scala-2.11/classes/application.conf: 137: user is deprecated, use username instead
+2020-07-20 13:23:25,827 [INFO] from application in application-akka.actor.default-dispatcher-14 - Creating Pool for datasource 'default'
+2020-07-20 13:23:25,834 [INFO] from play.api.db.HikariCPConnectionPool in application-akka.actor.default-dispatcher-14 - datasource [default] bound to JNDI as DefaultDS
+2020-07-20 13:23:25,841 [INFO] from play.api.db.DefaultDBApi in application-akka.actor.default-dispatcher-14 - Database [default] connected at jdbc:mysql://localhost:3306/afggis_db?characterEncoding=UTF-8
+2020-07-20 13:23:25,848 [INFO] from application in application-akka.actor.default-dispatcher-14 - ApplicationTimer demo: Starting application at 2020-07-20T10:23:25.848Z
+2020-07-20 13:23:25,942 [INFO] from play.api.Play in application-akka.actor.default-dispatcher-14 - Application started (Dev)
+2020-07-20 13:25:59,340 [INFO] from application in application-akka.actor.default-dispatcher-4 - ApplicationTimer demo: Stopping application at 2020-07-20T10:25:59.340Z after 154s.
+2020-07-20 13:25:59,340 [INFO] from application in application-akka.actor.default-dispatcher-4 - Shutting down connection pool.
+2020-07-20 13:25:59,416 [WARN] from application in application-akka.actor.default-dispatcher-4 - Logger configuration in conf files is deprecated and has no effect. Use a logback configuration file instead.
+2020-07-20 13:25:59,481 [WARN] from application in application-akka.actor.default-dispatcher-4 - application.conf @ file:/C:/developm/qgis_angular/back/target/scala-2.11/classes/application.conf: 137: user is deprecated, use username instead
+2020-07-20 13:25:59,481 [INFO] from application in application-akka.actor.default-dispatcher-4 - Creating Pool for datasource 'default'
+2020-07-20 13:25:59,486 [INFO] from play.api.db.HikariCPConnectionPool in application-akka.actor.default-dispatcher-4 - datasource [default] bound to JNDI as DefaultDS
+2020-07-20 13:25:59,490 [INFO] from play.api.db.DefaultDBApi in application-akka.actor.default-dispatcher-4 - Database [default] connected at jdbc:mysql://localhost:3306/afggis_db?characterEncoding=UTF-8
+2020-07-20 13:25:59,496 [INFO] from application in application-akka.actor.default-dispatcher-4 - ApplicationTimer demo: Starting application at 2020-07-20T10:25:59.496Z
+2020-07-20 13:25:59,559 [INFO] from play.api.Play in application-akka.actor.default-dispatcher-4 - Application started (Dev)
+2020-07-20 13:39:14,881 [WARN] from org.hibernate.util.JDBCExceptionReporter in application-akka.actor.default-dispatcher-30 - SQL Error: 1054, SQLState: 42S22
+2020-07-20 13:39:14,881 [ERROR] from org.hibernate.util.JDBCExceptionReporter in application-akka.actor.default-dispatcher-30 - Unknown column 'd.pro_code' in 'where clause'
+2020-07-20 13:41:17,358 [INFO] from application in application-akka.actor.default-dispatcher-29 - ApplicationTimer demo: Stopping application at 2020-07-20T10:41:17.358Z after 918s.
+2020-07-20 13:41:17,359 [INFO] from application in application-akka.actor.default-dispatcher-29 - Shutting down connection pool.
+2020-07-20 13:41:17,427 [WARN] from application in application-akka.actor.default-dispatcher-29 - Logger configuration in conf files is deprecated and has no effect. Use a logback configuration file instead.
+2020-07-20 13:41:17,488 [WARN] from application in application-akka.actor.default-dispatcher-29 - application.conf @ file:/C:/developm/qgis_angular/back/target/scala-2.11/classes/application.conf: 137: user is deprecated, use username instead
+2020-07-20 13:41:17,488 [INFO] from application in application-akka.actor.default-dispatcher-29 - Creating Pool for datasource 'default'
+2020-07-20 13:41:17,494 [INFO] from play.api.db.HikariCPConnectionPool in application-akka.actor.default-dispatcher-29 - datasource [default] bound to JNDI as DefaultDS
+2020-07-20 13:41:17,498 [INFO] from play.api.db.DefaultDBApi in application-akka.actor.default-dispatcher-29 - Database [default] connected at jdbc:mysql://localhost:3306/afggis_db?characterEncoding=UTF-8
+2020-07-20 13:41:17,499 [INFO] from application in application-akka.actor.default-dispatcher-29 - ApplicationTimer demo: Starting application at 2020-07-20T10:41:17.499Z
+2020-07-20 13:41:17,552 [INFO] from play.api.Play in application-akka.actor.default-dispatcher-29 - Application started (Dev)
+2020-07-20 13:41:23,225 [WARN] from org.hibernate.util.JDBCExceptionReporter in application-akka.actor.default-dispatcher-3 - SQL Error: 1054, SQLState: 42S22
+2020-07-20 13:41:23,225 [ERROR] from org.hibernate.util.JDBCExceptionReporter in application-akka.actor.default-dispatcher-3 - Unknown column 'd.pro_code' in 'where clause'
+2020-07-20 13:42:16,679 [INFO] from application in application-akka.actor.default-dispatcher-5 - ApplicationTimer demo: Stopping application at 2020-07-20T10:42:16.679Z after 59s.
+2020-07-20 13:42:16,679 [INFO] from application in application-akka.actor.default-dispatcher-5 - Shutting down connection pool.
+2020-07-20 13:42:16,749 [WARN] from application in application-akka.actor.default-dispatcher-5 - Logger configuration in conf files is deprecated and has no effect. Use a logback configuration file instead.
+2020-07-20 13:42:16,805 [WARN] from application in application-akka.actor.default-dispatcher-5 - application.conf @ file:/C:/developm/qgis_angular/back/target/scala-2.11/classes/application.conf: 137: user is deprecated, use username instead
+2020-07-20 13:42:16,805 [INFO] from application in application-akka.actor.default-dispatcher-5 - Creating Pool for datasource 'default'
+2020-07-20 13:42:16,810 [INFO] from play.api.db.HikariCPConnectionPool in application-akka.actor.default-dispatcher-5 - datasource [default] bound to JNDI as DefaultDS
+2020-07-20 13:42:16,816 [INFO] from play.api.db.DefaultDBApi in application-akka.actor.default-dispatcher-5 - Database [default] connected at jdbc:mysql://localhost:3306/afggis_db?characterEncoding=UTF-8
+2020-07-20 13:42:16,822 [INFO] from application in application-akka.actor.default-dispatcher-5 - ApplicationTimer demo: Starting application at 2020-07-20T10:42:16.822Z
+2020-07-20 13:42:16,880 [INFO] from play.api.Play in application-akka.actor.default-dispatcher-5 - Application started (Dev)
+2020-07-20 13:42:51,125 [WARN] from org.hibernate.util.JDBCExceptionReporter in application-akka.actor.default-dispatcher-4 - SQL Error: 1054, SQLState: 42S22
+2020-07-20 13:42:51,125 [ERROR] from org.hibernate.util.JDBCExceptionReporter in application-akka.actor.default-dispatcher-4 - Unknown column 'd.dist_code' in 'where clause'
+2020-07-20 13:43:52,274 [INFO] from application in application-akka.actor.default-dispatcher-10 - ApplicationTimer demo: Stopping application at 2020-07-20T10:43:52.274Z after 96s.
+2020-07-20 13:43:52,275 [INFO] from application in application-akka.actor.default-dispatcher-10 - Shutting down connection pool.
+2020-07-20 13:43:52,346 [WARN] from application in application-akka.actor.default-dispatcher-10 - Logger configuration in conf files is deprecated and has no effect. Use a logback configuration file instead.
+2020-07-20 13:43:52,405 [WARN] from application in application-akka.actor.default-dispatcher-10 - application.conf @ file:/C:/developm/qgis_angular/back/target/scala-2.11/classes/application.conf: 137: user is deprecated, use username instead
+2020-07-20 13:43:52,405 [INFO] from application in application-akka.actor.default-dispatcher-10 - Creating Pool for datasource 'default'
+2020-07-20 13:43:52,410 [INFO] from play.api.db.HikariCPConnectionPool in application-akka.actor.default-dispatcher-10 - datasource [default] bound to JNDI as DefaultDS
+2020-07-20 13:43:52,416 [INFO] from play.api.db.DefaultDBApi in application-akka.actor.default-dispatcher-10 - Database [default] connected at jdbc:mysql://localhost:3306/afggis_db?characterEncoding=UTF-8
+2020-07-20 13:43:52,422 [INFO] from application in application-akka.actor.default-dispatcher-10 - ApplicationTimer demo: Starting application at 2020-07-20T10:43:52.422Z
+2020-07-20 13:43:52,480 [INFO] from play.api.Play in application-akka.actor.default-dispatcher-10 - Application started (Dev)
+2020-07-20 13:44:47,097 [INFO] from application in application-akka.actor.default-dispatcher-5 - ApplicationTimer demo: Stopping application at 2020-07-20T10:44:47.097Z after 55s.
+2020-07-20 13:44:47,098 [INFO] from application in application-akka.actor.default-dispatcher-5 - Shutting down connection pool.
+2020-07-20 13:44:47,192 [WARN] from application in application-akka.actor.default-dispatcher-5 - Logger configuration in conf files is deprecated and has no effect. Use a logback configuration file instead.
+2020-07-20 13:44:47,243 [WARN] from application in application-akka.actor.default-dispatcher-5 - application.conf @ file:/C:/developm/qgis_angular/back/target/scala-2.11/classes/application.conf: 137: user is deprecated, use username instead
+2020-07-20 13:44:47,244 [INFO] from application in application-akka.actor.default-dispatcher-5 - Creating Pool for datasource 'default'
+2020-07-20 13:44:47,249 [INFO] from play.api.db.HikariCPConnectionPool in application-akka.actor.default-dispatcher-5 - datasource [default] bound to JNDI as DefaultDS
+2020-07-20 13:44:47,254 [INFO] from play.api.db.DefaultDBApi in application-akka.actor.default-dispatcher-5 - Database [default] connected at jdbc:mysql://localhost:3306/afggis_db?characterEncoding=UTF-8
+2020-07-20 13:44:47,255 [INFO] from application in application-akka.actor.default-dispatcher-5 - ApplicationTimer demo: Starting application at 2020-07-20T10:44:47.255Z
+2020-07-20 13:44:47,316 [INFO] from play.api.Play in application-akka.actor.default-dispatcher-5 - Application started (Dev)
+2020-07-20 13:45:35,552 [INFO] from application in application-akka.actor.default-dispatcher-2 - ApplicationTimer demo: Stopping application at 2020-07-20T10:45:35.552Z after 48s.
+2020-07-20 13:45:35,552 [INFO] from application in application-akka.actor.default-dispatcher-2 - Shutting down connection pool.
+2020-07-20 13:45:35,618 [WARN] from application in application-akka.actor.default-dispatcher-2 - Logger configuration in conf files is deprecated and has no effect. Use a logback configuration file instead.
+2020-07-20 13:45:35,664 [WARN] from application in application-akka.actor.default-dispatcher-2 - application.conf @ file:/C:/developm/qgis_angular/back/target/scala-2.11/classes/application.conf: 137: user is deprecated, use username instead
+2020-07-20 13:45:35,664 [INFO] from application in application-akka.actor.default-dispatcher-2 - Creating Pool for datasource 'default'
+2020-07-20 13:45:35,669 [INFO] from play.api.db.HikariCPConnectionPool in application-akka.actor.default-dispatcher-2 - datasource [default] bound to JNDI as DefaultDS
+2020-07-20 13:45:35,673 [INFO] from play.api.db.DefaultDBApi in application-akka.actor.default-dispatcher-2 - Database [default] connected at jdbc:mysql://localhost:3306/afggis_db?characterEncoding=UTF-8
+2020-07-20 13:45:35,678 [INFO] from application in application-akka.actor.default-dispatcher-2 - ApplicationTimer demo: Starting application at 2020-07-20T10:45:35.678Z
+2020-07-20 13:45:35,741 [INFO] from play.api.Play in application-akka.actor.default-dispatcher-2 - Application started (Dev)
+2020-07-20 14:19:52,973 [INFO] from application in application-akka.actor.default-dispatcher-36 - ApplicationTimer demo: Stopping application at 2020-07-20T11:19:52.973Z after 2057s.
+2020-07-20 14:19:52,974 [INFO] from application in application-akka.actor.default-dispatcher-36 - Shutting down connection pool.
+2020-07-20 14:19:53,043 [WARN] from application in application-akka.actor.default-dispatcher-36 - Logger configuration in conf files is deprecated and has no effect. Use a logback configuration file instead.
+2020-07-20 14:19:53,094 [WARN] from application in application-akka.actor.default-dispatcher-36 - application.conf @ file:/C:/developm/qgis_angular/back/target/scala-2.11/classes/application.conf: 137: user is deprecated, use username instead
+2020-07-20 14:19:53,094 [INFO] from application in application-akka.actor.default-dispatcher-36 - Creating Pool for datasource 'default'
+2020-07-20 14:19:53,100 [INFO] from play.api.db.HikariCPConnectionPool in application-akka.actor.default-dispatcher-36 - datasource [default] bound to JNDI as DefaultDS
+2020-07-20 14:19:53,104 [INFO] from play.api.db.DefaultDBApi in application-akka.actor.default-dispatcher-36 - Database [default] connected at jdbc:mysql://localhost:3306/afggis_db?characterEncoding=UTF-8
+2020-07-20 14:19:53,110 [INFO] from application in application-akka.actor.default-dispatcher-36 - ApplicationTimer demo: Starting application at 2020-07-20T11:19:53.110Z
+2020-07-20 14:19:53,184 [INFO] from play.api.Play in application-akka.actor.default-dispatcher-36 - Application started (Dev)
+2020-07-20 14:19:53,533 [WARN] from org.hibernate.util.JDBCExceptionReporter in application-akka.actor.default-dispatcher-5 - SQL Error: 0, SQLState: S0022
+2020-07-20 14:19:53,533 [ERROR] from org.hibernate.util.JDBCExceptionReporter in application-akka.actor.default-dispatcher-5 - Column 'id' not found.
+2020-07-20 14:20:39,631 [INFO] from application in application-akka.actor.default-dispatcher-3 - ApplicationTimer demo: Stopping application at 2020-07-20T11:20:39.631Z after 46s.
+2020-07-20 14:20:39,632 [INFO] from application in application-akka.actor.default-dispatcher-3 - Shutting down connection pool.
+2020-07-20 14:20:39,725 [WARN] from application in application-akka.actor.default-dispatcher-3 - Logger configuration in conf files is deprecated and has no effect. Use a logback configuration file instead.
+2020-07-20 14:20:39,764 [WARN] from application in application-akka.actor.default-dispatcher-3 - application.conf @ file:/C:/developm/qgis_angular/back/target/scala-2.11/classes/application.conf: 137: user is deprecated, use username instead
+2020-07-20 14:20:39,765 [INFO] from application in application-akka.actor.default-dispatcher-3 - Creating Pool for datasource 'default'
+2020-07-20 14:20:39,768 [INFO] from play.api.db.HikariCPConnectionPool in application-akka.actor.default-dispatcher-3 - datasource [default] bound to JNDI as DefaultDS
+2020-07-20 14:20:39,772 [INFO] from play.api.db.DefaultDBApi in application-akka.actor.default-dispatcher-3 - Database [default] connected at jdbc:mysql://localhost:3306/afggis_db?characterEncoding=UTF-8
+2020-07-20 14:20:39,779 [INFO] from application in application-akka.actor.default-dispatcher-3 - ApplicationTimer demo: Starting application at 2020-07-20T11:20:39.779Z
+2020-07-20 14:20:39,837 [INFO] from play.api.Play in application-akka.actor.default-dispatcher-3 - Application started (Dev)
+2020-07-20 14:20:40,019 [WARN] from org.hibernate.util.JDBCExceptionReporter in application-akka.actor.default-dispatcher-6 - SQL Error: 0, SQLState: S0022
+2020-07-20 14:20:40,019 [ERROR] from org.hibernate.util.JDBCExceptionReporter in application-akka.actor.default-dispatcher-6 - Column 'id' not found.
+2020-07-20 14:20:57,115 [INFO] from application in application-akka.actor.default-dispatcher-4 - ApplicationTimer demo: Stopping application at 2020-07-20T11:20:57.114Z after 18s.
+2020-07-20 14:20:57,116 [INFO] from application in application-akka.actor.default-dispatcher-4 - Shutting down connection pool.
+2020-07-20 14:20:57,181 [WARN] from application in application-akka.actor.default-dispatcher-4 - Logger configuration in conf files is deprecated and has no effect. Use a logback configuration file instead.
+2020-07-20 14:20:57,227 [WARN] from application in application-akka.actor.default-dispatcher-4 - application.conf @ file:/C:/developm/qgis_angular/back/target/scala-2.11/classes/application.conf: 137: user is deprecated, use username instead
+2020-07-20 14:20:57,227 [INFO] from application in application-akka.actor.default-dispatcher-4 - Creating Pool for datasource 'default'
+2020-07-20 14:20:57,231 [INFO] from play.api.db.HikariCPConnectionPool in application-akka.actor.default-dispatcher-4 - datasource [default] bound to JNDI as DefaultDS
+2020-07-20 14:20:57,237 [INFO] from play.api.db.DefaultDBApi in application-akka.actor.default-dispatcher-4 - Database [default] connected at jdbc:mysql://localhost:3306/afggis_db?characterEncoding=UTF-8
+2020-07-20 14:20:57,238 [INFO] from application in application-akka.actor.default-dispatcher-4 - ApplicationTimer demo: Starting application at 2020-07-20T11:20:57.238Z
+2020-07-20 14:20:57,295 [INFO] from play.api.Play in application-akka.actor.default-dispatcher-4 - Application started (Dev)
+2020-07-20 14:20:57,480 [WARN] from org.hibernate.util.JDBCExceptionReporter in application-akka.actor.default-dispatcher-3 - SQL Error: 0, SQLState: S0022
+2020-07-20 14:20:57,480 [ERROR] from org.hibernate.util.JDBCExceptionReporter in application-akka.actor.default-dispatcher-3 - Column 'id' not found.
+2020-07-20 14:21:15,230 [INFO] from application in application-akka.actor.default-dispatcher-5 - ApplicationTimer demo: Stopping application at 2020-07-20T11:21:15.230Z after 18s.
+2020-07-20 14:21:15,230 [INFO] from application in application-akka.actor.default-dispatcher-5 - Shutting down connection pool.
+2020-07-20 14:21:15,311 [WARN] from application in application-akka.actor.default-dispatcher-5 - Logger configuration in conf files is deprecated and has no effect. Use a logback configuration file instead.
+2020-07-20 14:21:15,348 [WARN] from application in application-akka.actor.default-dispatcher-5 - application.conf @ file:/C:/developm/qgis_angular/back/target/scala-2.11/classes/application.conf: 137: user is deprecated, use username instead
+2020-07-20 14:21:15,348 [INFO] from application in application-akka.actor.default-dispatcher-5 - Creating Pool for datasource 'default'
+2020-07-20 14:21:15,352 [INFO] from play.api.db.HikariCPConnectionPool in application-akka.actor.default-dispatcher-5 - datasource [default] bound to JNDI as DefaultDS
+2020-07-20 14:21:15,357 [INFO] from play.api.db.DefaultDBApi in application-akka.actor.default-dispatcher-5 - Database [default] connected at jdbc:mysql://localhost:3306/afggis_db?characterEncoding=UTF-8
+2020-07-20 14:21:15,363 [INFO] from application in application-akka.actor.default-dispatcher-5 - ApplicationTimer demo: Starting application at 2020-07-20T11:21:15.363Z
+2020-07-20 14:21:15,421 [INFO] from play.api.Play in application-akka.actor.default-dispatcher-5 - Application started (Dev)
+2020-07-20 14:30:12,220 [INFO] from application in application-akka.actor.default-dispatcher-2 - ApplicationTimer demo: Stopping application at 2020-07-20T11:30:12.220Z after 537s.
+2020-07-20 14:30:12,221 [INFO] from application in application-akka.actor.default-dispatcher-2 - Shutting down connection pool.
+2020-07-20 14:30:12,283 [WARN] from application in application-akka.actor.default-dispatcher-2 - Logger configuration in conf files is deprecated and has no effect. Use a logback configuration file instead.
+2020-07-20 14:30:12,321 [WARN] from application in application-akka.actor.default-dispatcher-2 - application.conf @ file:/C:/developm/qgis_angular/back/target/scala-2.11/classes/application.conf: 137: user is deprecated, use username instead
+2020-07-20 14:30:12,321 [INFO] from application in application-akka.actor.default-dispatcher-2 - Creating Pool for datasource 'default'
+2020-07-20 14:30:12,326 [INFO] from play.api.db.HikariCPConnectionPool in application-akka.actor.default-dispatcher-2 - datasource [default] bound to JNDI as DefaultDS
+2020-07-20 14:30:12,331 [INFO] from play.api.db.DefaultDBApi in application-akka.actor.default-dispatcher-2 - Database [default] connected at jdbc:mysql://localhost:3306/afggis_db?characterEncoding=UTF-8
+2020-07-20 14:30:12,336 [INFO] from application in application-akka.actor.default-dispatcher-2 - ApplicationTimer demo: Starting application at 2020-07-20T11:30:12.336Z
+2020-07-20 14:30:12,387 [INFO] from play.api.Play in application-akka.actor.default-dispatcher-2 - Application started (Dev)
+2020-07-20 14:34:01,393 [INFO] from application in application-akka.actor.default-dispatcher-9 - ApplicationTimer demo: Stopping application at 2020-07-20T11:34:01.393Z after 229s.
+2020-07-20 14:34:01,394 [INFO] from application in application-akka.actor.default-dispatcher-9 - Shutting down connection pool.
+2020-07-20 14:34:01,458 [WARN] from application in application-akka.actor.default-dispatcher-9 - Logger configuration in conf files is deprecated and has no effect. Use a logback configuration file instead.
+2020-07-20 14:34:01,505 [WARN] from application in application-akka.actor.default-dispatcher-9 - application.conf @ file:/C:/developm/qgis_angular/back/target/scala-2.11/classes/application.conf: 137: user is deprecated, use username instead
+2020-07-20 14:34:01,505 [INFO] from application in application-akka.actor.default-dispatcher-9 - Creating Pool for datasource 'default'
+2020-07-20 14:34:01,510 [INFO] from play.api.db.HikariCPConnectionPool in application-akka.actor.default-dispatcher-9 - datasource [default] bound to JNDI as DefaultDS
+2020-07-20 14:34:01,516 [INFO] from play.api.db.DefaultDBApi in application-akka.actor.default-dispatcher-9 - Database [default] connected at jdbc:mysql://localhost:3306/afggis_db?characterEncoding=UTF-8
+2020-07-20 14:34:01,517 [INFO] from application in application-akka.actor.default-dispatcher-9 - ApplicationTimer demo: Starting application at 2020-07-20T11:34:01.517Z
+2020-07-20 14:34:01,576 [INFO] from play.api.Play in application-akka.actor.default-dispatcher-9 - Application started (Dev)
+2020-07-20 14:35:45,824 [INFO] from application in application-akka.actor.default-dispatcher-5 - ApplicationTimer demo: Stopping application at 2020-07-20T11:35:45.824Z after 104s.
+2020-07-20 14:35:45,824 [INFO] from application in application-akka.actor.default-dispatcher-5 - Shutting down connection pool.
+2020-07-20 14:35:45,891 [WARN] from application in application-akka.actor.default-dispatcher-5 - Logger configuration in conf files is deprecated and has no effect. Use a logback configuration file instead.
+2020-07-20 14:35:45,935 [WARN] from application in application-akka.actor.default-dispatcher-5 - application.conf @ file:/C:/developm/qgis_angular/back/target/scala-2.11/classes/application.conf: 137: user is deprecated, use username instead
+2020-07-20 14:35:45,935 [INFO] from application in application-akka.actor.default-dispatcher-5 - Creating Pool for datasource 'default'
+2020-07-20 14:35:45,940 [INFO] from play.api.db.HikariCPConnectionPool in application-akka.actor.default-dispatcher-5 - datasource [default] bound to JNDI as DefaultDS
+2020-07-20 14:35:45,945 [INFO] from play.api.db.DefaultDBApi in application-akka.actor.default-dispatcher-5 - Database [default] connected at jdbc:mysql://localhost:3306/afggis_db?characterEncoding=UTF-8
+2020-07-20 14:35:45,951 [INFO] from application in application-akka.actor.default-dispatcher-5 - ApplicationTimer demo: Starting application at 2020-07-20T11:35:45.951Z
+2020-07-20 14:35:46,025 [INFO] from play.api.Play in application-akka.actor.default-dispatcher-5 - Application started (Dev)
+2020-07-20 14:40:34,631 [INFO] from application in application-akka.actor.default-dispatcher-11 - ApplicationTimer demo: Stopping application at 2020-07-20T11:40:34.631Z after 289s.
+2020-07-20 14:40:34,631 [INFO] from application in application-akka.actor.default-dispatcher-11 - Shutting down connection pool.
+2020-07-20 14:40:34,692 [WARN] from application in application-akka.actor.default-dispatcher-11 - Logger configuration in conf files is deprecated and has no effect. Use a logback configuration file instead.
+2020-07-20 14:40:34,741 [WARN] from application in application-akka.actor.default-dispatcher-11 - application.conf @ file:/C:/developm/qgis_angular/back/target/scala-2.11/classes/application.conf: 137: user is deprecated, use username instead
+2020-07-20 14:40:34,741 [INFO] from application in application-akka.actor.default-dispatcher-11 - Creating Pool for datasource 'default'
+2020-07-20 14:40:34,746 [INFO] from play.api.db.HikariCPConnectionPool in application-akka.actor.default-dispatcher-11 - datasource [default] bound to JNDI as DefaultDS
+2020-07-20 14:40:34,750 [INFO] from play.api.db.DefaultDBApi in application-akka.actor.default-dispatcher-11 - Database [default] connected at jdbc:mysql://localhost:3306/afggis_db?characterEncoding=UTF-8
+2020-07-20 14:40:34,758 [INFO] from application in application-akka.actor.default-dispatcher-11 - ApplicationTimer demo: Starting application at 2020-07-20T11:40:34.758Z
+2020-07-20 14:40:34,830 [INFO] from play.api.Play in application-akka.actor.default-dispatcher-11 - Application started (Dev)
+2020-07-20 14:49:54,282 [INFO] from application in application-akka.actor.default-dispatcher-2 - ApplicationTimer demo: Stopping application at 2020-07-20T11:49:54.282Z after 560s.
+2020-07-20 14:49:54,283 [INFO] from application in application-akka.actor.default-dispatcher-2 - Shutting down connection pool.
+2020-07-20 14:49:54,348 [WARN] from application in application-akka.actor.default-dispatcher-2 - Logger configuration in conf files is deprecated and has no effect. Use a logback configuration file instead.
+2020-07-20 14:49:54,392 [WARN] from application in application-akka.actor.default-dispatcher-2 - application.conf @ file:/C:/developm/qgis_angular/back/target/scala-2.11/classes/application.conf: 137: user is deprecated, use username instead
+2020-07-20 14:49:54,392 [INFO] from application in application-akka.actor.default-dispatcher-2 - Creating Pool for datasource 'default'
+2020-07-20 14:49:54,398 [INFO] from play.api.db.HikariCPConnectionPool in application-akka.actor.default-dispatcher-2 - datasource [default] bound to JNDI as DefaultDS
+2020-07-20 14:49:54,403 [INFO] from play.api.db.DefaultDBApi in application-akka.actor.default-dispatcher-2 - Database [default] connected at jdbc:mysql://localhost:3306/afggis_db?characterEncoding=UTF-8
+2020-07-20 14:49:54,404 [INFO] from application in application-akka.actor.default-dispatcher-2 - ApplicationTimer demo: Starting application at 2020-07-20T11:49:54.404Z
+2020-07-20 14:49:54,481 [INFO] from play.api.Play in application-akka.actor.default-dispatcher-2 - Application started (Dev)
+2020-07-20 15:12:29,236 [INFO] from application in application-akka.actor.default-dispatcher-4 - ApplicationTimer demo: Stopping application at 2020-07-20T12:12:29.236Z after 1355s.
+2020-07-20 15:12:29,236 [INFO] from application in application-akka.actor.default-dispatcher-4 - Shutting down connection pool.
+2020-07-20 15:12:29,809 [WARN] from application in application-akka.actor.default-dispatcher-4 - Logger configuration in conf files is deprecated and has no effect. Use a logback configuration file instead.
+2020-07-20 15:12:29,946 [WARN] from application in application-akka.actor.default-dispatcher-4 - application.conf @ file:/C:/developm/qgis_angular/back/target/scala-2.11/classes/application.conf: 137: user is deprecated, use username instead
+2020-07-20 15:12:29,946 [INFO] from application in application-akka.actor.default-dispatcher-4 - Creating Pool for datasource 'default'
+2020-07-20 15:12:30,147 [INFO] from play.api.db.HikariCPConnectionPool in application-akka.actor.default-dispatcher-4 - datasource [default] bound to JNDI as DefaultDS
+2020-07-20 15:12:30,152 [INFO] from play.api.db.DefaultDBApi in application-akka.actor.default-dispatcher-4 - Database [default] connected at jdbc:mysql://localhost:3306/afggis_db?characterEncoding=UTF-8
+2020-07-20 15:12:30,158 [INFO] from application in application-akka.actor.default-dispatcher-4 - ApplicationTimer demo: Starting application at 2020-07-20T12:12:30.157Z
+2020-07-20 15:12:30,313 [INFO] from play.api.Play in application-akka.actor.default-dispatcher-4 - Application started (Dev)
+2020-07-20 15:34:39,391 [INFO] from application in application-akka.actor.default-dispatcher-2 - ApplicationTimer demo: Stopping application at 2020-07-20T12:34:39.391Z after 1329s.
+2020-07-20 15:34:39,392 [INFO] from application in application-akka.actor.default-dispatcher-2 - Shutting down connection pool.
+2020-07-20 15:34:39,472 [WARN] from application in application-akka.actor.default-dispatcher-2 - Logger configuration in conf files is deprecated and has no effect. Use a logback configuration file instead.
+2020-07-20 15:34:39,536 [WARN] from application in application-akka.actor.default-dispatcher-2 - application.conf @ file:/C:/developm/qgis_angular/back/target/scala-2.11/classes/application.conf: 137: user is deprecated, use username instead
+2020-07-20 15:34:39,536 [INFO] from application in application-akka.actor.default-dispatcher-2 - Creating Pool for datasource 'default'
+2020-07-20 15:34:39,541 [INFO] from play.api.db.HikariCPConnectionPool in application-akka.actor.default-dispatcher-2 - datasource [default] bound to JNDI as DefaultDS
+2020-07-20 15:34:39,548 [INFO] from play.api.db.DefaultDBApi in application-akka.actor.default-dispatcher-2 - Database [default] connected at jdbc:mysql://localhost:3306/afggis_db?characterEncoding=UTF-8
+2020-07-20 15:34:39,556 [INFO] from application in application-akka.actor.default-dispatcher-2 - ApplicationTimer demo: Starting application at 2020-07-20T12:34:39.556Z
+2020-07-20 15:34:39,645 [INFO] from play.api.Play in application-akka.actor.default-dispatcher-2 - Application started (Dev)
+2020-07-20 15:36:56,994 [INFO] from application in application-akka.actor.default-dispatcher-4 - ApplicationTimer demo: Stopping application at 2020-07-20T12:36:56.994Z after 137s.
+2020-07-20 15:36:56,996 [INFO] from application in application-akka.actor.default-dispatcher-4 - Shutting down connection pool.
+2020-07-20 15:36:57,065 [WARN] from application in application-akka.actor.default-dispatcher-4 - Logger configuration in conf files is deprecated and has no effect. Use a logback configuration file instead.
+2020-07-20 15:36:57,107 [WARN] from application in application-akka.actor.default-dispatcher-4 - application.conf @ file:/C:/developm/qgis_angular/back/target/scala-2.11/classes/application.conf: 137: user is deprecated, use username instead
+2020-07-20 15:36:57,108 [INFO] from application in application-akka.actor.default-dispatcher-4 - Creating Pool for datasource 'default'
+2020-07-20 15:36:57,112 [INFO] from play.api.db.HikariCPConnectionPool in application-akka.actor.default-dispatcher-4 - datasource [default] bound to JNDI as DefaultDS
+2020-07-20 15:36:57,116 [INFO] from play.api.db.DefaultDBApi in application-akka.actor.default-dispatcher-4 - Database [default] connected at jdbc:mysql://localhost:3306/afggis_db?characterEncoding=UTF-8
+2020-07-20 15:36:57,121 [INFO] from application in application-akka.actor.default-dispatcher-4 - ApplicationTimer demo: Starting application at 2020-07-20T12:36:57.121Z
+2020-07-20 15:36:57,212 [INFO] from play.api.Play in application-akka.actor.default-dispatcher-4 - Application started (Dev)
+2020-07-20 16:25:42,621 [INFO] from application in application-akka.actor.default-dispatcher-97 - ApplicationTimer demo: Stopping application at 2020-07-20T13:25:42.608Z after 2925s.
+2020-07-20 16:25:42,636 [INFO] from application in application-akka.actor.default-dispatcher-97 - Shutting down connection pool.
+2020-07-20 16:25:42,866 [WARN] from application in application-akka.actor.default-dispatcher-97 - Logger configuration in conf files is deprecated and has no effect. Use a logback configuration file instead.
+2020-07-20 16:25:43,036 [WARN] from application in application-akka.actor.default-dispatcher-97 - application.conf @ file:/C:/developm/qgis_angular/back/target/scala-2.11/classes/application.conf: 137: user is deprecated, use username instead
+2020-07-20 16:25:43,036 [INFO] from application in application-akka.actor.default-dispatcher-97 - Creating Pool for datasource 'default'
+2020-07-20 16:25:43,042 [INFO] from play.api.db.HikariCPConnectionPool in application-akka.actor.default-dispatcher-97 - datasource [default] bound to JNDI as DefaultDS
+2020-07-20 16:25:43,059 [INFO] from play.api.db.DefaultDBApi in application-akka.actor.default-dispatcher-97 - Database [default] connected at jdbc:mysql://localhost:3306/afggis_db?characterEncoding=UTF-8
+2020-07-20 16:25:43,124 [INFO] from application in application-akka.actor.default-dispatcher-97 - ApplicationTimer demo: Starting application at 2020-07-20T13:25:43.105Z
+2020-07-20 16:25:43,458 [INFO] from play.api.Play in application-akka.actor.default-dispatcher-97 - Application started (Dev)
+2020-07-20 19:25:06,808 [INFO] from application in application-akka.actor.default-dispatcher-418 - ApplicationTimer demo: Stopping application at 2020-07-20T16:25:06.800Z after 10763s.
+2020-07-20 19:25:06,839 [INFO] from application in application-akka.actor.default-dispatcher-418 - Shutting down connection pool.
+2020-07-20 19:25:07,059 [WARN] from application in application-akka.actor.default-dispatcher-418 - Logger configuration in conf files is deprecated and has no effect. Use a logback configuration file instead.
+2020-07-20 19:25:07,139 [WARN] from application in application-akka.actor.default-dispatcher-418 - application.conf @ file:/C:/developm/qgis_angular/back/target/scala-2.11/classes/application.conf: 137: user is deprecated, use username instead
+2020-07-20 19:25:07,140 [INFO] from application in application-akka.actor.default-dispatcher-418 - Creating Pool for datasource 'default'
+2020-07-20 19:25:07,144 [INFO] from play.api.db.HikariCPConnectionPool in application-akka.actor.default-dispatcher-418 - datasource [default] bound to JNDI as DefaultDS
+2020-07-20 19:25:07,159 [INFO] from play.api.db.DefaultDBApi in application-akka.actor.default-dispatcher-418 - Database [default] connected at jdbc:mysql://localhost:3306/afggis_db?characterEncoding=UTF-8
+2020-07-20 19:25:07,211 [INFO] from application in application-akka.actor.default-dispatcher-418 - ApplicationTimer demo: Starting application at 2020-07-20T16:25:07.211Z
+2020-07-20 19:25:07,480 [INFO] from play.api.Play in application-akka.actor.default-dispatcher-418 - Application started (Dev)
+2020-07-20 20:34:57,524 [INFO] from application in application-akka.actor.default-dispatcher-239 - ApplicationTimer demo: Stopping application at 2020-07-20T17:34:57.524Z after 4190s.
+2020-07-20 20:34:57,524 [INFO] from application in application-akka.actor.default-dispatcher-239 - Shutting down connection pool.
+2020-07-20 20:34:57,686 [WARN] from application in application-akka.actor.default-dispatcher-239 - Logger configuration in conf files is deprecated and has no effect. Use a logback configuration file instead.
+2020-07-20 20:34:57,776 [WARN] from application in application-akka.actor.default-dispatcher-239 - application.conf @ file:/C:/developm/qgis_angular/back/target/scala-2.11/classes/application.conf: 137: user is deprecated, use username instead
+2020-07-20 20:34:57,776 [INFO] from application in application-akka.actor.default-dispatcher-239 - Creating Pool for datasource 'default'
+2020-07-20 20:34:57,781 [INFO] from play.api.db.HikariCPConnectionPool in application-akka.actor.default-dispatcher-239 - datasource [default] bound to JNDI as DefaultDS
+2020-07-20 20:34:57,797 [INFO] from play.api.db.DefaultDBApi in application-akka.actor.default-dispatcher-239 - Database [default] connected at jdbc:mysql://localhost:3306/afggis_db?characterEncoding=UTF-8
+2020-07-20 20:34:57,814 [INFO] from application in application-akka.actor.default-dispatcher-239 - ApplicationTimer demo: Starting application at 2020-07-20T17:34:57.814Z
+2020-07-20 20:34:58,336 [INFO] from play.api.Play in application-akka.actor.default-dispatcher-239 - Application started (Dev)
+2020-07-20 20:37:07,589 [INFO] from application in application-akka.actor.default-dispatcher-8 - ApplicationTimer demo: Stopping application at 2020-07-20T17:37:07.589Z after 130s.
+2020-07-20 20:37:07,603 [INFO] from application in application-akka.actor.default-dispatcher-8 - Shutting down connection pool.
+2020-07-20 20:37:07,876 [WARN] from application in application-akka.actor.default-dispatcher-8 - Logger configuration in conf files is deprecated and has no effect. Use a logback configuration file instead.
+2020-07-20 20:37:07,935 [WARN] from application in application-akka.actor.default-dispatcher-8 - application.conf @ file:/C:/developm/qgis_angular/back/target/scala-2.11/classes/application.conf: 137: user is deprecated, use username instead
+2020-07-20 20:37:07,935 [INFO] from application in application-akka.actor.default-dispatcher-8 - Creating Pool for datasource 'default'
+2020-07-20 20:37:07,940 [INFO] from play.api.db.HikariCPConnectionPool in application-akka.actor.default-dispatcher-8 - datasource [default] bound to JNDI as DefaultDS
+2020-07-20 20:37:07,945 [INFO] from play.api.db.DefaultDBApi in application-akka.actor.default-dispatcher-8 - Database [default] connected at jdbc:mysql://localhost:3306/afggis_db?characterEncoding=UTF-8
+2020-07-20 20:37:07,951 [INFO] from application in application-akka.actor.default-dispatcher-8 - ApplicationTimer demo: Starting application at 2020-07-20T17:37:07.951Z
+2020-07-20 20:37:08,159 [INFO] from play.api.Play in application-akka.actor.default-dispatcher-8 - Application started (Dev)
+2020-07-20 21:20:44,589 [INFO] from application in application-akka.actor.default-dispatcher-132 - ApplicationTimer demo: Stopping application at 2020-07-20T18:20:44.589Z after 2617s.
+2020-07-20 21:20:44,590 [INFO] from application in application-akka.actor.default-dispatcher-132 - Shutting down connection pool.
+2020-07-20 21:20:44,682 [WARN] from application in application-akka.actor.default-dispatcher-132 - Logger configuration in conf files is deprecated and has no effect. Use a logback configuration file instead.
+2020-07-20 21:20:44,905 [WARN] from application in application-akka.actor.default-dispatcher-132 - application.conf @ file:/C:/developm/qgis_angular/back/target/scala-2.11/classes/application.conf: 137: user is deprecated, use username instead
+2020-07-20 21:20:44,905 [INFO] from application in application-akka.actor.default-dispatcher-132 - Creating Pool for datasource 'default'
+2020-07-20 21:20:44,961 [INFO] from play.api.db.HikariCPConnectionPool in application-akka.actor.default-dispatcher-132 - datasource [default] bound to JNDI as DefaultDS
+2020-07-20 21:20:44,966 [INFO] from play.api.db.DefaultDBApi in application-akka.actor.default-dispatcher-132 - Database [default] connected at jdbc:mysql://localhost:3306/afggis_db?characterEncoding=UTF-8
+2020-07-20 21:20:44,971 [INFO] from application in application-akka.actor.default-dispatcher-132 - ApplicationTimer demo: Starting application at 2020-07-20T18:20:44.970Z
+2020-07-20 21:20:45,341 [INFO] from play.api.Play in application-akka.actor.default-dispatcher-132 - Application started (Dev)
+2020-07-20 21:20:50,332 [WARN] from org.hibernate.util.JDBCExceptionReporter in application-akka.actor.default-dispatcher-3 - SQL Error: 1054, SQLState: 42S22
+2020-07-20 21:20:50,332 [ERROR] from org.hibernate.util.JDBCExceptionReporter in application-akka.actor.default-dispatcher-3 - Unknown column 'd.label' in 'where clause'
+2020-07-20 21:20:52,715 [WARN] from org.hibernate.util.JDBCExceptionReporter in application-akka.actor.default-dispatcher-5 - SQL Error: 1054, SQLState: 42S22
+2020-07-20 21:20:52,715 [ERROR] from org.hibernate.util.JDBCExceptionReporter in application-akka.actor.default-dispatcher-5 - Unknown column 'd.label' in 'where clause'
+2020-07-20 21:20:52,772 [WARN] from org.hibernate.util.JDBCExceptionReporter in application-akka.actor.default-dispatcher-3 - SQL Error: 1054, SQLState: 42S22
+2020-07-20 21:20:52,772 [ERROR] from org.hibernate.util.JDBCExceptionReporter in application-akka.actor.default-dispatcher-3 - Unknown column 'd.label' in 'where clause'
+2020-07-20 21:20:52,908 [WARN] from org.hibernate.util.JDBCExceptionReporter in application-akka.actor.default-dispatcher-6 - SQL Error: 1054, SQLState: 42S22
+2020-07-20 21:20:52,908 [ERROR] from org.hibernate.util.JDBCExceptionReporter in application-akka.actor.default-dispatcher-6 - Unknown column 'd.label' in 'where clause'
+2020-07-20 21:20:53,564 [WARN] from org.hibernate.util.JDBCExceptionReporter in application-akka.actor.default-dispatcher-5 - SQL Error: 1054, SQLState: 42S22
+2020-07-20 21:20:53,564 [ERROR] from org.hibernate.util.JDBCExceptionReporter in application-akka.actor.default-dispatcher-5 - Unknown column 'd.label' in 'where clause'
+2020-07-20 21:21:09,558 [INFO] from application in application-akka.actor.default-dispatcher-6 - ApplicationTimer demo: Stopping application at 2020-07-20T18:21:09.558Z after 25s.
+2020-07-20 21:21:09,558 [INFO] from application in application-akka.actor.default-dispatcher-6 - Shutting down connection pool.
+2020-07-20 21:21:09,618 [WARN] from application in application-akka.actor.default-dispatcher-6 - Logger configuration in conf files is deprecated and has no effect. Use a logback configuration file instead.
+2020-07-20 21:21:09,685 [WARN] from application in application-akka.actor.default-dispatcher-6 - application.conf @ file:/C:/developm/qgis_angular/back/target/scala-2.11/classes/application.conf: 137: user is deprecated, use username instead
+2020-07-20 21:21:09,685 [INFO] from application in application-akka.actor.default-dispatcher-6 - Creating Pool for datasource 'default'
+2020-07-20 21:21:09,690 [INFO] from play.api.db.HikariCPConnectionPool in application-akka.actor.default-dispatcher-6 - datasource [default] bound to JNDI as DefaultDS
+2020-07-20 21:21:09,693 [INFO] from play.api.db.DefaultDBApi in application-akka.actor.default-dispatcher-6 - Database [default] connected at jdbc:mysql://localhost:3306/afggis_db?characterEncoding=UTF-8
+2020-07-20 21:21:09,698 [INFO] from application in application-akka.actor.default-dispatcher-6 - ApplicationTimer demo: Starting application at 2020-07-20T18:21:09.698Z
+2020-07-20 21:21:09,784 [INFO] from play.api.Play in application-akka.actor.default-dispatcher-6 - Application started (Dev)
+2020-07-20 21:21:10,044 [WARN] from org.hibernate.util.JDBCExceptionReporter in application-akka.actor.default-dispatcher-3 - SQL Error: 1054, SQLState: 42S22
+2020-07-20 21:21:10,045 [ERROR] from org.hibernate.util.JDBCExceptionReporter in application-akka.actor.default-dispatcher-3 - Unknown column 'd.label' in 'where clause'
+2020-07-20 21:21:11,791 [WARN] from org.hibernate.util.JDBCExceptionReporter in application-akka.actor.default-dispatcher-9 - SQL Error: 1054, SQLState: 42S22
+2020-07-20 21:21:11,791 [ERROR] from org.hibernate.util.JDBCExceptionReporter in application-akka.actor.default-dispatcher-9 - Unknown column 'd.label' in 'where clause'
+2020-07-20 21:21:11,793 [WARN] from org.hibernate.util.JDBCExceptionReporter in application-akka.actor.default-dispatcher-3 - SQL Error: 1054, SQLState: 42S22
+2020-07-20 21:21:11,793 [ERROR] from org.hibernate.util.JDBCExceptionReporter in application-akka.actor.default-dispatcher-3 - Unknown column 'd.label' in 'where clause'
+2020-07-20 21:21:11,793 [WARN] from org.hibernate.util.JDBCExceptionReporter in application-akka.actor.default-dispatcher-2 - SQL Error: 1054, SQLState: 42S22
+2020-07-20 21:21:11,793 [ERROR] from org.hibernate.util.JDBCExceptionReporter in application-akka.actor.default-dispatcher-2 - Unknown column 'd.label' in 'where clause'
+2020-07-20 21:21:11,793 [WARN] from org.hibernate.util.JDBCExceptionReporter in application-akka.actor.default-dispatcher-7 - SQL Error: 1054, SQLState: 42S22
+2020-07-20 21:21:11,793 [ERROR] from org.hibernate.util.JDBCExceptionReporter in application-akka.actor.default-dispatcher-7 - Unknown column 'd.label' in 'where clause'
+2020-07-20 21:21:56,902 [INFO] from application in application-akka.actor.default-dispatcher-9 - ApplicationTimer demo: Stopping application at 2020-07-20T18:21:56.902Z after 47s.
+2020-07-20 21:21:56,903 [INFO] from application in application-akka.actor.default-dispatcher-9 - Shutting down connection pool.
+2020-07-20 21:21:56,963 [WARN] from application in application-akka.actor.default-dispatcher-9 - Logger configuration in conf files is deprecated and has no effect. Use a logback configuration file instead.
+2020-07-20 21:21:57,013 [WARN] from application in application-akka.actor.default-dispatcher-9 - application.conf @ file:/C:/developm/qgis_angular/back/target/scala-2.11/classes/application.conf: 137: user is deprecated, use username instead
+2020-07-20 21:21:57,013 [INFO] from application in application-akka.actor.default-dispatcher-9 - Creating Pool for datasource 'default'
+2020-07-20 21:21:57,017 [INFO] from play.api.db.HikariCPConnectionPool in application-akka.actor.default-dispatcher-9 - datasource [default] bound to JNDI as DefaultDS
+2020-07-20 21:21:57,023 [INFO] from play.api.db.DefaultDBApi in application-akka.actor.default-dispatcher-9 - Database [default] connected at jdbc:mysql://localhost:3306/afggis_db?characterEncoding=UTF-8
+2020-07-20 21:21:57,028 [INFO] from application in application-akka.actor.default-dispatcher-9 - ApplicationTimer demo: Starting application at 2020-07-20T18:21:57.028Z
+2020-07-20 21:21:57,134 [INFO] from play.api.Play in application-akka.actor.default-dispatcher-9 - Application started (Dev)
