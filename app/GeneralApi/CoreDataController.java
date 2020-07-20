@@ -18,16 +18,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 import static play.mvc.Http.Context.Implicit.request;
 import static play.mvc.Results.badRequest;
 import static play.mvc.Results.ok;
-
 public class CoreDataController {
-
-
-
-
     @SuppressWarnings("Duplicates")
     @play.db.jpa.Transactional
     @BodyParser.Of(BodyParser.Json.class)
@@ -39,17 +33,10 @@ public class CoreDataController {
                 return badRequest("Expecting Json data");
             } else {
                 String query = " select * from criteria_master d where 1=1 ";
-
-
                 String label = json.findPath("label").asText();
                 if(label!=null && !label.equalsIgnoreCase("") ){
                     query+=" and d.criterion_label like '%"+label+"%'";
                 }
-
-
-
-
-
                 Query q = JPA.em().createNativeQuery(query, CriteriaMasterEntity.class);
                 List<CriteriaMasterEntity> distList = q.getResultList();
                 ObjectMapper ow = new ObjectMapper();
