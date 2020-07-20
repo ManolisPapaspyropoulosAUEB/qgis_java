@@ -26,6 +26,8 @@ import static play.mvc.Results.ok;
 public class CoreDataController {
 
 
+
+
     @SuppressWarnings("Duplicates")
     @play.db.jpa.Transactional
     @BodyParser.Of(BodyParser.Json.class)
@@ -38,12 +40,14 @@ public class CoreDataController {
             } else {
                 String query = " select * from criteria_master d where 1=1 ";
 
+
                 String label = json.findPath("label").asText();
                 if(label!=null && !label.equalsIgnoreCase("") ){
                     query+=" and d.criterion_label like '%"+label+"%'";
                 }
 
-                System.out.println(query);
+
+
 
 
                 Query q = JPA.em().createNativeQuery(query, CriteriaMasterEntity.class);
