@@ -261,11 +261,11 @@ public class FacilitiesController {
                 return badRequest("Expecting Json data");
             } else {
 
-                DistrictCentersEntity districtCenter = JPA.em().find(DistrictCentersEntity.class,json.findPath("id").asInt());
+                SchoolsEntity school = JPA.em().find(SchoolsEntity.class,json.findPath("id").asInt());
 
-                JPA.em().remove(districtCenter);
+                JPA.em().remove(school);
                 result.put("status", "ok");
-                result.put("message", "District Center  has been deleted succesfully!");
+                result.put("message", "School  has been deleted succesfully!");
                 return ok(result);
             }
         } catch (Exception e) {

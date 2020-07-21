@@ -43,7 +43,7 @@ POST        /updateDistrictCenter         controllers.FacilitiesController.updat
 POST        /deleteDistrictCenter         controllers.FacilitiesController.deleteDistrictCenter()
 POST        /addSchool                    controllers.FacilitiesController.addSchool()
 POST        /updateSchool                 controllers.FacilitiesController.updateSchool()
-POST        /updateSchool                 controllers.FacilitiesController.deleteSchool()
+POST        /deleteSchool                 controllers.FacilitiesController.deleteSchool()
 
 
 #VillagesController
