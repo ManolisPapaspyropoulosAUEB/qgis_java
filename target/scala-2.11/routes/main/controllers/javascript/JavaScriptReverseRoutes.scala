@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
 // @SOURCE:C:/developm/qgis_angular/back/conf/routes
-// @DATE:Tue Jul 21 20:32:20 EEST 2020
+// @DATE:Wed Jul 22 01:19:56 EEST 2020
 
 import play.api.routing.JavaScriptReverseRoute
 import play.api.mvc.{ QueryStringBindable, PathBindable, Call, JavascriptLiteral }
@@ -85,7 +85,7 @@ package controllers.javascript {
   
   }
 
-  // @LINE:47
+  // @LINE:50
   class ReverseVillageController(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -93,7 +93,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:47
+    // @LINE:50
     def getAllVillages: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.VillageController.getAllVillages",
       """
@@ -173,22 +173,52 @@ package controllers.javascript {
     }
 
   
-    // @LINE:40
-    def getAllFacilities: JavaScriptReverseRoute = JavaScriptReverseRoute(
-      "controllers.FacilitiesController.getAllFacilities",
-      """
-        function() {
-          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "getAllFacilities"})
-        }
-      """
-    )
-  
     // @LINE:42
     def updateDistrictCenter: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.FacilitiesController.updateDistrictCenter",
       """
         function() {
           return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "updateDistrictCenter"})
+        }
+      """
+    )
+  
+    // @LINE:45
+    def updateSchool: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.FacilitiesController.updateSchool",
+      """
+        function() {
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "updateSchool"})
+        }
+      """
+    )
+  
+    // @LINE:43
+    def deleteDistrictCenter: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.FacilitiesController.deleteDistrictCenter",
+      """
+        function() {
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "deleteDistrictCenter"})
+        }
+      """
+    )
+  
+    // @LINE:44
+    def addSchool: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.FacilitiesController.addSchool",
+      """
+        function() {
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "addSchool"})
+        }
+      """
+    )
+  
+    // @LINE:40
+    def getAllFacilities: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.FacilitiesController.getAllFacilities",
+      """
+        function() {
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "getAllFacilities"})
         }
       """
     )

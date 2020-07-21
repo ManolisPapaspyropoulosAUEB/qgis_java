@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
 // @SOURCE:C:/developm/qgis_angular/back/conf/routes
-// @DATE:Tue Jul 21 20:32:20 EEST 2020
+// @DATE:Wed Jul 22 01:19:56 EEST 2020
 
 import play.api.mvc.{ QueryStringBindable, PathBindable, Call, JavascriptLiteral }
 import play.core.routing.{ HandlerDef, ReverseRouteContext, queryString, dynamicString }
@@ -61,14 +61,14 @@ package controllers {
   
   }
 
-  // @LINE:47
+  // @LINE:50
   class ReverseVillageController(_prefix: => String) {
     def _defaultPrefix: String = {
       if (_prefix.endsWith("/")) "" else "/"
     }
 
   
-    // @LINE:47
+    // @LINE:50
     def getAllVillages(): Call = {
       import ReverseRouteContext.empty
       Call("POST", _prefix + { _defaultPrefix } + "getAllVillages")
@@ -128,16 +128,34 @@ package controllers {
     }
 
   
-    // @LINE:40
-    def getAllFacilities(): Call = {
-      import ReverseRouteContext.empty
-      Call("POST", _prefix + { _defaultPrefix } + "getAllFacilities")
-    }
-  
     // @LINE:42
     def updateDistrictCenter(): Call = {
       import ReverseRouteContext.empty
       Call("POST", _prefix + { _defaultPrefix } + "updateDistrictCenter")
+    }
+  
+    // @LINE:45
+    def updateSchool(): Call = {
+      import ReverseRouteContext.empty
+      Call("POST", _prefix + { _defaultPrefix } + "updateSchool")
+    }
+  
+    // @LINE:43
+    def deleteDistrictCenter(): Call = {
+      import ReverseRouteContext.empty
+      Call("POST", _prefix + { _defaultPrefix } + "deleteDistrictCenter")
+    }
+  
+    // @LINE:44
+    def addSchool(): Call = {
+      import ReverseRouteContext.empty
+      Call("POST", _prefix + { _defaultPrefix } + "addSchool")
+    }
+  
+    // @LINE:40
+    def getAllFacilities(): Call = {
+      import ReverseRouteContext.empty
+      Call("POST", _prefix + { _defaultPrefix } + "getAllFacilities")
     }
   
     // @LINE:41

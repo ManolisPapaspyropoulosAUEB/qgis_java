@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
 // @SOURCE:C:/developm/qgis_angular/back/conf/routes
-// @DATE:Tue Jul 21 20:32:20 EEST 2020
+// @DATE:Wed Jul 22 01:19:56 EEST 2020
 
 package GeneralApi;
 

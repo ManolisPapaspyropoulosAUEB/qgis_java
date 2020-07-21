@@ -35,11 +35,14 @@ POST        /resetCriteria                controllers.RoadController.resetCriter
 POST        /updateSoftwareAccount        controllers.RoadController.updateSoftwareAccount()
 
 
-#FacilitiesController
+#FacilitiesController  
 
 POST        /getAllFacilities             controllers.FacilitiesController.getAllFacilities()
 POST        /addDistrictCenter            controllers.FacilitiesController.addDistrictCenter()
 POST        /updateDistrictCenter         controllers.FacilitiesController.updateDistrictCenter()
+POST        /deleteDistrictCenter         controllers.FacilitiesController.deleteDistrictCenter()
+POST        /addSchool                    controllers.FacilitiesController.addSchool()
+POST        /updateSchool                 controllers.FacilitiesController.updateSchool()
 
 
 #VillagesController

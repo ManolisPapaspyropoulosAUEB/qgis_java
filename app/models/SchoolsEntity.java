@@ -15,7 +15,7 @@ public class SchoolsEntity {
     private BigDecimal north;
     private Integer eastUtm42;
     private Integer northUtm42;
-    private String from;
+    private String fromSource;
     private String distName;
     private String altDistName;
     private Integer distCode;
@@ -102,13 +102,13 @@ public class SchoolsEntity {
     }
 
     @Basic
-    @Column(name = "from")
-    public String getFrom() {
-        return from;
+    @Column(name = "from_source")
+    public String getFromSource() {
+        return fromSource;
     }
 
-    public void setFrom(String from) {
-        this.from = from;
+    public void setFromSource(String fromSource) {
+        this.fromSource = fromSource;
     }
 
     @Basic
@@ -164,7 +164,7 @@ public class SchoolsEntity {
                 Objects.equals(north, that.north) &&
                 Objects.equals(eastUtm42, that.eastUtm42) &&
                 Objects.equals(northUtm42, that.northUtm42) &&
-                Objects.equals(from, that.from) &&
+                Objects.equals(fromSource, that.fromSource) &&
                 Objects.equals(distName, that.distName) &&
                 Objects.equals(altDistName, that.altDistName) &&
                 Objects.equals(distCode, that.distCode) &&
@@ -173,6 +173,6 @@ public class SchoolsEntity {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, targetFid, name, type, east, north, eastUtm42, northUtm42, from, distName, altDistName, distCode, proCode);
+        return Objects.hash(id, targetFid, name, type, east, north, eastUtm42, northUtm42, fromSource, distName, altDistName, distCode, proCode);
     }
 }

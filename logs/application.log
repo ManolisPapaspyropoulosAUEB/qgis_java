@@ -99,3 +99,449 @@
 2020-07-21 20:32:43,268 [INFO] from play.api.db.DefaultDBApi in application-akka.actor.default-dispatcher-288 - Database [default] connected at jdbc:mysql://localhost:3306/afggis_db?characterEncoding=UTF-8
 2020-07-21 20:32:43,275 [INFO] from application in application-akka.actor.default-dispatcher-288 - ApplicationTimer demo: Starting application at 2020-07-21T17:32:43.274Z
 2020-07-21 20:32:43,408 [INFO] from play.api.Play in application-akka.actor.default-dispatcher-288 - Application started (Dev)
+2020-07-21 21:21:43,899 [INFO] from application in application-akka.actor.default-dispatcher-149 - ApplicationTimer demo: Stopping application at 2020-07-21T18:21:43.899Z after 2940s.
+2020-07-21 21:21:43,900 [INFO] from application in application-akka.actor.default-dispatcher-149 - Shutting down connection pool.
+2020-07-21 21:21:44,012 [WARN] from application in application-akka.actor.default-dispatcher-149 - Logger configuration in conf files is deprecated and has no effect. Use a logback configuration file instead.
+2020-07-21 21:21:44,083 [WARN] from application in application-akka.actor.default-dispatcher-149 - application.conf @ file:/C:/developm/qgis_angular/back/target/scala-2.11/classes/application.conf: 137: user is deprecated, use username instead
+2020-07-21 21:21:44,083 [INFO] from application in application-akka.actor.default-dispatcher-149 - Creating Pool for datasource 'default'
+2020-07-21 21:21:44,128 [INFO] from play.api.db.HikariCPConnectionPool in application-akka.actor.default-dispatcher-149 - datasource [default] bound to JNDI as DefaultDS
+2020-07-21 21:21:44,135 [INFO] from play.api.db.DefaultDBApi in application-akka.actor.default-dispatcher-149 - Database [default] connected at jdbc:mysql://localhost:3306/afggis_db?characterEncoding=UTF-8
+2020-07-21 21:21:44,142 [INFO] from application in application-akka.actor.default-dispatcher-149 - ApplicationTimer demo: Starting application at 2020-07-21T18:21:44.141Z
+2020-07-21 21:21:44,259 [INFO] from play.api.Play in application-akka.actor.default-dispatcher-149 - Application started (Dev)
+2020-07-21 21:26:13,481 [INFO] from application in application-akka.actor.default-dispatcher-9 - ApplicationTimer demo: Stopping application at 2020-07-21T18:26:13.481Z after 269s.
+2020-07-21 21:26:13,482 [INFO] from application in application-akka.actor.default-dispatcher-9 - Shutting down connection pool.
+2020-07-21 21:26:13,543 [WARN] from application in application-akka.actor.default-dispatcher-9 - Logger configuration in conf files is deprecated and has no effect. Use a logback configuration file instead.
+2020-07-21 21:26:13,779 [WARN] from application in application-akka.actor.default-dispatcher-9 - application.conf @ file:/C:/developm/qgis_angular/back/target/scala-2.11/classes/application.conf: 137: user is deprecated, use username instead
+2020-07-21 21:26:13,779 [INFO] from application in application-akka.actor.default-dispatcher-9 - Creating Pool for datasource 'default'
+2020-07-21 21:26:13,787 [INFO] from play.api.db.HikariCPConnectionPool in application-akka.actor.default-dispatcher-9 - datasource [default] bound to JNDI as DefaultDS
+2020-07-21 21:26:13,793 [INFO] from play.api.db.DefaultDBApi in application-akka.actor.default-dispatcher-9 - Database [default] connected at jdbc:mysql://localhost:3306/afggis_db?characterEncoding=UTF-8
+2020-07-21 21:26:13,794 [INFO] from application in application-akka.actor.default-dispatcher-9 - ApplicationTimer demo: Starting application at 2020-07-21T18:26:13.794Z
+2020-07-21 21:26:13,854 [INFO] from play.api.Play in application-akka.actor.default-dispatcher-9 - Application started (Dev)
+2020-07-21 21:31:15,780 [INFO] from application in application-akka.actor.default-dispatcher-23 - ApplicationTimer demo: Stopping application at 2020-07-21T18:31:15.780Z after 302s.
+2020-07-21 21:31:15,780 [INFO] from application in application-akka.actor.default-dispatcher-23 - Shutting down connection pool.
+2020-07-21 21:31:15,845 [WARN] from application in application-akka.actor.default-dispatcher-23 - Logger configuration in conf files is deprecated and has no effect. Use a logback configuration file instead.
+2020-07-21 21:31:15,913 [WARN] from application in application-akka.actor.default-dispatcher-23 - application.conf @ file:/C:/developm/qgis_angular/back/target/scala-2.11/classes/application.conf: 137: user is deprecated, use username instead
+2020-07-21 21:31:15,913 [INFO] from application in application-akka.actor.default-dispatcher-23 - Creating Pool for datasource 'default'
+2020-07-21 21:31:15,917 [INFO] from play.api.db.HikariCPConnectionPool in application-akka.actor.default-dispatcher-23 - datasource [default] bound to JNDI as DefaultDS
+2020-07-21 21:31:15,922 [INFO] from play.api.db.DefaultDBApi in application-akka.actor.default-dispatcher-23 - Database [default] connected at jdbc:mysql://localhost:3306/afggis_db?characterEncoding=UTF-8
+2020-07-21 21:31:15,926 [INFO] from application in application-akka.actor.default-dispatcher-23 - ApplicationTimer demo: Starting application at 2020-07-21T18:31:15.926Z
+2020-07-21 21:31:16,025 [INFO] from play.api.Play in application-akka.actor.default-dispatcher-23 - Application started (Dev)
+2020-07-21 22:48:39,664 [ERROR] from application in netty-event-loop-11 - 
+
+! @7gga271g9 - Internal server error, for (POST) [/getAllFromRoads] ->
+ 
+play.sbt.PlayExceptions$CompilationException: Compilation error[cannot find symbol
+  symbol:   variable proCenter
+  location: class controllers.FacilitiesController]
+	at play.sbt.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:27)
+	at play.sbt.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:27)
+	at scala.Option.map(Option.scala:145)
+	at play.sbt.run.PlayReload$$anonfun$taskFailureHandler$1.apply(PlayReload.scala:49)
+	at play.sbt.run.PlayReload$$anonfun$taskFailureHandler$1.apply(PlayReload.scala:44)
+	at scala.Option.map(Option.scala:145)
+	at play.sbt.run.PlayReload$.taskFailureHandler(PlayReload.scala:44)
+	at play.sbt.run.PlayReload$.compileFailure(PlayReload.scala:40)
+	at play.sbt.run.PlayReload$$anonfun$compile$1.apply(PlayReload.scala:17)
+	at play.sbt.run.PlayReload$$anonfun$compile$1.apply(PlayReload.scala:17)
+	at scala.util.Either$LeftProjection.map(Either.scala:377)
+	at play.sbt.run.PlayReload$.compile(PlayReload.scala:17)
+	at play.sbt.run.PlayRun$$anonfun$playRunTask$1$$anonfun$apply$2$$anonfun$apply$3$$anonfun$2.apply(PlayRun.scala:61)
+	at play.sbt.run.PlayRun$$anonfun$playRunTask$1$$anonfun$apply$2$$anonfun$apply$3$$anonfun$2.apply(PlayRun.scala:61)
+	at play.runsupport.Reloader$$anonfun$reload$1.apply(Reloader.scala:339)
+	at play.runsupport.Reloader$$anon$3.run(Reloader.scala:44)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at play.runsupport.Reloader$.play$runsupport$Reloader$$withReloaderContextClassLoader(Reloader.scala:40)
+	at play.runsupport.Reloader.reload(Reloader.scala:337)
+	at play.core.server.DevServerStart$$anonfun$mainDev$1$$anon$1$$anonfun$get$1.apply(DevServerStart.scala:123)
+	at play.core.server.DevServerStart$$anonfun$mainDev$1$$anon$1$$anonfun$get$1.apply(DevServerStart.scala:121)
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24)
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24)
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:39)
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(AbstractDispatcher.scala:415)
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)
+2020-07-21 22:49:02,772 [ERROR] from application in netty-event-loop-1 - 
+
+! @7gga28agc - Internal server error, for (POST) [/getAllDistricts] ->
+ 
+play.sbt.PlayExceptions$CompilationException: Compilation error[cannot find symbol
+  symbol:   variable proCenter
+  location: class controllers.FacilitiesController]
+	at play.sbt.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:27)
+	at play.sbt.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:27)
+	at scala.Option.map(Option.scala:145)
+	at play.sbt.run.PlayReload$$anonfun$taskFailureHandler$1.apply(PlayReload.scala:49)
+	at play.sbt.run.PlayReload$$anonfun$taskFailureHandler$1.apply(PlayReload.scala:44)
+	at scala.Option.map(Option.scala:145)
+	at play.sbt.run.PlayReload$.taskFailureHandler(PlayReload.scala:44)
+	at play.sbt.run.PlayReload$.compileFailure(PlayReload.scala:40)
+	at play.sbt.run.PlayReload$$anonfun$compile$1.apply(PlayReload.scala:17)
+	at play.sbt.run.PlayReload$$anonfun$compile$1.apply(PlayReload.scala:17)
+	at scala.util.Either$LeftProjection.map(Either.scala:377)
+	at play.sbt.run.PlayReload$.compile(PlayReload.scala:17)
+	at play.sbt.run.PlayRun$$anonfun$playRunTask$1$$anonfun$apply$2$$anonfun$apply$3$$anonfun$2.apply(PlayRun.scala:61)
+	at play.sbt.run.PlayRun$$anonfun$playRunTask$1$$anonfun$apply$2$$anonfun$apply$3$$anonfun$2.apply(PlayRun.scala:61)
+	at play.runsupport.Reloader$$anonfun$reload$1.apply(Reloader.scala:339)
+	at play.runsupport.Reloader$$anon$3.run(Reloader.scala:44)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at play.runsupport.Reloader$.play$runsupport$Reloader$$withReloaderContextClassLoader(Reloader.scala:40)
+	at play.runsupport.Reloader.reload(Reloader.scala:337)
+	at play.core.server.DevServerStart$$anonfun$mainDev$1$$anon$1$$anonfun$get$1.apply(DevServerStart.scala:123)
+	at play.core.server.DevServerStart$$anonfun$mainDev$1$$anon$1$$anonfun$get$1.apply(DevServerStart.scala:121)
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24)
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24)
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:39)
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(AbstractDispatcher.scala:415)
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)
+2020-07-21 22:49:06,271 [ERROR] from application in netty-event-loop-2 - 
+
+! @7gga28fl1 - Internal server error, for (POST) [/getAllFromRoads] ->
+ 
+play.sbt.PlayExceptions$CompilationException: Compilation error[cannot find symbol
+  symbol:   variable proCenter
+  location: class controllers.FacilitiesController]
+	at play.sbt.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:27)
+	at play.sbt.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:27)
+	at scala.Option.map(Option.scala:145)
+	at play.sbt.run.PlayReload$$anonfun$taskFailureHandler$1.apply(PlayReload.scala:49)
+	at play.sbt.run.PlayReload$$anonfun$taskFailureHandler$1.apply(PlayReload.scala:44)
+	at scala.Option.map(Option.scala:145)
+	at play.sbt.run.PlayReload$.taskFailureHandler(PlayReload.scala:44)
+	at play.sbt.run.PlayReload$.compileFailure(PlayReload.scala:40)
+	at play.sbt.run.PlayReload$$anonfun$compile$1.apply(PlayReload.scala:17)
+	at play.sbt.run.PlayReload$$anonfun$compile$1.apply(PlayReload.scala:17)
+	at scala.util.Either$LeftProjection.map(Either.scala:377)
+	at play.sbt.run.PlayReload$.compile(PlayReload.scala:17)
+	at play.sbt.run.PlayRun$$anonfun$playRunTask$1$$anonfun$apply$2$$anonfun$apply$3$$anonfun$2.apply(PlayRun.scala:61)
+	at play.sbt.run.PlayRun$$anonfun$playRunTask$1$$anonfun$apply$2$$anonfun$apply$3$$anonfun$2.apply(PlayRun.scala:61)
+	at play.runsupport.Reloader$$anonfun$reload$1.apply(Reloader.scala:339)
+	at play.runsupport.Reloader$$anon$3.run(Reloader.scala:44)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at play.runsupport.Reloader$.play$runsupport$Reloader$$withReloaderContextClassLoader(Reloader.scala:40)
+	at play.runsupport.Reloader.reload(Reloader.scala:337)
+	at play.core.server.DevServerStart$$anonfun$mainDev$1$$anon$1$$anonfun$get$1.apply(DevServerStart.scala:123)
+	at play.core.server.DevServerStart$$anonfun$mainDev$1$$anon$1$$anonfun$get$1.apply(DevServerStart.scala:121)
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24)
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24)
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:39)
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(AbstractDispatcher.scala:415)
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)
+2020-07-21 22:49:09,789 [ERROR] from application in netty-event-loop-3 - 
+
+! @7gga28l09 - Internal server error, for (POST) [/getAllProvinces] ->
+ 
+play.sbt.PlayExceptions$CompilationException: Compilation error[cannot find symbol
+  symbol:   variable proCenter
+  location: class controllers.FacilitiesController]
+	at play.sbt.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:27)
+	at play.sbt.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:27)
+	at scala.Option.map(Option.scala:145)
+	at play.sbt.run.PlayReload$$anonfun$taskFailureHandler$1.apply(PlayReload.scala:49)
+	at play.sbt.run.PlayReload$$anonfun$taskFailureHandler$1.apply(PlayReload.scala:44)
+	at scala.Option.map(Option.scala:145)
+	at play.sbt.run.PlayReload$.taskFailureHandler(PlayReload.scala:44)
+	at play.sbt.run.PlayReload$.compileFailure(PlayReload.scala:40)
+	at play.sbt.run.PlayReload$$anonfun$compile$1.apply(PlayReload.scala:17)
+	at play.sbt.run.PlayReload$$anonfun$compile$1.apply(PlayReload.scala:17)
+	at scala.util.Either$LeftProjection.map(Either.scala:377)
+	at play.sbt.run.PlayReload$.compile(PlayReload.scala:17)
+	at play.sbt.run.PlayRun$$anonfun$playRunTask$1$$anonfun$apply$2$$anonfun$apply$3$$anonfun$2.apply(PlayRun.scala:61)
+	at play.sbt.run.PlayRun$$anonfun$playRunTask$1$$anonfun$apply$2$$anonfun$apply$3$$anonfun$2.apply(PlayRun.scala:61)
+	at play.runsupport.Reloader$$anonfun$reload$1.apply(Reloader.scala:339)
+	at play.runsupport.Reloader$$anon$3.run(Reloader.scala:44)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at play.runsupport.Reloader$.play$runsupport$Reloader$$withReloaderContextClassLoader(Reloader.scala:40)
+	at play.runsupport.Reloader.reload(Reloader.scala:337)
+	at play.core.server.DevServerStart$$anonfun$mainDev$1$$anon$1$$anonfun$get$1.apply(DevServerStart.scala:123)
+	at play.core.server.DevServerStart$$anonfun$mainDev$1$$anon$1$$anonfun$get$1.apply(DevServerStart.scala:121)
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24)
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24)
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:39)
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(AbstractDispatcher.scala:415)
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)
+2020-07-21 22:49:16,829 [ERROR] from application in netty-event-loop-16 - 
+
+! @7gga295b3 - Internal server error, for (POST) [/getAllProvinces] ->
+ 
+play.sbt.PlayExceptions$CompilationException: Compilation error[cannot find symbol
+  symbol:   variable proCenter
+  location: class controllers.FacilitiesController]
+	at play.sbt.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:27)
+	at play.sbt.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:27)
+	at scala.Option.map(Option.scala:145)
+	at play.sbt.run.PlayReload$$anonfun$taskFailureHandler$1.apply(PlayReload.scala:49)
+	at play.sbt.run.PlayReload$$anonfun$taskFailureHandler$1.apply(PlayReload.scala:44)
+	at scala.Option.map(Option.scala:145)
+	at play.sbt.run.PlayReload$.taskFailureHandler(PlayReload.scala:44)
+	at play.sbt.run.PlayReload$.compileFailure(PlayReload.scala:40)
+	at play.sbt.run.PlayReload$$anonfun$compile$1.apply(PlayReload.scala:17)
+	at play.sbt.run.PlayReload$$anonfun$compile$1.apply(PlayReload.scala:17)
+	at scala.util.Either$LeftProjection.map(Either.scala:377)
+	at play.sbt.run.PlayReload$.compile(PlayReload.scala:17)
+	at play.sbt.run.PlayRun$$anonfun$playRunTask$1$$anonfun$apply$2$$anonfun$apply$3$$anonfun$2.apply(PlayRun.scala:61)
+	at play.sbt.run.PlayRun$$anonfun$playRunTask$1$$anonfun$apply$2$$anonfun$apply$3$$anonfun$2.apply(PlayRun.scala:61)
+	at play.runsupport.Reloader$$anonfun$reload$1.apply(Reloader.scala:339)
+	at play.runsupport.Reloader$$anon$3.run(Reloader.scala:44)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at play.runsupport.Reloader$.play$runsupport$Reloader$$withReloaderContextClassLoader(Reloader.scala:40)
+	at play.runsupport.Reloader.reload(Reloader.scala:337)
+	at play.core.server.DevServerStart$$anonfun$mainDev$1$$anon$1$$anonfun$get$1.apply(DevServerStart.scala:123)
+	at play.core.server.DevServerStart$$anonfun$mainDev$1$$anon$1$$anonfun$get$1.apply(DevServerStart.scala:121)
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24)
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24)
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:39)
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(AbstractDispatcher.scala:415)
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)
+2020-07-21 22:49:20,195 [ERROR] from application in netty-event-loop-4 - 
+
+! @7gga29aaf - Internal server error, for (POST) [/getAllDistricts] ->
+ 
+play.sbt.PlayExceptions$CompilationException: Compilation error[cannot find symbol
+  symbol:   variable proCenter
+  location: class controllers.FacilitiesController]
+	at play.sbt.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:27)
+	at play.sbt.PlayExceptions$CompilationException$.apply(PlayExceptions.scala:27)
+	at scala.Option.map(Option.scala:145)
+	at play.sbt.run.PlayReload$$anonfun$taskFailureHandler$1.apply(PlayReload.scala:49)
+	at play.sbt.run.PlayReload$$anonfun$taskFailureHandler$1.apply(PlayReload.scala:44)
+	at scala.Option.map(Option.scala:145)
+	at play.sbt.run.PlayReload$.taskFailureHandler(PlayReload.scala:44)
+	at play.sbt.run.PlayReload$.compileFailure(PlayReload.scala:40)
+	at play.sbt.run.PlayReload$$anonfun$compile$1.apply(PlayReload.scala:17)
+	at play.sbt.run.PlayReload$$anonfun$compile$1.apply(PlayReload.scala:17)
+	at scala.util.Either$LeftProjection.map(Either.scala:377)
+	at play.sbt.run.PlayReload$.compile(PlayReload.scala:17)
+	at play.sbt.run.PlayRun$$anonfun$playRunTask$1$$anonfun$apply$2$$anonfun$apply$3$$anonfun$2.apply(PlayRun.scala:61)
+	at play.sbt.run.PlayRun$$anonfun$playRunTask$1$$anonfun$apply$2$$anonfun$apply$3$$anonfun$2.apply(PlayRun.scala:61)
+	at play.runsupport.Reloader$$anonfun$reload$1.apply(Reloader.scala:339)
+	at play.runsupport.Reloader$$anon$3.run(Reloader.scala:44)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at play.runsupport.Reloader$.play$runsupport$Reloader$$withReloaderContextClassLoader(Reloader.scala:40)
+	at play.runsupport.Reloader.reload(Reloader.scala:337)
+	at play.core.server.DevServerStart$$anonfun$mainDev$1$$anon$1$$anonfun$get$1.apply(DevServerStart.scala:123)
+	at play.core.server.DevServerStart$$anonfun$mainDev$1$$anon$1$$anonfun$get$1.apply(DevServerStart.scala:121)
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24)
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24)
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:39)
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(AbstractDispatcher.scala:415)
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)
+2020-07-21 22:50:54,093 [INFO] from application in application-akka.actor.default-dispatcher-205 - ApplicationTimer demo: Stopping application at 2020-07-21T19:50:54.093Z after 4779s.
+2020-07-21 22:50:54,094 [INFO] from application in application-akka.actor.default-dispatcher-205 - Shutting down connection pool.
+2020-07-21 22:50:54,270 [WARN] from application in application-akka.actor.default-dispatcher-205 - Logger configuration in conf files is deprecated and has no effect. Use a logback configuration file instead.
+2020-07-21 22:50:54,404 [WARN] from application in application-akka.actor.default-dispatcher-205 - application.conf @ file:/C:/developm/qgis_angular/back/target/scala-2.11/classes/application.conf: 137: user is deprecated, use username instead
+2020-07-21 22:50:54,404 [INFO] from application in application-akka.actor.default-dispatcher-205 - Creating Pool for datasource 'default'
+2020-07-21 22:50:54,410 [INFO] from play.api.db.HikariCPConnectionPool in application-akka.actor.default-dispatcher-205 - datasource [default] bound to JNDI as DefaultDS
+2020-07-21 22:50:54,415 [INFO] from play.api.db.DefaultDBApi in application-akka.actor.default-dispatcher-205 - Database [default] connected at jdbc:mysql://localhost:3306/afggis_db?characterEncoding=UTF-8
+2020-07-21 22:50:54,416 [INFO] from application in application-akka.actor.default-dispatcher-205 - ApplicationTimer demo: Starting application at 2020-07-21T19:50:54.416Z
+2020-07-21 22:50:54,586 [INFO] from play.api.Play in application-akka.actor.default-dispatcher-205 - Application started (Dev)
+2020-07-21 22:54:39,301 [WARN] from org.hibernate.util.JDBCExceptionReporter in application-akka.actor.default-dispatcher-12 - SQL Error: 1064, SQLState: 42000
+2020-07-21 22:54:39,302 [ERROR] from org.hibernate.util.JDBCExceptionReporter in application-akka.actor.default-dispatcher-12 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'from, name, north, north_utm42, pro_code, target_fid, type, id) values ('eeeeeee' at line 1
+2020-07-21 22:54:39,466 [ERROR] from application in application-akka.actor.default-dispatcher-12 - 
+
+! @7gga31ei6 - Internal server error, for (POST) [/addSchool] ->
+ 
+play.api.http.HttpErrorHandlerExceptions$$anon$1: Execution exception[[RollbackException: Error while committing the transaction]]
+	at play.api.http.HttpErrorHandlerExceptions$.throwableToUsefulException(HttpErrorHandler.scala:293)
+	at play.api.http.DefaultHttpErrorHandler.onServerError(HttpErrorHandler.scala:220)
+	at play.api.GlobalSettings$class.onError(GlobalSettings.scala:160)
+	at play.core.j.JavaGlobalSettingsAdapter.play$core$j$JavaGlobalSettingsAdapter$$super$onError(JavaGlobalSettingsAdapter.scala:35)
+	at play.core.j.JavaGlobalSettingsAdapter$$anonfun$onError$2.apply(JavaGlobalSettingsAdapter.scala:35)
+	at play.core.j.JavaGlobalSettingsAdapter$$anonfun$onError$2.apply(JavaGlobalSettingsAdapter.scala:35)
+	at scala.Option.getOrElse(Option.scala:121)
+	at play.core.j.JavaGlobalSettingsAdapter.onError(JavaGlobalSettingsAdapter.scala:35)
+	at play.api.http.GlobalSettingsHttpErrorHandler.onServerError(HttpErrorHandler.scala:100)
+	at play.filters.cors.AbstractCORSPolicy$$anonfun$2.applyOrElse(AbstractCORSPolicy.scala:146)
+	at play.filters.cors.AbstractCORSPolicy$$anonfun$2.applyOrElse(AbstractCORSPolicy.scala:145)
+	at scala.concurrent.Future$$anonfun$recoverWith$1.apply(Future.scala:344)
+	at scala.concurrent.Future$$anonfun$recoverWith$1.apply(Future.scala:343)
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:32)
+	at play.api.libs.iteratee.Execution$trampoline$.execute(Execution.scala:70)
+	at scala.concurrent.impl.CallbackRunnable.executeWithValue(Promise.scala:40)
+	at scala.concurrent.impl.Promise$DefaultPromise.tryComplete(Promise.scala:248)
+	at scala.concurrent.Promise$class.tryFailure(Promise.scala:112)
+	at scala.concurrent.impl.Promise$DefaultPromise.tryFailure(Promise.scala:153)
+	at play.api.mvc.Filter$$anon$1$$anonfun$apply$4$$anonfun$apply$1.applyOrElse(Filters.scala:83)
+	at play.api.mvc.Filter$$anon$1$$anonfun$apply$4$$anonfun$apply$1.applyOrElse(Filters.scala:77)
+	at scala.concurrent.Future$$anonfun$recoverWith$1.apply(Future.scala:344)
+	at scala.concurrent.Future$$anonfun$recoverWith$1.apply(Future.scala:343)
+	at scala.concurrent.impl.CallbackRunnable.run(Promise.scala:32)
+	at akka.dispatch.BatchingExecutor$AbstractBatch.processBatch(BatchingExecutor.scala:55)
+	at akka.dispatch.BatchingExecutor$BlockableBatch$$anonfun$run$1.apply$mcV$sp(BatchingExecutor.scala:91)
+	at akka.dispatch.BatchingExecutor$BlockableBatch$$anonfun$run$1.apply(BatchingExecutor.scala:91)
+	at akka.dispatch.BatchingExecutor$BlockableBatch$$anonfun$run$1.apply(BatchingExecutor.scala:91)
+	at scala.concurrent.BlockContext$.withBlockContext(BlockContext.scala:72)
+	at akka.dispatch.BatchingExecutor$BlockableBatch.run(BatchingExecutor.scala:90)
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:39)
+	at akka.dispatch.ForkJoinExecutorConfigurator$AkkaForkJoinTask.exec(AbstractDispatcher.scala:415)
+	at scala.concurrent.forkjoin.ForkJoinTask.doExec(ForkJoinTask.java:260)
+	at scala.concurrent.forkjoin.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1339)
+	at scala.concurrent.forkjoin.ForkJoinPool.runWorker(ForkJoinPool.java:1979)
+	at scala.concurrent.forkjoin.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:107)
+Caused by: javax.persistence.RollbackException: Error while committing the transaction
+	at org.hibernate.ejb.TransactionImpl.commit(TransactionImpl.java:93)
+	at play.db.jpa.DefaultJPAApi.withTransaction(DefaultJPAApi.java:143)
+	at play.db.jpa.DefaultJPAApi.withTransaction(DefaultJPAApi.java:195)
+	at play.db.jpa.TransactionalAction.call(TransactionalAction.java:25)
+	at play.core.j.JavaAction$$anonfun$7.apply(JavaAction.scala:108)
+	at play.core.j.JavaAction$$anonfun$7.apply(JavaAction.scala:108)
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.liftedTree1$1(Future.scala:24)
+	at scala.concurrent.impl.Future$PromiseCompletingRunnable.run(Future.scala:24)
+	at play.core.j.HttpExecutionContext$$anon$2.run(HttpExecutionContext.scala:56)
+	at play.api.libs.iteratee.Execution$trampoline$.execute(Execution.scala:70)
+	at play.core.j.HttpExecutionContext.execute(HttpExecutionContext.scala:48)
+	at scala.concurrent.impl.Future$.apply(Future.scala:31)
+	at scala.concurrent.Future$.apply(Future.scala:492)
+	at play.core.j.JavaAction.apply(JavaAction.scala:108)
+	at play.api.mvc.Action$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:112)
+	at play.api.mvc.Action$$anonfun$apply$2$$anonfun$apply$5$$anonfun$apply$6.apply(Action.scala:112)
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:21)
+	at play.api.mvc.Action$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:111)
+	at play.api.mvc.Action$$anonfun$apply$2$$anonfun$apply$5.apply(Action.scala:110)
+	at scala.Option.map(Option.scala:146)
+	at play.api.mvc.Action$$anonfun$apply$2.apply(Action.scala:110)
+	at play.api.mvc.Action$$anonfun$apply$2.apply(Action.scala:103)
+	at scala.concurrent.Future$$anonfun$flatMap$1.apply(Future.scala:251)
+	at scala.concurrent.Future$$anonfun$flatMap$1.apply(Future.scala:249)
+	... 13 common frames omitted
+Caused by: javax.persistence.PersistenceException: org.hibernate.exception.SQLGrammarException: Could not execute JDBC batch update
+	at org.hibernate.ejb.AbstractEntityManagerImpl.convert(AbstractEntityManagerImpl.java:1389)
+	at org.hibernate.ejb.AbstractEntityManagerImpl.convert(AbstractEntityManagerImpl.java:1317)
+	at org.hibernate.ejb.TransactionImpl.commit(TransactionImpl.java:81)
+	... 36 common frames omitted
+Caused by: org.hibernate.exception.SQLGrammarException: Could not execute JDBC batch update
+	at org.hibernate.exception.SQLStateConverter.convert(SQLStateConverter.java:92)
+	at org.hibernate.exception.JDBCExceptionHelper.convert(JDBCExceptionHelper.java:66)
+	at org.hibernate.jdbc.AbstractBatcher.executeBatch(AbstractBatcher.java:275)
+	at org.hibernate.engine.ActionQueue.executeActions(ActionQueue.java:268)
+	at org.hibernate.engine.ActionQueue.executeActions(ActionQueue.java:184)
+	at org.hibernate.event.def.AbstractFlushingEventListener.performExecutions(AbstractFlushingEventListener.java:321)
+	at org.hibernate.event.def.DefaultFlushEventListener.onFlush(DefaultFlushEventListener.java:51)
+	at org.hibernate.impl.SessionImpl.flush(SessionImpl.java:1216)
+	at org.hibernate.impl.SessionImpl.managedFlush(SessionImpl.java:383)
+	at org.hibernate.transaction.JDBCTransaction.commit(JDBCTransaction.java:133)
+	at org.hibernate.ejb.TransactionImpl.commit(TransactionImpl.java:76)
+	... 36 common frames omitted
+Caused by: java.sql.BatchUpdateException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'from, name, north, north_utm42, pro_code, target_fid, type, id) values ('eeeeeee' at line 1
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:404)
+	at com.mysql.jdbc.Util.getInstance(Util.java:387)
+	at com.mysql.jdbc.SQLError.createBatchUpdateException(SQLError.java:1154)
+	at com.mysql.jdbc.PreparedStatement.executeBatchSerially(PreparedStatement.java:1773)
+	at com.mysql.jdbc.PreparedStatement.executeBatchInternal(PreparedStatement.java:1257)
+	at com.mysql.jdbc.StatementImpl.executeBatch(StatementImpl.java:959)
+	at com.zaxxer.hikari.pool.ProxyStatement.executeBatch(ProxyStatement.java:128)
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeBatch(HikariProxyPreparedStatement.java)
+	at org.hibernate.jdbc.BatchingBatcher.doExecuteBatch(BatchingBatcher.java:70)
+	at org.hibernate.jdbc.AbstractBatcher.executeBatch(AbstractBatcher.java:268)
+	... 44 common frames omitted
+Caused by: com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'from, name, north, north_utm42, pro_code, target_fid, type, id) values ('eeeeeee' at line 1
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:404)
+	at com.mysql.jdbc.Util.getInstance(Util.java:387)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:939)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3878)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3814)
+	at com.mysql.jdbc.MysqlIO.sendCommand(MysqlIO.java:2478)
+	at com.mysql.jdbc.MysqlIO.sqlQueryDirect(MysqlIO.java:2625)
+	at com.mysql.jdbc.ConnectionImpl.execSQL(ConnectionImpl.java:2551)
+	at com.mysql.jdbc.PreparedStatement.executeInternal(PreparedStatement.java:1861)
+	at com.mysql.jdbc.PreparedStatement.executeUpdateInternal(PreparedStatement.java:2073)
+	at com.mysql.jdbc.PreparedStatement.executeBatchSerially(PreparedStatement.java:1751)
+	... 50 common frames omitted
+2020-07-21 22:58:04,378 [INFO] from application in application-akka.actor.default-dispatcher-16 - ApplicationTimer demo: Stopping application at 2020-07-21T19:58:04.378Z after 430s.
+2020-07-21 22:58:04,378 [INFO] from application in application-akka.actor.default-dispatcher-16 - Shutting down connection pool.
+2020-07-21 22:58:04,497 [WARN] from application in application-akka.actor.default-dispatcher-16 - Logger configuration in conf files is deprecated and has no effect. Use a logback configuration file instead.
+2020-07-21 22:58:04,668 [WARN] from application in application-akka.actor.default-dispatcher-16 - application.conf @ file:/C:/developm/qgis_angular/back/target/scala-2.11/classes/application.conf: 137: user is deprecated, use username instead
+2020-07-21 22:58:04,668 [INFO] from application in application-akka.actor.default-dispatcher-16 - Creating Pool for datasource 'default'
+2020-07-21 22:58:04,677 [INFO] from play.api.db.HikariCPConnectionPool in application-akka.actor.default-dispatcher-16 - datasource [default] bound to JNDI as DefaultDS
+2020-07-21 22:58:04,682 [INFO] from play.api.db.DefaultDBApi in application-akka.actor.default-dispatcher-16 - Database [default] connected at jdbc:mysql://localhost:3306/afggis_db?characterEncoding=UTF-8
+2020-07-21 22:58:04,684 [INFO] from application in application-akka.actor.default-dispatcher-16 - ApplicationTimer demo: Starting application at 2020-07-21T19:58:04.683Z
+2020-07-21 22:58:04,978 [INFO] from play.api.Play in application-akka.actor.default-dispatcher-16 - Application started (Dev)
+2020-07-21 23:13:24,389 [WARN] from org.hibernate.util.JDBCExceptionReporter in application-akka.actor.default-dispatcher-58 - SQL Error: 1064, SQLState: 42000
+2020-07-21 23:13:24,389 [ERROR] from org.hibernate.util.JDBCExceptionReporter in application-akka.actor.default-dispatcher-58 - You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'from, name, north, north_utm42, pro_code, target_fid, type) values ('eeeee', 204' at line 1
+2020-07-21 23:19:34,291 [INFO] from application in application-akka.actor.default-dispatcher-52 - ApplicationTimer demo: Stopping application at 2020-07-21T20:19:34.291Z after 1290s.
+2020-07-21 23:19:34,291 [INFO] from application in application-akka.actor.default-dispatcher-52 - Shutting down connection pool.
+2020-07-21 23:19:34,395 [WARN] from application in application-akka.actor.default-dispatcher-52 - Logger configuration in conf files is deprecated and has no effect. Use a logback configuration file instead.
+2020-07-21 23:19:34,461 [WARN] from application in application-akka.actor.default-dispatcher-52 - application.conf @ file:/C:/developm/qgis_angular/back/target/scala-2.11/classes/application.conf: 137: user is deprecated, use username instead
+2020-07-21 23:19:34,461 [INFO] from application in application-akka.actor.default-dispatcher-52 - Creating Pool for datasource 'default'
+2020-07-21 23:19:34,468 [INFO] from play.api.db.HikariCPConnectionPool in application-akka.actor.default-dispatcher-52 - datasource [default] bound to JNDI as DefaultDS
+2020-07-21 23:19:34,485 [INFO] from play.api.db.DefaultDBApi in application-akka.actor.default-dispatcher-52 - Database [default] connected at jdbc:mysql://localhost:3306/afggis_db?characterEncoding=UTF-8
+2020-07-21 23:19:34,492 [INFO] from application in application-akka.actor.default-dispatcher-52 - ApplicationTimer demo: Starting application at 2020-07-21T20:19:34.492Z
+2020-07-21 23:19:34,814 [INFO] from play.api.Play in application-akka.actor.default-dispatcher-52 - Application started (Dev)
+2020-07-21 23:25:00,082 [INFO] from application in application-akka.actor.default-dispatcher-5 - ApplicationTimer demo: Stopping application at 2020-07-21T20:25:00.082Z after 326s.
+2020-07-21 23:25:00,112 [INFO] from application in application-akka.actor.default-dispatcher-5 - Shutting down connection pool.
+2020-07-21 23:25:00,196 [WARN] from application in application-akka.actor.default-dispatcher-5 - Logger configuration in conf files is deprecated and has no effect. Use a logback configuration file instead.
+2020-07-21 23:25:00,238 [WARN] from application in application-akka.actor.default-dispatcher-5 - application.conf @ file:/C:/developm/qgis_angular/back/target/scala-2.11/classes/application.conf: 137: user is deprecated, use username instead
+2020-07-21 23:25:00,238 [INFO] from application in application-akka.actor.default-dispatcher-5 - Creating Pool for datasource 'default'
+2020-07-21 23:25:00,242 [INFO] from play.api.db.HikariCPConnectionPool in application-akka.actor.default-dispatcher-5 - datasource [default] bound to JNDI as DefaultDS
+2020-07-21 23:25:00,246 [INFO] from play.api.db.DefaultDBApi in application-akka.actor.default-dispatcher-5 - Database [default] connected at jdbc:mysql://localhost:3306/afggis_db?characterEncoding=UTF-8
+2020-07-21 23:25:00,251 [INFO] from application in application-akka.actor.default-dispatcher-5 - ApplicationTimer demo: Starting application at 2020-07-21T20:25:00.251Z
+2020-07-21 23:25:00,414 [INFO] from play.api.Play in application-akka.actor.default-dispatcher-5 - Application started (Dev)
+2020-07-22 00:00:03,472 [INFO] from application in application-akka.actor.default-dispatcher-95 - ApplicationTimer demo: Stopping application at 2020-07-21T21:00:03.472Z after 2103s.
+2020-07-22 00:00:03,473 [INFO] from application in application-akka.actor.default-dispatcher-95 - Shutting down connection pool.
+2020-07-22 00:00:03,563 [WARN] from application in application-akka.actor.default-dispatcher-95 - Logger configuration in conf files is deprecated and has no effect. Use a logback configuration file instead.
+2020-07-22 00:00:03,666 [WARN] from application in application-akka.actor.default-dispatcher-95 - application.conf @ file:/C:/developm/qgis_angular/back/target/scala-2.11/classes/application.conf: 137: user is deprecated, use username instead
+2020-07-22 00:00:03,666 [INFO] from application in application-akka.actor.default-dispatcher-95 - Creating Pool for datasource 'default'
+2020-07-22 00:00:03,673 [INFO] from play.api.db.HikariCPConnectionPool in application-akka.actor.default-dispatcher-95 - datasource [default] bound to JNDI as DefaultDS
+2020-07-22 00:00:03,681 [INFO] from play.api.db.DefaultDBApi in application-akka.actor.default-dispatcher-95 - Database [default] connected at jdbc:mysql://localhost:3306/afggis_db?characterEncoding=UTF-8
+2020-07-22 00:00:03,693 [INFO] from application in application-akka.actor.default-dispatcher-95 - ApplicationTimer demo: Starting application at 2020-07-21T21:00:03.693Z
+2020-07-22 00:00:03,776 [INFO] from play.api.Play in application-akka.actor.default-dispatcher-95 - Application started (Dev)
+2020-07-22 00:18:23,791 [INFO] from application in application-akka.actor.default-dispatcher-45 - ApplicationTimer demo: Stopping application at 2020-07-21T21:18:23.791Z after 1100s.
+2020-07-22 00:18:23,808 [INFO] from application in application-akka.actor.default-dispatcher-45 - Shutting down connection pool.
+2020-07-22 00:18:23,912 [WARN] from application in application-akka.actor.default-dispatcher-45 - Logger configuration in conf files is deprecated and has no effect. Use a logback configuration file instead.
+2020-07-22 00:18:23,984 [WARN] from application in application-akka.actor.default-dispatcher-45 - application.conf @ file:/C:/developm/qgis_angular/back/target/scala-2.11/classes/application.conf: 137: user is deprecated, use username instead
+2020-07-22 00:18:23,984 [INFO] from application in application-akka.actor.default-dispatcher-45 - Creating Pool for datasource 'default'
+2020-07-22 00:18:23,997 [INFO] from play.api.db.HikariCPConnectionPool in application-akka.actor.default-dispatcher-45 - datasource [default] bound to JNDI as DefaultDS
+2020-07-22 00:18:24,002 [INFO] from play.api.db.DefaultDBApi in application-akka.actor.default-dispatcher-45 - Database [default] connected at jdbc:mysql://localhost:3306/afggis_db?characterEncoding=UTF-8
+2020-07-22 00:18:24,008 [INFO] from application in application-akka.actor.default-dispatcher-45 - ApplicationTimer demo: Starting application at 2020-07-21T21:18:24.008Z
+2020-07-22 00:18:24,206 [INFO] from play.api.Play in application-akka.actor.default-dispatcher-45 - Application started (Dev)
+2020-07-22 00:21:46,705 [INFO] from application in application-akka.actor.default-dispatcher-2 - ApplicationTimer demo: Stopping application at 2020-07-21T21:21:46.705Z after 202s.
+2020-07-22 00:21:46,706 [INFO] from application in application-akka.actor.default-dispatcher-2 - Shutting down connection pool.
+2020-07-22 00:21:46,821 [WARN] from application in application-akka.actor.default-dispatcher-2 - Logger configuration in conf files is deprecated and has no effect. Use a logback configuration file instead.
+2020-07-22 00:21:46,972 [WARN] from application in application-akka.actor.default-dispatcher-2 - application.conf @ file:/C:/developm/qgis_angular/back/target/scala-2.11/classes/application.conf: 137: user is deprecated, use username instead
+2020-07-22 00:21:46,972 [INFO] from application in application-akka.actor.default-dispatcher-2 - Creating Pool for datasource 'default'
+2020-07-22 00:21:46,977 [INFO] from play.api.db.HikariCPConnectionPool in application-akka.actor.default-dispatcher-2 - datasource [default] bound to JNDI as DefaultDS
+2020-07-22 00:21:46,984 [INFO] from play.api.db.DefaultDBApi in application-akka.actor.default-dispatcher-2 - Database [default] connected at jdbc:mysql://localhost:3306/afggis_db?characterEncoding=UTF-8
+2020-07-22 00:21:46,985 [INFO] from application in application-akka.actor.default-dispatcher-2 - ApplicationTimer demo: Starting application at 2020-07-21T21:21:46.984Z
+2020-07-22 00:21:47,169 [INFO] from play.api.Play in application-akka.actor.default-dispatcher-2 - Application started (Dev)
+2020-07-22 01:18:51,108 [INFO] from application in application-akka.actor.default-dispatcher-227 - ApplicationTimer demo: Stopping application at 2020-07-21T22:18:51.108Z after 3425s.
+2020-07-22 01:18:51,108 [INFO] from application in application-akka.actor.default-dispatcher-227 - Shutting down connection pool.
+2020-07-22 01:18:52,217 [WARN] from application in application-akka.actor.default-dispatcher-227 - Logger configuration in conf files is deprecated and has no effect. Use a logback configuration file instead.
+2020-07-22 01:18:52,561 [WARN] from application in application-akka.actor.default-dispatcher-227 - application.conf @ file:/C:/developm/qgis_angular/back/target/scala-2.11/classes/application.conf: 137: user is deprecated, use username instead
+2020-07-22 01:18:52,579 [INFO] from application in application-akka.actor.default-dispatcher-227 - Creating Pool for datasource 'default'
+2020-07-22 01:18:52,603 [INFO] from play.api.db.HikariCPConnectionPool in application-akka.actor.default-dispatcher-227 - datasource [default] bound to JNDI as DefaultDS
+2020-07-22 01:18:52,608 [INFO] from play.api.db.DefaultDBApi in application-akka.actor.default-dispatcher-227 - Database [default] connected at jdbc:mysql://localhost:3306/afggis_db?characterEncoding=UTF-8
+2020-07-22 01:18:52,609 [INFO] from application in application-akka.actor.default-dispatcher-227 - ApplicationTimer demo: Starting application at 2020-07-21T22:18:52.609Z
+2020-07-22 01:18:53,393 [INFO] from play.api.Play in application-akka.actor.default-dispatcher-227 - Application started (Dev)
+2020-07-22 01:20:17,414 [INFO] from application in application-akka.actor.default-dispatcher-2 - ApplicationTimer demo: Stopping application at 2020-07-21T22:20:17.414Z after 85s.
+2020-07-22 01:20:17,414 [INFO] from application in application-akka.actor.default-dispatcher-2 - Shutting down connection pool.
+2020-07-22 01:20:17,512 [WARN] from application in application-akka.actor.default-dispatcher-2 - Logger configuration in conf files is deprecated and has no effect. Use a logback configuration file instead.
+2020-07-22 01:20:17,628 [WARN] from application in application-akka.actor.default-dispatcher-2 - application.conf @ file:/C:/developm/qgis_angular/back/target/scala-2.11/classes/application.conf: 137: user is deprecated, use username instead
+2020-07-22 01:20:17,628 [INFO] from application in application-akka.actor.default-dispatcher-2 - Creating Pool for datasource 'default'
+2020-07-22 01:20:17,633 [INFO] from play.api.db.HikariCPConnectionPool in application-akka.actor.default-dispatcher-2 - datasource [default] bound to JNDI as DefaultDS
+2020-07-22 01:20:17,646 [INFO] from play.api.db.DefaultDBApi in application-akka.actor.default-dispatcher-2 - Database [default] connected at jdbc:mysql://localhost:3306/afggis_db?characterEncoding=UTF-8
+2020-07-22 01:20:17,654 [INFO] from application in application-akka.actor.default-dispatcher-2 - ApplicationTimer demo: Starting application at 2020-07-21T22:20:17.654Z
+2020-07-22 01:20:17,870 [INFO] from play.api.Play in application-akka.actor.default-dispatcher-2 - Application started (Dev)
