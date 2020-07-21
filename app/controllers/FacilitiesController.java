@@ -3,10 +3,7 @@ package controllers;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import models.DistrictCentersEntity;
-import models.MosquesEntity;
-import models.RoadsEntity;
-import models.SchoolsEntity;
+import models.*;
 import play.db.jpa.JPA;
 import play.libs.Json;
 import play.mvc.BodyParser;
@@ -14,9 +11,11 @@ import play.mvc.Result;
 
 import javax.persistence.Query;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -65,6 +64,9 @@ public class FacilitiesController {
                     schools+=" and s.dist_code="+districtCode;
                     mosques+=" and m.dist_code="+districtCode;
                 }
+
+                System.out.println(districtCenters);
+
                 if(type.equalsIgnoreCase("Schools")){
                     Query qS = JPA.em().createNativeQuery(schools, SchoolsEntity.class);
                     totalSchools = qS.getResultList().size();
@@ -225,6 +227,104 @@ public class FacilitiesController {
             e.printStackTrace();
             result.put("status", "error");
             result.put("message", "Problem in fetch data process,communicate with the administrator");
+            return ok(result);
+        }
+    }
+
+    //
+
+
+    @SuppressWarnings("Duplicates")
+    @play.db.jpa.Transactional
+    @BodyParser.Of(BodyParser.Json.class)
+    public Result updateDistrictCenter() {
+        try {
+            JsonNode json = request().body().asJson(); //
+            ObjectNode result = Json.newObject();
+            if (json == null) {
+                return badRequest("Expecting Json data");
+            } else {
+                String proCenter = json.findPath("proCenter").asText();
+                Integer num_district_code = json.findPath("num_district_code").asInt();
+                String districtType = json.findPath("districtType").asText();
+                Integer num_province_code = json.findPath("num_province_code").asInt();
+                BigDecimal east = json.findPath("east").decimalValue();
+                BigDecimal north = json.findPath("north").decimalValue();
+                Integer northUtm42 = json.findPath("northUtm42").asInt();
+                Integer eastUtm42 = json.findPath("eastUtm42").asInt();
+                DistrictCentersEntity districtCenter = JPA.em().find(DistrictCentersEntity.class,json.findPath("id").asInt());
+                districtCenter.setCenterType(districtType);
+                districtCenter.setProCenter(proCenter);
+                districtCenter.setDistCode(num_district_code);
+                districtCenter.setProCode(num_province_code);
+                districtCenter.setEast(east);
+                districtCenter.setNorth(north);
+                districtCenter.setNorthUtm42(northUtm42);
+                districtCenter.setEastUtm42(eastUtm42);
+                String sqlDP= "select * from districts d where d.numerical_province_code="+num_province_code +" and d.numerical_district_code="+num_district_code;
+                System.out.println(sqlDP);
+                List<DistrictsEntity> districtsList = JPA.em().createNativeQuery(sqlDP,DistrictsEntity.class).getResultList();
+                districtCenter.setDistName(districtsList.get(0).getDistrictName());
+                districtCenter.setProName(districtsList.get(0).getProvinceName());
+                JPA.em().persist(districtCenter);
+                result.put("status", "ok");
+                result.put("message", "District Center: "+proCenter +" has been updated succesfully!");
+                return ok(result);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            ObjectNode result = Json.newObject();
+            result.put("status", "error");
+            result.put("message", "Error while commiting,please contact with administrator and report the problem");
+            return ok(result);
+        }
+    }
+
+
+
+
+    @SuppressWarnings("Duplicates")
+    @play.db.jpa.Transactional
+    @BodyParser.Of(BodyParser.Json.class)
+    public Result addDistrictCenter() {
+        try {
+            JsonNode json = request().body().asJson(); //
+            ObjectNode result = Json.newObject();
+            if (json == null) {
+                return badRequest("Expecting Json data");
+            } else {
+                String proCenter = json.findPath("proCenter").asText();
+                Integer num_district_code = json.findPath("num_district_code").asInt();
+                String districtType = json.findPath("districtType").asText();
+                Integer num_province_code = json.findPath("num_province_code").asInt();
+                BigDecimal east = json.findPath("east").decimalValue();
+                BigDecimal north = json.findPath("north").decimalValue();
+                Integer northUtm42 = json.findPath("northUtm42").asInt();
+                Integer eastUtm42 = json.findPath("eastUtm42").asInt();
+                DistrictCentersEntity districtCenter = new DistrictCentersEntity();
+                districtCenter.setCenterType(districtType);
+                districtCenter.setProCenter(proCenter);
+                districtCenter.setDistCode(num_district_code);
+                districtCenter.setProCode(num_province_code);
+                districtCenter.setEast(east);
+                districtCenter.setNorth(north);
+                districtCenter.setNorthUtm42(northUtm42);
+                districtCenter.setEastUtm42(eastUtm42);
+                String sqlDP= "select * from districts d where d.numerical_province_code="+num_province_code +" and d.numerical_district_code="+num_district_code;
+                System.out.println(sqlDP);
+                List<DistrictsEntity> districtsList = JPA.em().createNativeQuery(sqlDP,DistrictsEntity.class).getResultList();
+                districtCenter.setDistName(districtsList.get(0).getDistrictName());
+                districtCenter.setProName(districtsList.get(0).getProvinceName());
+                JPA.em().persist(districtCenter);
+                result.put("status", "ok");
+                result.put("message", "District Center: "+proCenter +" has been added succesfully!");
+                return ok(result);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            ObjectNode result = Json.newObject();
+            result.put("status", "error");
+            result.put("message", "Error while commiting,please contact with administrator and report the problem");
             return ok(result);
         }
     }

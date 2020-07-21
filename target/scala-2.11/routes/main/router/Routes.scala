@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
 // @SOURCE:C:/developm/qgis_angular/back/conf/routes
-// @DATE:Mon Jul 20 19:24:25 EEST 2020
+// @DATE:Tue Jul 21 20:32:20 EEST 2020
 
 package router
 
@@ -34,7 +34,7 @@ class Routes(
   RoadController_7: controllers.RoadController,
   // @LINE:40
   FacilitiesController_6: controllers.FacilitiesController,
-  // @LINE:45
+  // @LINE:47
   VillageController_9: controllers.VillageController,
   val prefix: String
 ) extends GeneratedRouter {
@@ -59,7 +59,7 @@ class Routes(
     RoadController_7: controllers.RoadController,
     // @LINE:40
     FacilitiesController_6: controllers.FacilitiesController,
-    // @LINE:45
+    // @LINE:47
     VillageController_9: controllers.VillageController
   ) = this(errorHandler, HomeController_1, CountController_0, AsyncController_2, Assets_8, WebAppAssets_3, GeneralController_5, CoreDataController_4, RoadController_7, FacilitiesController_6, VillageController_9, "/")
 
@@ -88,6 +88,8 @@ class Routes(
     ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """resetCriteria""", """controllers.RoadController.resetCriteria()"""),
     ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """updateSoftwareAccount""", """controllers.RoadController.updateSoftwareAccount()"""),
     ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """getAllFacilities""", """controllers.FacilitiesController.getAllFacilities()"""),
+    ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """addDistrictCenter""", """controllers.FacilitiesController.addDistrictCenter()"""),
+    ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """updateDistrictCenter""", """controllers.FacilitiesController.updateDistrictCenter()"""),
     ("""POST""", this.prefix + (if(this.prefix.endsWith("/")) "" else "/") + """getAllVillages""", """controllers.VillageController.getAllVillages()"""),
     Nil
   ).foldLeft(List.empty[(String,String,String)]) { (s,e) => e.asInstanceOf[Any] match {
@@ -317,11 +319,45 @@ class Routes(
     )
   )
 
-  // @LINE:45
-  private[this] lazy val controllers_VillageController_getAllVillages13_route = Route("POST",
+  // @LINE:41
+  private[this] lazy val controllers_FacilitiesController_addDistrictCenter13_route = Route("POST",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("addDistrictCenter")))
+  )
+  private[this] lazy val controllers_FacilitiesController_addDistrictCenter13_invoker = createInvoker(
+    FacilitiesController_6.addDistrictCenter(),
+    HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "controllers.FacilitiesController",
+      "addDistrictCenter",
+      Nil,
+      "POST",
+      """""",
+      this.prefix + """addDistrictCenter"""
+    )
+  )
+
+  // @LINE:42
+  private[this] lazy val controllers_FacilitiesController_updateDistrictCenter14_route = Route("POST",
+    PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("updateDistrictCenter")))
+  )
+  private[this] lazy val controllers_FacilitiesController_updateDistrictCenter14_invoker = createInvoker(
+    FacilitiesController_6.updateDistrictCenter(),
+    HandlerDef(this.getClass.getClassLoader,
+      "router",
+      "controllers.FacilitiesController",
+      "updateDistrictCenter",
+      Nil,
+      "POST",
+      """""",
+      this.prefix + """updateDistrictCenter"""
+    )
+  )
+
+  // @LINE:47
+  private[this] lazy val controllers_VillageController_getAllVillages15_route = Route("POST",
     PathPattern(List(StaticPart(this.prefix), StaticPart(this.defaultPrefix), StaticPart("getAllVillages")))
   )
-  private[this] lazy val controllers_VillageController_getAllVillages13_invoker = createInvoker(
+  private[this] lazy val controllers_VillageController_getAllVillages15_invoker = createInvoker(
     VillageController_9.getAllVillages(),
     HandlerDef(this.getClass.getClassLoader,
       "router",
@@ -415,10 +451,22 @@ class Routes(
         controllers_FacilitiesController_getAllFacilities12_invoker.call(FacilitiesController_6.getAllFacilities())
       }
   
-    // @LINE:45
-    case controllers_VillageController_getAllVillages13_route(params) =>
+    // @LINE:41
+    case controllers_FacilitiesController_addDistrictCenter13_route(params) =>
       call { 
-        controllers_VillageController_getAllVillages13_invoker.call(VillageController_9.getAllVillages())
+        controllers_FacilitiesController_addDistrictCenter13_invoker.call(FacilitiesController_6.addDistrictCenter())
+      }
+  
+    // @LINE:42
+    case controllers_FacilitiesController_updateDistrictCenter14_route(params) =>
+      call { 
+        controllers_FacilitiesController_updateDistrictCenter14_invoker.call(FacilitiesController_6.updateDistrictCenter())
+      }
+  
+    // @LINE:47
+    case controllers_VillageController_getAllVillages15_route(params) =>
+      call { 
+        controllers_VillageController_getAllVillages15_invoker.call(VillageController_9.getAllVillages())
       }
   }
 }

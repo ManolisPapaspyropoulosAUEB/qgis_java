@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
 // @SOURCE:C:/developm/qgis_angular/back/conf/routes
-// @DATE:Mon Jul 20 19:24:25 EEST 2020
+// @DATE:Tue Jul 21 20:32:20 EEST 2020
 
 import play.api.routing.JavaScriptReverseRoute
 import play.api.mvc.{ QueryStringBindable, PathBindable, Call, JavascriptLiteral }
@@ -85,7 +85,7 @@ package controllers.javascript {
   
   }
 
-  // @LINE:45
+  // @LINE:47
   class ReverseVillageController(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -93,7 +93,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:45
+    // @LINE:47
     def getAllVillages: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.VillageController.getAllVillages",
       """
@@ -179,6 +179,26 @@ package controllers.javascript {
       """
         function() {
           return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "getAllFacilities"})
+        }
+      """
+    )
+  
+    // @LINE:42
+    def updateDistrictCenter: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.FacilitiesController.updateDistrictCenter",
+      """
+        function() {
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "updateDistrictCenter"})
+        }
+      """
+    )
+  
+    // @LINE:41
+    def addDistrictCenter: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.FacilitiesController.addDistrictCenter",
+      """
+        function() {
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "addDistrictCenter"})
         }
       """
     )

@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
 // @SOURCE:C:/developm/qgis_angular/back/conf/routes
-// @DATE:Mon Jul 20 19:24:25 EEST 2020
+// @DATE:Tue Jul 21 20:32:20 EEST 2020
 
 import play.api.mvc.{ QueryStringBindable, PathBindable, Call, JavascriptLiteral }
 import play.core.routing.{ HandlerDef, ReverseRouteContext, queryString, dynamicString }
@@ -61,14 +61,14 @@ package controllers {
   
   }
 
-  // @LINE:45
+  // @LINE:47
   class ReverseVillageController(_prefix: => String) {
     def _defaultPrefix: String = {
       if (_prefix.endsWith("/")) "" else "/"
     }
 
   
-    // @LINE:45
+    // @LINE:47
     def getAllVillages(): Call = {
       import ReverseRouteContext.empty
       Call("POST", _prefix + { _defaultPrefix } + "getAllVillages")
@@ -132,6 +132,18 @@ package controllers {
     def getAllFacilities(): Call = {
       import ReverseRouteContext.empty
       Call("POST", _prefix + { _defaultPrefix } + "getAllFacilities")
+    }
+  
+    // @LINE:42
+    def updateDistrictCenter(): Call = {
+      import ReverseRouteContext.empty
+      Call("POST", _prefix + { _defaultPrefix } + "updateDistrictCenter")
+    }
+  
+    // @LINE:41
+    def addDistrictCenter(): Call = {
+      import ReverseRouteContext.empty
+      Call("POST", _prefix + { _defaultPrefix } + "addDistrictCenter")
     }
   
   }

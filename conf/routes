@@ -38,6 +38,8 @@ POST        /updateSoftwareAccount        controllers.RoadController.updateSoftw
 #FacilitiesController
 
 POST        /getAllFacilities             controllers.FacilitiesController.getAllFacilities()
+POST        /addDistrictCenter            controllers.FacilitiesController.addDistrictCenter()
+POST        /updateDistrictCenter         controllers.FacilitiesController.updateDistrictCenter()
 
 
 #VillagesController
