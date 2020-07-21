@@ -233,6 +233,39 @@ public class FacilitiesController {
 
     //
 
+    //deleteDistrictCenter
+
+
+    @SuppressWarnings("Duplicates")
+    @play.db.jpa.Transactional
+    @BodyParser.Of(BodyParser.Json.class)
+    public Result deleteDistrictCenter() {
+        try {
+            System.out.println("eedew");
+            JsonNode json = request().body().asJson(); //
+            ObjectNode result = Json.newObject();
+            if (json == null) {
+                return badRequest("Expecting Json data");
+            } else {
+
+                DistrictCentersEntity districtCenter = JPA.em().find(DistrictCentersEntity.class,json.findPath("id").asInt());
+
+                JPA.em().remove(districtCenter);
+                result.put("status", "ok");
+                result.put("message", "District Center  has been deleted succesfully!");
+                return ok(result);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            ObjectNode result = Json.newObject();
+            result.put("status", "error");
+            result.put("message", "Error while commiting,please contact with administrator and report the problem");
+            return ok(result);
+        }
+    }
+
+
+
 
     @SuppressWarnings("Duplicates")
     @play.db.jpa.Transactional
