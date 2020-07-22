@@ -569,7 +569,12 @@ public class RoadController {
                 road.setLengthInMetres(lengthInMetres);
                 road.setLinksToMajorActivityCentres(linksToMajorActivityCentres);
                 road.setMaxspeed(maxspeed);
-                road.setName(name);
+                if(name!=null){
+                    road.setName(name);
+                }else{
+                    road.setName("");
+                }
+
                 road.setNumberOfConnections(numberOfConnections);
                 road.setOneway(oneway);
                 road.setPopulationServed(populationServed.doubleValue());
