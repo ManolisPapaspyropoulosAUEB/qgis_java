@@ -3,6 +3,7 @@ package controllers;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import models.DistrictCentersEntity;
 import models.DistrictsEntity;
 import models.VillagesEntity;
 import play.db.jpa.JPA;
@@ -12,6 +13,7 @@ import play.mvc.Result;
 
 import javax.persistence.Query;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -23,6 +25,118 @@ import static play.mvc.Results.badRequest;
 import static play.mvc.Results.ok;
 
 public class VillageController {
+
+
+
+    @SuppressWarnings("Duplicates")
+    @play.db.jpa.Transactional
+    @BodyParser.Of(BodyParser.Json.class)
+    public Result updateVillage() {
+        try {
+            JsonNode json = request().body().asJson(); //
+            ObjectNode result = Json.newObject();
+            if (json == null) {
+                return badRequest("Expecting Json data");
+            } else {
+                String village1 = json.findPath("village1").asText();
+                Integer villageCo = json.findPath("villageCo").asInt();
+                BigDecimal mapLong = json.findPath("mapLong").decimalValue();
+                BigDecimal mapLat = json.findPath("mapLat").decimalValue();
+                Integer villagePop = json.findPath("villagePop").asInt();
+                Integer villageHh = json.findPath("villageHh").asInt();
+                BigDecimal east = json.findPath("east").decimalValue();
+                BigDecimal north = json.findPath("north").decimalValue();
+                Integer eastUtm42 = json.findPath("eastUtm42").asInt();
+                Integer northUtm42 = json.findPath("northUtm42").asInt();
+
+
+                Integer num_district_code = json.findPath("num_district_code").asInt();
+                Integer num_province_code = json.findPath("num_province_code").asInt();
+
+                VillagesEntity village = JPA.em().find(VillagesEntity.class,json.findPath("id").asInt());
+
+                village.setVillage1(village1);
+                village.setVillageCo(villageCo);
+                village.setMapLong(mapLong);
+                village.setMapLat(mapLat);
+                village.setVillageHh(villageHh);
+                village.setVillagePop(villagePop);
+                village.setEast(east);
+                village.setNorth(north);
+                village.setNorthUtm42(northUtm42);
+                village.setEastUtm42(eastUtm42);
+                village.setDistCode(num_district_code);
+                village.setProCode(num_province_code);
+                JPA.em().merge(village);
+                result.put("status", "ok");
+                result.put("message", "District Center: "+village1 +" has been added succesfully!");
+                return ok(result);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            ObjectNode result = Json.newObject();
+            result.put("status", "error");
+            result.put("message", "Error while commiting,please contact with administrator and report the problem");
+            return ok(result);
+        }
+    }
+
+
+    @SuppressWarnings("Duplicates")
+    @play.db.jpa.Transactional
+    @BodyParser.Of(BodyParser.Json.class)
+    public Result addVillage() {
+        try {
+            JsonNode json = request().body().asJson(); //
+            ObjectNode result = Json.newObject();
+            if (json == null) {
+                return badRequest("Expecting Json data");
+            } else {
+                String village1 = json.findPath("village1").asText();
+                Integer villageCo = json.findPath("villageCo").asInt();
+                BigDecimal mapLong = json.findPath("mapLong").decimalValue();
+                BigDecimal mapLat = json.findPath("mapLat").decimalValue();
+                Integer villagePop = json.findPath("villagePop").asInt();
+                Integer villageHh = json.findPath("villageHh").asInt();
+                BigDecimal east = json.findPath("east").decimalValue();
+                BigDecimal north = json.findPath("north").decimalValue();
+                Integer eastUtm42 = json.findPath("eastUtm42").asInt();
+                Integer northUtm42 = json.findPath("northUtm42").asInt();
+
+
+                Integer num_district_code = json.findPath("num_district_code").asInt();
+                Integer num_province_code = json.findPath("num_province_code").asInt();
+
+                VillagesEntity village = new VillagesEntity();
+
+                village.setVillage1(village1);
+                village.setVillageCo(villageCo);
+                village.setMapLong(mapLong);
+                village.setMapLat(mapLat);
+                village.setVillageHh(villageHh);
+                village.setVillagePop(villagePop);
+                village.setEast(east);
+                village.setNorth(north);
+                village.setNorthUtm42(northUtm42);
+                village.setEastUtm42(eastUtm42);
+                village.setDistCode(num_district_code);
+                village.setProCode(num_province_code);
+                JPA.em().persist(village);
+                result.put("status", "ok");
+                result.put("message", "District Center: "+village1 +" has been added succesfully!");
+                return ok(result);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            ObjectNode result = Json.newObject();
+            result.put("status", "error");
+            result.put("message", "Error while commiting,please contact with administrator and report the problem");
+            return ok(result);
+        }
+    }
+
+
+
 
     @SuppressWarnings("Duplicates")
     @play.db.jpa.Transactional
@@ -75,6 +189,15 @@ public class VillageController {
                     roadObject.put("eastUtm42", d.getEastUtm42());
                     roadObject.put("northUtm42", d.getNorthUtm42());
                     roadObject.put("villageName", d.getVillage1());
+
+
+                    String district = "select * from districts d where d.numerical_district_code="+d.getDistCode();
+
+                    System.out.println(district);
+                    List<DistrictsEntity> districtsList = JPA.em().createNativeQuery(district,DistrictsEntity.class).getResultList();
+                    roadObject.put("distName", districtsList.get(0).getDistrictName());
+
+
                     finalRoadsList.add(roadObject);
                 }
                 returnList.put("data", finalRoadsList);

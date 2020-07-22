@@ -51,6 +51,11 @@ public class FacilitiesController {
                 String type = json.findPath("type").asText();
                 String districtCode = json.findPath("num_district_code").asText();
                 String provinceCode = json.findPath("num_province_code").asText();
+                String nameFilter = json.findPath("nameFilter").asText();
+
+
+
+
                 String districtCenters = "select * from district_centers d where 1=1 ";
                 String schools = "select * from schools s where 1=1 ";
                 String mosques = "select * from mosques m where 1=1 ";
@@ -64,6 +69,14 @@ public class FacilitiesController {
                     schools+=" and s.dist_code="+districtCode;
                     mosques+=" and m.dist_code="+districtCode;
                 }
+
+                if(nameFilter!=null && !nameFilter.equalsIgnoreCase("")){
+                    //query+=" and d.criterion_label like '%"+label+"%'";
+                    districtCenters+=" and d.pro_center  like   '%"+nameFilter+"%'";
+                    schools+=" and s.name  like  '%"+nameFilter+"%'";
+                    mosques+=" and m.name like '%"+nameFilter+"%'";
+                }
+
 
                 System.out.println(districtCenters);
 
@@ -99,14 +112,14 @@ public class FacilitiesController {
                     for (MosquesEntity mosque : mosquesList) {
                         HashMap<String, Object> distHM = new HashMap<String, Object>();
                         distHM.put("id", mosque.getId());
-                        distHM.put("targetFid", mosque.getTarggetFid());
+                        distHM.put("targetFid", mosque.getTargetFid());
                         distHM.put("name", mosque.getName());
                         distHM.put("type", mosque.getType());
                         distHM.put("east", mosque.getEast());
                         distHM.put("north", mosque.getNorth());
                         distHM.put("eastUtm42", mosque.getEastUtm42());
                         distHM.put("northUtm42", mosque.getNorthUtm42());
-                        distHM.put("from", mosque.getFrom());
+                        distHM.put("from", mosque.getFromSource());
                         distHM.put("distName", mosque.getDistName());
                         distHM.put("distCode", mosque.getDistCode());
                         distHM.put("altDistName", mosque.getAltDistName());
@@ -200,7 +213,7 @@ public class FacilitiesController {
                     for (MosquesEntity mosque : mosquesList) {
                         HashMap<String, Object> distHM = new HashMap<String, Object>();
                         distHM.put("id", mosque.getId());
-                        distHM.put("targetFid", mosque.getTarggetFid());
+                        distHM.put("targetFid", mosque.getTargetFid());
                         distHM.put("name", mosque.getName());
                         distHM.put("type", mosque.getType());
                         distHM.put("east", mosque.getEast());
@@ -209,7 +222,7 @@ public class FacilitiesController {
                         distHM.put("north", mosque.getNorth());
                         distHM.put("eastUtm42", mosque.getEastUtm42());
                         distHM.put("northUtm42", mosque.getNorthUtm42());
-                        distHM.put("from", mosque.getFrom());
+                        distHM.put("from", mosque.getFromSource());
                         distHM.put("distName", mosque.getDistName());
                         distHM.put("distCode", mosque.getDistCode());
                         distHM.put("altDistName", mosque.getAltDistName());
@@ -467,6 +480,66 @@ public class FacilitiesController {
         }
     }
 
+//addMosque
+
+    @SuppressWarnings("Duplicates")
+    @play.db.jpa.Transactional
+    @BodyParser.Of(BodyParser.Json.class)
+    public Result addMosque() {
+        try {
+            JsonNode json = request().body().asJson(); //
+            ObjectNode result = Json.newObject();
+            if (json == null) {
+                return badRequest("Expecting Json data");
+            } else {
+
+
+                String altDistName = json.findPath("altDistName").asText();
+                Integer num_district_code = json.findPath("num_district_code").asInt();
+                String from = json.findPath("from").asText();
+                String type = json.findPath("type").asText();
+                String name = json.findPath("name").asText();
+
+                Integer num_province_code = json.findPath("num_province_code").asInt();
+                Integer targetFid = json.findPath("targetFid").asInt();
+
+                BigDecimal east = json.findPath("east").decimalValue();
+                BigDecimal north = json.findPath("north").decimalValue();
+                Integer northUtm42 = json.findPath("northUtm42").asInt();
+                Integer eastUtm42 = json.findPath("eastUtm42").asInt();
+
+                MosquesEntity mosquesEntity = new MosquesEntity();
+
+
+                mosquesEntity.setDistCode(num_district_code);
+                mosquesEntity.setName(name);
+                mosquesEntity.setTargetFid(targetFid);
+                mosquesEntity.setType(type);
+                mosquesEntity.setFromSource(from);
+                mosquesEntity.setAltDistName(altDistName);
+                mosquesEntity.setProCode(num_province_code);
+                mosquesEntity.setEast(east);
+                mosquesEntity.setNorth(north);
+                mosquesEntity.setNorthUtm42(northUtm42);
+                mosquesEntity.setEastUtm42(eastUtm42);
+
+                String sqlDP= "select * from districts d where d.numerical_province_code="+num_province_code +" and d.numerical_district_code="+num_district_code;
+                System.out.println(sqlDP);
+                List<DistrictsEntity> districtsList = JPA.em().createNativeQuery(sqlDP,DistrictsEntity.class).getResultList();
+                mosquesEntity.setDistName(districtsList.get(0).getDistrictName());
+                JPA.em().persist(mosquesEntity);
+                result.put("status", "ok");
+                result.put("message", "School: "+name +" has been added succesfully!");
+                return ok(result);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            ObjectNode result = Json.newObject();
+            result.put("status", "error");
+            result.put("message", "Error while commiting,please contact with administrator and report the problem");
+            return ok(result);
+        }
+    }
 
 
     @SuppressWarnings("Duplicates")
@@ -529,7 +602,91 @@ public class FacilitiesController {
     }
 
 
+    @SuppressWarnings("Duplicates")
+    @play.db.jpa.Transactional
+    @BodyParser.Of(BodyParser.Json.class)
+    public Result updateMosque() {
+        try {
+            JsonNode json = request().body().asJson(); //
+            ObjectNode result = Json.newObject();
+            if (json == null) {
+                return badRequest("Expecting Json data");
+            } else {
 
 
+                String altDistName = json.findPath("altDistName").asText();
+                Integer num_district_code = json.findPath("num_district_code").asInt();
+                String from = json.findPath("from").asText();
+                String type = json.findPath("type").asText();
+                String name = json.findPath("name").asText();
+
+                Integer num_province_code = json.findPath("num_province_code").asInt();
+                Integer targetFid = json.findPath("targetFid").asInt();
+
+                BigDecimal east = json.findPath("east").decimalValue();
+                BigDecimal north = json.findPath("north").decimalValue();
+                Integer northUtm42 = json.findPath("northUtm42").asInt();
+                Integer eastUtm42 = json.findPath("eastUtm42").asInt();
+
+
+                MosquesEntity mosquesEntity = JPA.em().find(MosquesEntity.class,json.findPath("id").asInt());
+
+                mosquesEntity.setDistCode(num_district_code);
+                mosquesEntity.setName(name);
+                mosquesEntity.setTargetFid(targetFid);
+                mosquesEntity.setType(type);
+                mosquesEntity.setFromSource(from);
+                mosquesEntity.setAltDistName(altDistName);
+                mosquesEntity.setProCode(num_province_code);
+                mosquesEntity.setEast(east);
+                mosquesEntity.setNorth(north);
+                mosquesEntity.setNorthUtm42(northUtm42);
+                mosquesEntity.setEastUtm42(eastUtm42);
+
+                String sqlDP= "select * from districts d where d.numerical_province_code="+num_province_code +" and d.numerical_district_code="+num_district_code;
+                System.out.println(sqlDP);
+                List<DistrictsEntity> districtsList = JPA.em().createNativeQuery(sqlDP,DistrictsEntity.class).getResultList();
+                mosquesEntity.setDistName(districtsList.get(0).getDistrictName());
+                JPA.em().merge(mosquesEntity);
+                result.put("status", "ok");
+                result.put("message", "School: "+name +" has been updated succesfully!");
+                return ok(result);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            ObjectNode result = Json.newObject();
+            result.put("status", "error");
+            result.put("message", "Error while commiting,please contact with administrator and report the problem");
+            return ok(result);
+        }
+    }
+
+    @SuppressWarnings("Duplicates")
+    @play.db.jpa.Transactional
+    @BodyParser.Of(BodyParser.Json.class)
+    public Result deleteMosque() {
+        try {
+            System.out.println("eedew");
+            JsonNode json = request().body().asJson(); //
+            ObjectNode result = Json.newObject();
+            if (json == null) {
+                return badRequest("Expecting Json data");
+            } else {
+
+                MosquesEntity mosque = JPA.em().find(MosquesEntity.class,json.findPath("id").asInt());
+
+                JPA.em().remove(mosque);
+                result.put("status", "ok");
+                result.put("message", "Mosque  has been deleted succesfully!");
+                return ok(result);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            ObjectNode result = Json.newObject();
+            result.put("status", "error");
+            result.put("message", "Error while commiting,please contact with administrator and report the problem");
+            return ok(result);
+        }
+    }
 
 }

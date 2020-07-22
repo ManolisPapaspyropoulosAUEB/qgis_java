@@ -22,6 +22,8 @@ public class VillagesEntity {
     private Integer northUtm42;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Column(name = "id")
     public int getId() {
         return id;
