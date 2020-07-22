@@ -104,8 +104,11 @@ public class CoreDataController {
                 return badRequest("Expecting Json data");
             } else {
 
-                Double estimatedMaintenanceCost = json.findPath("estimatedMaintenanceCost").asDouble();
-                Integer id = json.findPath("id").asInt();
+                Double estimatedMaintenanceCost = json.findPath("opParam").asDouble();
+                Integer id = json.findPath("opId").asInt();
+
+                System.out.println(estimatedMaintenanceCost);
+
 
                 OperetionalParametersEntity op = JPA.em().find(OperetionalParametersEntity.class,id);
                 op.setEstimatedMaintenanceCost(estimatedMaintenanceCost);

@@ -12,7 +12,10 @@ import play.mvc.Result;
 import javax.persistence.Query;
 import javax.xml.transform.Source;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,7 +28,7 @@ public class RoadController {
 
 
 
-
+    private static DecimalFormat df2 = new DecimalFormat("#.##");
 
 
     @SuppressWarnings("Duplicates")
@@ -306,6 +309,7 @@ public class RoadController {
                     if (!district_id.isEmpty()) {
                         roadsSql += " and r.district_id=" + district_id;
                     }
+                    System.out.println("lvrr_id "+lvrr_id);
                     if (!lvrr_id.isEmpty()) {
                         roadsSql += " and r.lvrr_id=" + lvrr_id;
                     }
@@ -317,9 +321,23 @@ public class RoadController {
                             List<OperetionalParametersEntity> opList = JPA.em().createNativeQuery(opParamSql,OperetionalParametersEntity.class).getResultList();
                             Double opParam = opList.get(0).getEstimatedMaintenanceCost();
                             Double cbi = 0.0;
-                            cbi=(opParam/road.getLengthInMetres())/road.getPopulationServed();
-                            System.out.println(cbi);
-                            road.setCbi(cbi);
+                            if(road.getPopulationServed()>0 && road.getLengthInMetres() >0){
+                                cbi = (opParam/road.getLengthInMetres())/road.getPopulationServed();
+                            }
+
+                            if(cbi > 0){
+                                BigDecimal finalCbi = new BigDecimal(cbi).setScale(2, RoundingMode.HALF_UP);
+                                System.out.println(df2.format(cbi));
+                                //System.out.println(cbi.doubleValue());
+                                //double finalCbi  = Double.parseDouble((df2.format(cbi)));
+                                System.out.println(finalCbi);
+                                road.setCbi(finalCbi.doubleValue());//  value =Double.parseDouble(new DecimalFormat("##.####").format(value));
+                            }else{
+                                road.setCbi(new Double(0));
+                            }
+
+
+
                             for(CriteriaMasterEntity cm : cmList){
                                 if(cm.getId()==1){
                                     Integer weightFactor = 1;
@@ -566,6 +584,7 @@ public class RoadController {
 
                 JPA.em().merge(road);
                 result.put("status", "ok");
+                result.put("lvrr_id", road.getLvrrId());
                 result.put("message", "Update successfully");
                 return ok(result);
             }
