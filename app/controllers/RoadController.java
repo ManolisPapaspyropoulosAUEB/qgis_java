@@ -313,6 +313,13 @@ public class RoadController {
                         List<RoadsEntity> roadsList = JPA.em().createNativeQuery(roadsSql, RoadsEntity.class).getResultList();
                         for (RoadsEntity road : roadsList) {
                             Double mca =0.0;
+                            String opParamSql = "select * from operetional_parameters op ";
+                            List<OperetionalParametersEntity> opList = JPA.em().createNativeQuery(opParamSql,OperetionalParametersEntity.class).getResultList();
+                            Double opParam = opList.get(0).getEstimatedMaintenanceCost();
+                            Double cbi = 0.0;
+                            cbi=(opParam/road.getLengthInMetres())/road.getPopulationServed();
+                            System.out.println(cbi);
+                            road.setCbi(cbi);
                             for(CriteriaMasterEntity cm : cmList){
                                 if(cm.getId()==1){
                                     Integer weightFactor = 1;

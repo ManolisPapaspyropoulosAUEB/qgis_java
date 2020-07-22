@@ -16,6 +16,7 @@
         <class>models.DistrictsEntity</class>
         <class>models.VillagesEntity</class>
         <class>models.UsersEntity</class>
+        <class>models.OperetionalParametersEntity</class>
 
 
         <properties>

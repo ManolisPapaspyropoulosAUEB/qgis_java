@@ -3,12 +3,11 @@ package GeneralApi;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import models.CriteriaMasterDetailsEntity;
-import models.CriteriaMasterEntity;
-import models.DistrictsEntity;
+import models.*;
 import play.db.jpa.JPA;
 import play.libs.Json;
 import play.mvc.BodyParser;
+import play.mvc.Http;
 import play.mvc.Result;
 
 import javax.persistence.Query;
@@ -64,6 +63,13 @@ public class CoreDataController {
                     finalRoadsList.add(roadObject);
                 }
                 returnList.put("data", finalRoadsList);
+
+                String opParam = "select * from operetional_parameters op ";
+                List<OperetionalParametersEntity> opList = JPA.em().createNativeQuery(opParam,OperetionalParametersEntity.class).getResultList();
+
+                returnList.put("data", finalRoadsList);
+                returnList.put("opParam", opList.get(0).getEstimatedMaintenanceCost());
+                returnList.put("opId", opList.get(0).getId());
                 returnList.put("total", total.intValue());
                 returnList.put("status", "ok");
                 DateFormat myDateFormat = new SimpleDateFormat("M/d/Y");
@@ -85,6 +91,39 @@ public class CoreDataController {
             return ok(result);
         }
     }
+
+
+    @SuppressWarnings("Duplicates")
+    @play.db.jpa.Transactional
+    @BodyParser.Of(BodyParser.Json.class)
+    public Result updateEstimatedMaintenanceCost() {
+        try {
+            JsonNode json = Http.Context.Implicit.request().body().asJson();
+            ObjectNode result = Json.newObject();
+            if (json.findPath("id") == null) {
+                return badRequest("Expecting Json data");
+            } else {
+
+                Double estimatedMaintenanceCost = json.findPath("estimatedMaintenanceCost").asDouble();
+                Integer id = json.findPath("id").asInt();
+
+                OperetionalParametersEntity op = JPA.em().find(OperetionalParametersEntity.class,id);
+                op.setEstimatedMaintenanceCost(estimatedMaintenanceCost);
+                JPA.em().merge(op);
+                result.put("status", "ok");
+                result.put("message", "Update successfully");
+                return ok(result);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            ObjectNode result = Json.newObject();
+            result.put("status", "error");
+            result.put("message", "Πρόβλημα κατά την εισαγωγή .");
+            return ok(result);
+        }
+    }
+
+
 
 
 
