@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.DistrictCentersEntity;
 import models.DistrictsEntity;
+import models.SchoolsEntity;
 import models.VillagesEntity;
 import play.db.jpa.JPA;
 import play.libs.Json;
@@ -69,7 +70,7 @@ public class VillageController {
                 village.setProCode(num_province_code);
                 JPA.em().merge(village);
                 result.put("status", "ok");
-                result.put("message", "District Center: "+village1 +" has been added succesfully!");
+                result.put("message", "District Center: "+village1 +" has been updated succesfully!");
                 return ok(result);
             }
         } catch (Exception e) {
@@ -124,6 +125,36 @@ public class VillageController {
                 JPA.em().persist(village);
                 result.put("status", "ok");
                 result.put("message", "District Center: "+village1 +" has been added succesfully!");
+                return ok(result);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            ObjectNode result = Json.newObject();
+            result.put("status", "error");
+            result.put("message", "Error while commiting,please contact with administrator and report the problem");
+            return ok(result);
+        }
+    }
+
+
+
+    @SuppressWarnings("Duplicates")
+    @play.db.jpa.Transactional
+    @BodyParser.Of(BodyParser.Json.class)
+    public Result deleteVillage() {
+        try {
+            System.out.println("eedew");
+            JsonNode json = request().body().asJson(); //
+            ObjectNode result = Json.newObject();
+            if (json == null) {
+                return badRequest("Expecting Json data");
+            } else {
+
+                VillagesEntity village = JPA.em().find(VillagesEntity.class,json.findPath("id").asInt());
+
+                JPA.em().remove(village);
+                result.put("status", "ok");
+                result.put("message", "Village  has been deleted succesfully!");
                 return ok(result);
             }
         } catch (Exception e) {

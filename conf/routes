@@ -32,7 +32,7 @@ POST        /getAllCriteriaMaster         GeneralApi.CoreDataController.getAllCr
 POST        /getAllFromRoads              controllers.RoadController.getAllFromRoads()
 POST        /calculateCriteria            controllers.RoadController.calculateCriteria()
 POST        /resetCriteria                controllers.RoadController.resetCriteria()
-POST        /updateSoftwareAccount        controllers.RoadController.updateSoftwareAccount()
+POST        /updateRoad        controllers.RoadController.updateRoad()
 
 
 #FacilitiesController
@@ -50,11 +50,12 @@ POST        /updateMosque                 controllers.FacilitiesController.updat
 POST        /deleteMosque                 controllers.FacilitiesController.deleteMosque()
 
 
-#VillagesController addVillage updateVillage
+#VillagesController addVillage
 
 POST        /getAllVillages               controllers.VillageController.getAllVillages()
 POST        /addVillage                   controllers.VillageController.addVillage()
 POST        /updateVillage                controllers.VillageController.updateVillage()
+POST        /deleteVillage                controllers.VillageController.deleteVillage()
 
 
 

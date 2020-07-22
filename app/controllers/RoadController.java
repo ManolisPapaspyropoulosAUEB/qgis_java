@@ -490,7 +490,7 @@ public class RoadController {
     @SuppressWarnings("Duplicates")
     @play.db.jpa.Transactional
     @BodyParser.Of(BodyParser.Json.class)
-    public Result updateSoftwareAccount() {
+    public Result updateRoad() {
         try {
             JsonNode json = Http.Context.Implicit.request().body().asJson();
             ObjectNode result = Json.newObject();
