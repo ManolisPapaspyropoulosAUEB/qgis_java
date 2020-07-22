@@ -3,61 +3,66 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET         /                             controllers.HomeController.index
+GET         /                            controllers.HomeController.index
 # An example controller showing how to use dependency injection
-GET         /count                        controllers.CountController.count
+GET         /count                       controllers.CountController.count
 # An example controller showing how to write asynchronous code
-GET         /message                      controllers.AsyncController.message
+GET         /message                     controllers.AsyncController.message
 #books
 #OPTIONS /*all                           controllers.Application.preflight(all)
 
 
 # Map static resources from the /public folder to the /iets URL path
-GET         /assets/*file                 controllers.Assets.versioned(path="/public", file: Asset)
-GET         /app/*file                    controllers.WebAppAssets.at(path="webapp/", file: String)
+GET         /assets/*file                controllers.Assets.versioned(path="/public", file: Asset)
+GET         /app/*file                   controllers.WebAppAssets.at(path="webapp/", file: String)
 
 
 
 #GeneralController
 
-POST        /getAllProvinces              GeneralApi.GeneralController.getAllProvinces()
-POST        /getAllDistricts              GeneralApi.GeneralController.getAllDistricts()
+POST        /getAllProvinces             GeneralApi.GeneralController.getAllProvinces()
+POST        /getAllDistricts             GeneralApi.GeneralController.getAllDistricts()
 
 #GeneralController
-POST        /getAllCriteriaMaster         GeneralApi.CoreDataController.getAllCriteriaMaster()
+POST        /getAllCriteriaMaster        GeneralApi.CoreDataController.getAllCriteriaMaster()
 
 
 #RoadsController
 
-POST        /getAllFromRoads              controllers.RoadController.getAllFromRoads()
-POST        /calculateCriteria            controllers.RoadController.calculateCriteria()
-POST        /resetCriteria                controllers.RoadController.resetCriteria()
-POST        /updateRoad        controllers.RoadController.updateRoad()
+POST        /getAllFromRoads             controllers.RoadController.getAllFromRoads()
+POST        /calculateCriteria           controllers.RoadController.calculateCriteria()
+POST        /resetCriteria               controllers.RoadController.resetCriteria()
+POST        /updateRoad                  controllers.RoadController.updateRoad()
 
 
 #FacilitiesController
 
-POST        /getAllFacilities             controllers.FacilitiesController.getAllFacilities()
-POST        /addDistrictCenter            controllers.FacilitiesController.addDistrictCenter()
-POST        /updateDistrictCenter         controllers.FacilitiesController.updateDistrictCenter()
-POST        /deleteDistrictCenter         controllers.FacilitiesController.deleteDistrictCenter()
-POST        /addSchool                    controllers.FacilitiesController.addSchool()
-POST        /updateSchool                 controllers.FacilitiesController.updateSchool()
-POST        /deleteSchool                 controllers.FacilitiesController.deleteSchool()
+POST        /getAllFacilities            controllers.FacilitiesController.getAllFacilities()
+POST        /addDistrictCenter           controllers.FacilitiesController.addDistrictCenter()
+POST        /updateDistrictCenter        controllers.FacilitiesController.updateDistrictCenter()
+POST        /deleteDistrictCenter        controllers.FacilitiesController.deleteDistrictCenter()
+POST        /addSchool                   controllers.FacilitiesController.addSchool()
+POST        /updateSchool                controllers.FacilitiesController.updateSchool()
+POST        /deleteSchool                controllers.FacilitiesController.deleteSchool()
 
-POST        /addMosque                    controllers.FacilitiesController.addMosque()
-POST        /updateMosque                 controllers.FacilitiesController.updateMosque()
-POST        /deleteMosque                 controllers.FacilitiesController.deleteMosque()
+POST        /addMosque                   controllers.FacilitiesController.addMosque()
+POST        /updateMosque                controllers.FacilitiesController.updateMosque()
+POST        /deleteMosque                controllers.FacilitiesController.deleteMosque()
 
 
 #VillagesController addVillage
 
-POST        /getAllVillages               controllers.VillageController.getAllVillages()
-POST        /addVillage                   controllers.VillageController.addVillage()
-POST        /updateVillage                controllers.VillageController.updateVillage()
-POST        /deleteVillage                controllers.VillageController.deleteVillage()
+POST        /getAllVillages              controllers.VillageController.getAllVillages()
+POST        /addVillage                  controllers.VillageController.addVillage()
+POST        /updateVillage               controllers.VillageController.updateVillage()
+POST        /deleteVillage               controllers.VillageController.deleteVillage()
 
 
+#UsersController register
+
+POST        /login                       controllers.UsersController.login()
+POST        /register                    controllers.UsersController.register()
+POST        /forgotPwd                    controllers.UsersController.forgotPwd()
 
 
 
