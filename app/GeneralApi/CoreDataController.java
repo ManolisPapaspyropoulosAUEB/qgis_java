@@ -63,10 +63,8 @@ public class CoreDataController {
                     finalRoadsList.add(roadObject);
                 }
                 returnList.put("data", finalRoadsList);
-
                 String opParam = "select * from operetional_parameters op ";
                 List<OperetionalParametersEntity> opList = JPA.em().createNativeQuery(opParam,OperetionalParametersEntity.class).getResultList();
-
                 returnList.put("data", finalRoadsList);
                 returnList.put("opParam", opList.get(0).getEstimatedMaintenanceCost());
                 returnList.put("opId", opList.get(0).getId());
@@ -91,8 +89,6 @@ public class CoreDataController {
             return ok(result);
         }
     }
-
-
     @SuppressWarnings("Duplicates")
     @play.db.jpa.Transactional
     @BodyParser.Of(BodyParser.Json.class)
@@ -103,13 +99,8 @@ public class CoreDataController {
             if (json.findPath("id") == null) {
                 return badRequest("Expecting Json data");
             } else {
-
                 Double estimatedMaintenanceCost = json.findPath("opParam").asDouble();
                 Integer id = json.findPath("opId").asInt();
-
-                System.out.println(estimatedMaintenanceCost);
-
-
                 OperetionalParametersEntity op = JPA.em().find(OperetionalParametersEntity.class,id);
                 op.setEstimatedMaintenanceCost(estimatedMaintenanceCost);
                 JPA.em().merge(op);

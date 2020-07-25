@@ -79,8 +79,6 @@ public class GeneralController {
         }
     }
 
-
-
     @SuppressWarnings("Duplicates")
     @play.db.jpa.Transactional
     @BodyParser.Of(BodyParser.Json.class)

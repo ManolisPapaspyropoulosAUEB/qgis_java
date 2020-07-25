@@ -34,6 +34,7 @@ import org.apache.commons.mail.SimpleEmail;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 import java.security.Key;
+
 public class UsersController {
     private static final String ALGO = "AES";
     @Inject
@@ -43,23 +44,11 @@ public class UsersController {
                     'S', 'e', 'c', 'r', 'e', 't', 'K', 'e', 'y'};
 
 
-
-
-
     @SuppressWarnings("Duplicates")
     //
     @play.db.jpa.Transactional
     @BodyParser.Of(BodyParser.Json.class)
     public Result login() {//login apo ton pinaka me tous users
-        Query qUserstest = JPA.em().createQuery("SELECT u FROM UsersEntity u ");
-        List<UsersEntity> usListtest = qUserstest.getResultList();
-        for (UsersEntity ue : usListtest) {
-            System.out.println("id:" + ue.getId());
-            try {
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
         try {
             ObjectMapper ow = new ObjectMapper();
             ObjectNode result = Json.newObject();
@@ -69,32 +58,40 @@ public class UsersController {
             } else {
                 String email = json.findPath("email").asText();
                 String pwd = json.findPath("pwd").asText();
-                System.out.println(email);
-                System.out.println(pwd);
-                if (email == null || pwd == null || pwd.equalsIgnoreCase("") ) {
+                if (email == null || pwd == null || pwd.equalsIgnoreCase("")) {
                     result.put("status", "invalidCredentials");
                     result.put("message", "Παρακαλώ καταχωρήστε ορθά στοιχεία.");
                     return ok(result);
                 }
-                Query qUsers = JPA.em().createQuery("SELECT u FROM UsersEntity u where u.email = '" + email+"'");
+                String checkCredentials = "SELECT u FROM UsersEntity u where u.email = '" + email + "'";
+                Query qUsers = JPA.em().createQuery(checkCredentials);
                 List<UsersEntity> usList = qUsers.getResultList();
-                for (UsersEntity us : usList) {
-                   // String encryptPassword = encrypt(pwd);
-                    if (email.equals(us.getEmail()) && pwd.equalsIgnoreCase(us.getPassword())) { //todo:&& encryptPassword.equalsIgnoreCase(us.getPassword())
-                        result.put("status", "ok");
-                        result.put("role", us.getRole());
-                        result.put("message", "Success login");
-                        return ok(result);
-                    }else{
-                        result.put("status", "error");
-                        result.put("role", us.getRole());
-                        result.put("message", "Error email and password doesnt match");
-                        return ok(result);
+                boolean emailExist = false;
+                boolean pwdExist = false;
+                if (usList.size() > 0) {
+                    UsersEntity findUserByEmail = usList.get(0);
+                    emailExist = true;
+                    if(findUserByEmail.getPassword().equalsIgnoreCase(pwd)){
+                        pwdExist=true;
                     }
                 }
-                result.put("status", "invalidCredentials");
-                result.put("message", "Πρόβλημα κατά την επαλήθευση των στοιχείων.");
-                return ok(result);
+                if(emailExist==true && pwdExist==true){
+                    result.put("status", "ok");
+                    result.put("role", usList.get(0).getRole());
+                    result.put("fullName", usList.get(0).getName()+" "+usList.get(0).getLastName());
+                    result.put("message", "Success login!");
+                    return ok(result);
+                }else if (emailExist==true && pwdExist==false ){
+                    result.put("status", "error");
+                    result.put("message", "Incorrect password");
+                    return ok(result);
+                }else {
+                    result.put("status", "error");
+                    result.put("message", "The system cannot find user with this email and password");
+                    return ok(result);
+                }
+
+
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -108,27 +105,26 @@ public class UsersController {
     @SuppressWarnings("Duplicates")
     @play.db.jpa.Transactional
     @BodyParser.Of(BodyParser.Json.class)
-    public Result  register() {
+    public Result register() {
         try {
             JsonNode json = request().body().asJson(); //
             ObjectNode result = Json.newObject();
             if (json == null) {
                 return badRequest("Expecting Json data");
             } else {
-                String email =         json.findPath("email").asText();
-                String password =       json.findPath("password").asText();
+                String email = json.findPath("email").asText();
+                String password = json.findPath("password").asText();
                 UsersEntity user = new UsersEntity();
                 user.setEmail(email);
                 user.setPassword(password);
-                String emailUnique = "select * from users u where u.email='"+user.getEmail()+"'";
-                System.out.println(emailUnique);
-                Query qemail = JPA.em().createNativeQuery(emailUnique,UsersEntity.class);
+                String emailUnique = "select * from users u where u.email='" + user.getEmail() + "'";
+                Query qemail = JPA.em().createNativeQuery(emailUnique, UsersEntity.class);
                 List<UsersEntity> usersListEmail = qemail.getResultList();
-                if(usersListEmail.size()>0){
+                if (usersListEmail.size() > 0) {
                     result.put("status", "error");
                     result.put("message", "The email you provided already exists.");
                     return ok(result);
-                }else {
+                } else {
                     user.setEmail(email);
                 }
                 user.setCreationDate(new Date());
@@ -146,35 +142,29 @@ public class UsersController {
         }
     }
 
-
-
     @SuppressWarnings("Duplicates")
     @play.db.jpa.Transactional
     @BodyParser.Of(BodyParser.Json.class)
-    public Result  forgotPwd() {
+    public Result forgotPwd() {
         try {
             JsonNode json = request().body().asJson(); //
             ObjectNode result = Json.newObject();
             if (json == null) {
                 return badRequest("Expecting Json data");
             } else {
-                String email =         json.findPath("email").asText();
+                String email = json.findPath("email").asText();
                 UsersEntity user = new UsersEntity();
-                String emailUnique = "select * from users u where u.email='"+email+"'";
-                System.out.println(emailUnique);
-                Query qemail = JPA.em().createNativeQuery(emailUnique,UsersEntity.class);
+                String emailUnique = "select * from users u where u.email='" + email + "'";
+                Query qemail = JPA.em().createNativeQuery(emailUnique, UsersEntity.class);
                 List<UsersEntity> usersListEmail = qemail.getResultList();
-                if(usersListEmail.size()>0){
+                if (usersListEmail.size() > 0) {
                     String subject = "Forgot Password";
-                    String message = "Your password is:"+usersListEmail.get(0).getPassword();
-                    System.out.println(usersListEmail.get(0).getPassword());
-
+                    String message = "Your password is:" + usersListEmail.get(0).getPassword();
                     sendMail(email, subject, message);
-
                     result.put("status", "error");
                     result.put("message", "We send you an email with your forgotten password");
                     return ok(result);
-                }else {
+                } else {
                     result.put("status", "error");
                     result.put("message", "No User found with this email");
                     return ok(result);
@@ -192,30 +182,12 @@ public class UsersController {
 
     public Result sendMail(String recipient, String subject, String message) {
         ObjectNode result = Json.newObject();
-//        String hostName = configuration.getString("host_name_mail");
-//        String hostUsername = configuration.getString("username_mail_host");
-//        String hostPassword = configuration.getString("password_mail_host");
-//        Integer smtpPort = configuration.getInt("port_mail_host");
-//        Boolean sslOn = configuration.getBoolean("email_ssl");
-//        Boolean emailAuthentication = configuration.getBoolean("email_authentication");
         String hostName = "mail.synergic.gr";
         String hostUsername = "ibebis@synergic.gr";
         String hostPassword = "D](j#N~Xwi5}";
         Integer smtpPort = 25;
         Boolean sslOn = false;
         Boolean emailAuthentication = true;
-
-        //host_name_mail = "mail.synergic.gr"
-        //username_mail_host = "ibebis@synergic.gr"
-        //password_mail_host = "D](j#N~Xwi5}"
-        //email_ssl=false
-        //port_mail_host = "25"
-        //email_authentication=true
-        //send_mail = "ON"
-        //contactEmail = "ibebis@synergic.gr"
-
-
-        //Boolean trustSSLServer = configuration.getBoolean("ssl_trust");
         try {
             Properties props = new Properties();
             props.put("mail.smtp.starttls.enable", "true");
@@ -250,26 +222,6 @@ public class UsersController {
         }
         return ok(result);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     @SuppressWarnings("Duplicates")

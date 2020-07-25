@@ -15,6 +15,8 @@ public class UsersEntity {
     private String role;
     private Date creationDate;
     private Date updateDate;
+    private String lastName;
+    private String username;
 
     @Id
     @Column(name = "id")
@@ -103,5 +105,25 @@ public class UsersEntity {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, email, password, role, creationDate, updateDate);
+    }
+
+    @Basic
+    @Column(name = "last_name")
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    @Basic
+    @Column(name = "username")
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }
