@@ -38,12 +38,18 @@ public class RoadController {
         ObjectNode result = Json.newObject();
         try {
             JsonNode json = request().body().asJson();
-            if (json == null) {
+            if (json == null ) {
                 return badRequest("Expecting Json data");
             } else {
                 String query = " select * from roads r where 1=1 ";
                 String districtId = json.findPath("district_id").asText();
                 String fclass = json.findPath("fclass").asText();
+
+
+                String orderCol = json.findPath("orderCol").asText();
+                String descAsc = json.findPath("descAsc").asText();
+
+
                 String nameFilter = json.findPath("nameFilter").asText();
                 String sqlInFclass = json.findPath("sqlInFclass").asText();
                 String oneway = json.findPath("oneway").asText();
@@ -58,7 +64,7 @@ public class RoadController {
                     query += " and r.fclass = " + fclass + "'";
                 }
                 if (nameFilter != null && nameFilter != "") {
-                    query += " and r.name like '%" + nameFilter + "%'";
+                    query += " and r.name like '%" + nameFilter + "%'  or r.LVRR_ID like '%"+nameFilter+"%'";
                 }
                 if ((!sqlInFclass.isEmpty()) && !sqlInFclass.equalsIgnoreCase("()")) {
                     query += " and r.fclass IN " + sqlInFclass;
@@ -78,6 +84,13 @@ public class RoadController {
                 if ((!sqlInRoadConditions.isEmpty()) && !sqlInRoadConditions .equalsIgnoreCase("()")) {
                     query += " and r.road_condition in " + sqlInRoadConditions ;
                 }
+
+                if(orderCol!=null && !orderCol.equalsIgnoreCase("")){
+
+                    query += " order by mca "+descAsc +" , cbi  "+descAsc ;
+                }
+
+
                 System.out.println(query);
                 Query q = JPA.em().createNativeQuery(query, RoadsEntity.class);
                 List<RoadsEntity> roadsList = q.getResultList();
@@ -93,13 +106,40 @@ public class RoadController {
                     roadObject.put("commentsOnConnections", roads.getCommentsOnConnections());
                     roadObject.put("osmId", roads.getOsmId());
                     roadObject.put("osm_id", roads.getOsmId());
-                    roadObject.put("code", roads.getCode());
+                    if(!roads.getOsmId().equalsIgnoreCase("") && roads.getOsmId()!=null){
+                        roadObject.put("code", roads.getCode());
+
+                    }else{
+                        roadObject.put("code", "-");
+
+                    }
                     roadObject.put("checked", false);
 
+                    roadObject.put("connectivity", roads.getConnectivity());
+
                     roadObject.put("fclass", roads.getFclass());
-                    roadObject.put("name", roads.getName());
-                    roadObject.put("ref", roads.getRef());
-                    roadObject.put("oneway", roads.getOneway());
+                    if(!roads.getOsmId().equalsIgnoreCase("") && roads.getOsmId()!=null){
+                        roadObject.put("name", roads.getName());
+
+                    }else{
+                        roadObject.put("name", "-");
+
+                    }
+                    if(!roads.getOsmId().equalsIgnoreCase("") && roads.getOsmId()!=null){
+                        roadObject.put("ref", roads.getRef());
+
+                    }else{
+                        roadObject.put("ref", "-");
+
+                    }
+
+                    if(!roads.getOsmId().equalsIgnoreCase("") && roads.getOsmId()!=null){
+                        roadObject.put("oneway", roads.getOneway());
+
+                    }else{
+                        roadObject.put("oneway", "-");
+
+                    }
                     roadObject.put("maxspeed", roads.getMaxspeed());
                     roadObject.put("layer", roads.getLayer());
                     roadObject.put("bridge", roads.getBridge());
@@ -130,7 +170,12 @@ public class RoadController {
                     roadObject.put("roadWidthInM", roads.getRoadWidthInM());
                     roadObject.put("roadCondition", roads.getRoadCondition());
                     roadObject.put("maxRoadSteepnessPrc", roads.getMaxRoadSteepnessPrc());
-                    roadObject.put("roadsideEnvironment", roads.getRoadsideEnvironment());
+                    if(roads.getRoadsideEnvironment()==null){
+                        roadObject.put("roadsideEnvironment", "-");
+                    }else{
+                        roadObject.put("roadsideEnvironment", roads.getRoadsideEnvironment());
+                    }
+
                     roadObject.put("agricultureFacilitation", roads.getAgricultureFacilitation());
                     roadObject.put("agricultureFacilitaties", roads.getAgriculturalFacilities().toString());
                     roadObject.put("lengthOfRoadStretchInM", roads.getLengthOfRoadStretchInM());
@@ -182,8 +227,13 @@ public class RoadController {
                     roadObject.put("c15Score", roads.getC15Score());
                     roadObject.put("mca", roads.getMca());
                     roadObject.put("cbi", roads.getCbi());
+
                     finalRoadsList.add(roadObject);
                 }
+
+
+
+
                 returnList.put("data", finalRoadsList);
                 returnList.put("total", total.intValue());
                 returnList.put("status", "ok");
@@ -427,17 +477,17 @@ public class RoadController {
                                     }
                                 }
                                 if(cm.getId()==6){
-                                    Integer weightFactor = 1;
-                                    String sqlMasterDetail = "select cmd.* from criteria_master_details cmd where cmd.score="+road.getLinksToMajorActivityCentres()+" and cmd.criteria_master_id=6";
-                                    List<CriteriaMasterDetailsEntity> cmdList = JPA.em().createNativeQuery(sqlMasterDetail,CriteriaMasterDetailsEntity.class).getResultList();
-                                    if(cmdList.size()>0){
-                                        road.setC6Id(cmdList.get(0).getId());
-                                        road.setC6Score(road.getLinksToMajorActivityCentres());
-                                        mca+=road.getC6Score()*weightFactor;
-                                    }else{
+                                    Integer weightFactor = 5;
+
+
                                         road.setC6Id(0);
-                                        road.setC6Score(0.0);
-                                    }
+                                        if(road.getConnectivity()<=5){
+                                            road.setC6Score(road.getConnectivity());
+                                        }else{
+                                            road.setC6Score(5.0);
+                                        }
+
+
                                 }
                                 if(cm.getId()==7){
                                     road.setC7Score(0.0);
@@ -494,6 +544,8 @@ public class RoadController {
                                     mca+=road.getC15Score();
                                 }
                             }
+                            road.setLinksToMajorActivityCentres(road.getC2Score()+road.getC3Score());
+
                             road.setMca(mca);
                             JPA.em().merge(road);
                         }
@@ -533,6 +585,8 @@ public class RoadController {
                 Integer elevationInMetres = json.findPath("elevationInMetres").asInt();
                 Integer facilitiesServed = json.findPath("facilitiesServed").asInt();
                 Double farmToTheMarket = json.findPath("farmToTheMarket").asDouble();
+                Double connectivity = json.findPath("connectivity").asDouble();
+
 
 
 
@@ -553,7 +607,8 @@ public class RoadController {
                 boolean tunnelMat = json.findPath("tunnelMat").asBoolean();
 
                 RoadsEntity road = JPA.em().find(RoadsEntity.class,json.findPath("id").asInt());
-                road.setFarmToTheMarket(farmToTheMarket);
+
+                road.setConnectivity(connectivity);
 
                 road.setAccessToGCsRMs(accessToGCsRMs);
                 road.setAgriculturalFacilities(agricultureFacilitaties);
@@ -569,12 +624,7 @@ public class RoadController {
                 road.setLengthInMetres(lengthInMetres);
                 road.setLinksToMajorActivityCentres(linksToMajorActivityCentres);
                 road.setMaxspeed(maxspeed);
-                if(name!=null){
-                    road.setName(name);
-                }else{
-                    road.setName("");
-                }
-
+                road.setName(name);
                 road.setNumberOfConnections(numberOfConnections);
                 road.setOneway(oneway);
                 road.setPopulationServed(populationServed.doubleValue());
@@ -601,6 +651,51 @@ public class RoadController {
             return ok(result);
         }
     }
+
+
+
+//
+//    @SuppressWarnings("Duplicates")
+//    @play.db.jpa.Transactional
+//    @BodyParser.Of(BodyParser.Json.class)
+//    public Result updateRoad() {
+//        try {
+//            JsonNode json = Http.Context.Implicit.request().body().asJson();
+//            ObjectNode result = Json.newObject();
+//            if (json.findPath("id") == null) {
+//                return badRequest("Expecting Json data");
+//            } else {
+//                RoadsEntity road = Json.fromJson(json, RoadsEntity.class);
+//                boolean bridgeMat = json.findPath("bridgeMat").asBoolean();
+//                boolean tunnelMat = json.findPath("tunnelMat").asBoolean();
+//                ((ObjectNode) json).remove("bridgeMat");
+//                ((ObjectNode) json).remove("tunnelMat");
+//                if(bridgeMat){
+//                    road.setBridge("T");
+//                }else{
+//                    road.setBridge("F");
+//                }
+//                if(tunnelMat){
+//                    road.setTunnel("T");
+//                }else{
+//                    road.setTunnel("F");
+//                }
+//
+//                JPA.em().merge(road);
+//                result.put("status", "ok");
+//                result.put("lvrr_id", road.getLvrrId());
+//                result.put("message", "Update successfully");
+//                return ok(result);
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            ObjectNode result = Json.newObject();
+//            result.put("status", "error");
+//            result.put("message", "Πρόβλημα κατά την εισαγωγή .");
+//            return ok(result);
+//        }
+//    }
+
 
 
 

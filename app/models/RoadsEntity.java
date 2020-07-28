@@ -74,6 +74,7 @@ public class RoadsEntity {
     private Double c15Score;
     private Double mca;
     private Double cbi;
+    private Double connectivity;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -836,5 +837,15 @@ public class RoadsEntity {
     @Override
     public int hashCode() {
         return Objects.hash(id, osmId, code, fclass, name, ref, oneway, maxspeed, layer, bridge, tunnel, district, source, roadWidthInM, roadCondition, maxRoadSteepnessPrc, roadsideEnvironment, agricultureFacilitation, commentsOnConnections, lengthOfRoadStretchInM, averageElevationInMAboveSealevel, averagePopulationInPersons, lvrrId, security, environmentalImpacts, districtId, lengthInMetres, widthInMetres, elevationInMetres, populationServed, facilitiesServed, accessToGCsRMs, farmToTheMarket, agriculturalFacilities, linksToMajorActivityCentres, numberOfConnections, c1Id, c1Score, c2Id, c2Score, c3Id, c3Score, c4Id, c4Score, c5Id, c5Score, c6Id, c6Score, c7Id, c7Score, c8Id, c8Score, c9Id, c9Score, c10Id, c10Score, c11Id, c11Score, c12Id, c12Score, c13Id, c13Score, c14Id, c14Score, c15Id, c15Score, mca, cbi);
+    }
+
+    @Basic
+    @Column(name = "connectivity")
+    public Double getConnectivity() {
+        return connectivity;
+    }
+
+    public void setConnectivity(Double connectivity) {
+        this.connectivity = connectivity;
     }
 }

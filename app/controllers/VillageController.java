@@ -186,7 +186,15 @@ public class VillageController {
                     HashMap<String, Object> roadObject = new HashMap<String, Object>();
                     roadObject.put("id", d.getId());
                     roadObject.put("villageCo", d.getVillageCo());
-                    roadObject.put("village1", d.getVillage1());
+                    if(!d.getVillage1().equalsIgnoreCase("") && d.getVillage1()!=null){
+                        roadObject.put("village1", d.getVillage1());
+
+                    }else{
+                        roadObject.put("village1", "-");
+
+                    }
+
+
                     roadObject.put("proCode", d.getProCode());
                     roadObject.put("distCode", d.getDistCode());
                     roadObject.put("mapLong", d.getMapLong());

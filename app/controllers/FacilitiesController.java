@@ -86,6 +86,8 @@ public class FacilitiesController {
                         distHM.put("northUtm42", school.getNorthUtm42());
                         distHM.put("from", school.getFromSource());
                         distHM.put("distName", school.getDistName());
+                        distHM.put("proCode", school.getProCode());
+
                         distHM.put("distCode", school.getDistCode());
                         distHM.put("altDistName", school.getAltDistName());
                         distHM.put("distId", school.getDistCode());
@@ -107,6 +109,8 @@ public class FacilitiesController {
                         distHM.put("eastUtm42", mosque.getEastUtm42());
                         distHM.put("northUtm42", mosque.getNorthUtm42());
                         distHM.put("from", mosque.getFromSource());
+                        distHM.put("proCode", mosque.getProCode());
+
                         distHM.put("distName", mosque.getDistName());
                         distHM.put("distCode", mosque.getDistCode());
                         distHM.put("altDistName", mosque.getAltDistName());
@@ -157,6 +161,8 @@ public class FacilitiesController {
                         distHM.put("centerType", distrct.getCenterType());
                         distHM.put("east", distrct.getEast());
                         distHM.put("north", distrct.getNorth());
+                        distHM.put("proCode", distrct.getProCode());
+
                         distHM.put("facilitie", "districtcenter");
                         distHM.put("eastUtm42", distrct.getEastUtm42());
                         distHM.put("northUtm42", distrct.getNorthUtm42());
@@ -171,6 +177,8 @@ public class FacilitiesController {
                         distHM.put("type", school.getType());
                         distHM.put("east", school.getEast());
                         distHM.put("north", school.getNorth());
+                        distHM.put("proCode", school.getProCode());
+
                         distHM.put("eastUtm42", school.getEastUtm42());
                         distHM.put("northUtm42", school.getNorthUtm42());
                         distHM.put("from", school.getFromSource());
@@ -192,6 +200,8 @@ public class FacilitiesController {
                         distHM.put("type", mosque.getType());
                         distHM.put("east", mosque.getEast());
                         distHM.put("facilitie", "mosque");
+                        distHM.put("proCode", mosque.getProCode());
+
                         distHM.put("north", mosque.getNorth());
                         distHM.put("eastUtm42", mosque.getEastUtm42());
                         distHM.put("northUtm42", mosque.getNorthUtm42());
