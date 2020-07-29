@@ -68,10 +68,24 @@ public class DocumentsController {
                 fileName = fileNameArr[fileNameArr.length - 2];
                 File filed = (File) d.getFile();
 
+
+                String fullPath = district +"/"+ fileName + "." + extension;
+
                 String path_system =ConfigFactory.load().getString("uploads_dir")+district +"/"+ fileName + "." + extension;
+
+
+
+
                 System.out.println(district);
                 System.out.println(path_system);
-                File dest = new File(path_system);
+
+
+                File uploadsDir = new File(ConfigFactory.load().getString("uploads_dir")+district);
+                if (!uploadsDir.exists()) uploadsDir.mkdirs();
+
+                //File dest = new File(path_system);
+                File dest = new File(uploadsDir.getPath()  + "/" + fileName + "." + extension);
+
                 copyFileUsingFileStreams(filed, dest);
                 DocumentsEntity newDoc = new DocumentsEntity();
                 newDoc.setName(fileName);
@@ -79,7 +93,7 @@ public class DocumentsController {
                 newDoc.setUploadDate(new Date());
                 newDoc.setName(fileName + "." + extension);
                 newDoc.setRoadId(Integer.valueOf(roadId));
-                newDoc.setFullPath(path_system);
+                newDoc.setFullPath(fullPath);
                 JPA.em().persist(newDoc);
                 result.put("docId", newDoc.getId());
                 result.put("status", "ok");
@@ -438,26 +452,17 @@ public class DocumentsController {
         }
     }
 
-
-
-
-
-//
-//
-//
-//
-    @SuppressWarnings("Duplicates")
-
-
     @play.db.jpa.Transactional
     public Result downloadFile() {
         ObjectNode result = Json.newObject();
+        //System.out.println("downloadFile");
         String docId = request().getQueryString("docId");
         String sql = "select * from documents d where d.id=  " + docId;
         Query qsql = JPA.em().createNativeQuery(sql, DocumentsEntity.class);
         List<DocumentsEntity> docsList = qsql.getResultList();
+       // System.out.println(docsList.get(0).getFullPath());
         try {
-            File previewFile = new File(ConfigFactory.load().getString("uploads_dir") + docsList.get(0).getName());
+            File previewFile = new File(ConfigFactory.load().getString("uploads_dir") + docsList.get(0).getFullPath());
             return ok(previewFile);
         } catch (Exception e) {
             e.printStackTrace();
@@ -466,6 +471,23 @@ public class DocumentsController {
         }
         return ok(result);
     }
+
+
+   /* public Result previewFile() {
+        ObjectNode result = Json.newObject();
+        String filePath = request().getQueryString("filename");
+        String projectId = request().getQueryString("projectId");
+        try {
+            File uploadsDir = new File(Play.application().configuration().getString("uploads_dir"));
+            File previewFile = new File(uploadsDir.getPath() +"/"+projectId+"/"+filePath);
+            return ok(previewFile);
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.put("status", "error");
+            result.put("message", e.getMessage());
+        }
+        return ok(result);
+    }*/
 //
 //
 //

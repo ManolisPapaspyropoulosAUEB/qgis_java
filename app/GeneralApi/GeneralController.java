@@ -39,7 +39,7 @@ public class GeneralController {
                         " province_name, \n" +
                         "numerical_province_code, \n" +
                         "alphanumerical_province_code \n" +
-                        " FROM `DISTRICTS` WHERE 1;\n ";
+                        " FROM `districts` WHERE 1;\n ";
                 Query q = JPA.em().createNativeQuery(query);
                 List distList = q.getResultList();
                 ObjectMapper ow = new ObjectMapper();

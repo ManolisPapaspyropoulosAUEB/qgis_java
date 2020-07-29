@@ -65,6 +65,22 @@ POST        /login                                 controllers.UsersController.l
 POST        /register                              controllers.UsersController.register()
 POST        /forgotPwd                             controllers.UsersController.forgotPwd()
 
+#UsersController register uploadFile addNote
+
+POST        /uploadPhotoTest                       documents.DocumentsController.uploadPhotoTest()
+POST        /getPhotoByRoadId                      documents.DocumentsController.getPhotoByRoadId()
+POST        /uploadFile                            documents.DocumentsController.uploadFile()
+POST        /deleteImage                           documents.DocumentsController.deleteImage()
+
+GET         /downloadFile     documents.DocumentsController.downloadFile()
+
+
+#UsersController register uploadFile addNote editNote
+
+POST        /addNote                               controllers.NotesController.addNote()
+POST        /getNoteByRoadId                       controllers.NotesController.getNoteByRoadId()
+POST        /editNote                              controllers.NotesController.editNote()
+POST        /deleteNote                              controllers.NotesController.deleteNote()
 
 
 

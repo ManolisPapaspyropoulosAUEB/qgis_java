@@ -551,7 +551,7 @@ public class RoadController {
                         }
                     }
                     result.put("status", "ok");
-                    result.put("message", "Update success");
+                    result.put("message", "Criteria has been updated succesfully");
                     return ok(result);
                 }
             }
@@ -585,6 +585,7 @@ public class RoadController {
                 Integer elevationInMetres = json.findPath("elevationInMetres").asInt();
                 Integer facilitiesServed = json.findPath("facilitiesServed").asInt();
                 Double farmToTheMarket = json.findPath("farmToTheMarket").asDouble();
+                System.out.println(farmToTheMarket);
                 Double connectivity = json.findPath("connectivity").asDouble();
 
 
@@ -620,6 +621,7 @@ public class RoadController {
                 road.setElevationInMetres(elevationInMetres);
                 road.setFacilitiesServed(facilitiesServed.doubleValue());
                 road.setFclass(fclass);
+                road.setFarmToTheMarket(farmToTheMarket);
                 road.setLayer(layer);
                 road.setLengthInMetres(lengthInMetres);
                 road.setLinksToMajorActivityCentres(linksToMajorActivityCentres);
@@ -640,7 +642,7 @@ public class RoadController {
                 JPA.em().merge(road);
                 result.put("status", "ok");
                 result.put("lvrr_id", road.getLvrrId());
-                result.put("message", "Update successfully");
+                result.put("message", "Road has been updated successfully");
                 return ok(result);
             }
         } catch (Exception e) {

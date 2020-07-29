@@ -17,6 +17,8 @@
         <class>models.VillagesEntity</class>
         <class>models.UsersEntity</class>
         <class>models.OperetionalParametersEntity</class>
+        <class>models.DocumentsEntity</class>
+        <class>models.NotesEntity</class>
 
 
         <properties>
