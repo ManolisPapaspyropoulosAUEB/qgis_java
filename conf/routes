@@ -12,6 +12,7 @@ GET         /message                               controllers.AsyncController.m
 #OPTIONS /*all                           controllers.Application.preflight(all)
 
 
+
 # Map static resources from the /public folder to the /iets URL path
 GET         /assets/*file                          controllers.Assets.versioned(path="/public", file: Asset)
 GET         /app/*file                             controllers.WebAppAssets.at(path="webapp/", file: String)
@@ -28,9 +29,10 @@ POST        /getAllCriteriaMaster                  GeneralApi.CoreDataController
 POST        /updateEstimatedMaintenanceCost        GeneralApi.CoreDataController.updateEstimatedMaintenanceCost()
 
 
-#RoadsController
+#RoadsController getRoadsForExporter
 
 POST        /getAllFromRoads                       controllers.RoadController.getAllFromRoads()
+POST        /getRoadsForExporter                       controllers.RoadController.getRoadsForExporter()
 POST        /calculateCriteria                     controllers.RoadController.calculateCriteria()
 POST        /resetCriteria                         controllers.RoadController.resetCriteria()
 POST        /updateRoad                            controllers.RoadController.updateRoad()
@@ -51,7 +53,7 @@ POST        /updateMosque                          controllers.FacilitiesControl
 POST        /deleteMosque                          controllers.FacilitiesController.deleteMosque()
 
 
-#VillagesController addVillage
+#VillagesController
 
 POST        /getAllVillages                        controllers.VillageController.getAllVillages()
 POST        /addVillage                            controllers.VillageController.addVillage()
@@ -59,28 +61,27 @@ POST        /updateVillage                         controllers.VillageController
 POST        /deleteVillage                         controllers.VillageController.deleteVillage()
 
 
-#UsersController register
+#UsersController
 
 POST        /login                                 controllers.UsersController.login()
 POST        /register                              controllers.UsersController.register()
 POST        /forgotPwd                             controllers.UsersController.forgotPwd()
 
-#UsersController register uploadFile addNote
+#DocumentsController
 
 POST        /uploadPhotoTest                       documents.DocumentsController.uploadPhotoTest()
 POST        /getPhotoByRoadId                      documents.DocumentsController.getPhotoByRoadId()
 POST        /uploadFile                            documents.DocumentsController.uploadFile()
 POST        /deleteImage                           documents.DocumentsController.deleteImage()
+GET         /downloadFile                          documents.DocumentsController.downloadFile()
+GET         /downloadDocument                      documents.DocumentsController.downloadDocument()
 
-GET         /downloadFile     documents.DocumentsController.downloadFile()
-
-
-#UsersController register uploadFile addNote editNote
+#UsersController
 
 POST        /addNote                               controllers.NotesController.addNote()
 POST        /getNoteByRoadId                       controllers.NotesController.getNoteByRoadId()
 POST        /editNote                              controllers.NotesController.editNote()
-POST        /deleteNote                              controllers.NotesController.deleteNote()
+POST        /deleteNote                            controllers.NotesController.deleteNote()
 
 
 

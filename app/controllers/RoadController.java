@@ -30,18 +30,20 @@ public class RoadController {
 
     private static DecimalFormat df2 = new DecimalFormat("#.##");
 
+    //
+
 
     @SuppressWarnings("Duplicates")
     @play.db.jpa.Transactional
     @BodyParser.Of(BodyParser.Json.class)
-    public Result getAllFromRoads() throws IOException {
+    public Result getRoadsForExporter() throws IOException {
         ObjectNode result = Json.newObject();
         try {
             JsonNode json = request().body().asJson();
             if (json == null ) {
                 return badRequest("Expecting Json data");
             } else {
-                String query = " select * from roads r where 1=1 ";
+                String query = " select r from RoadsEntity r where 1=1 ";
                 String districtId = json.findPath("district_id").asText();
                 String fclass = json.findPath("fclass").asText();
 
@@ -49,6 +51,9 @@ public class RoadController {
                 String orderCol = json.findPath("orderCol").asText();
                 String descAsc = json.findPath("descAsc").asText();
 
+
+                //result
+                Integer resultParam = json.findPath("result").asInt();
 
                 String nameFilter = json.findPath("nameFilter").asText();
                 String sqlInFclass = json.findPath("sqlInFclass").asText();
@@ -58,13 +63,13 @@ public class RoadController {
                 String agriculturFacilitationFilter = json.findPath("agriculturFacilitationFilter").asText();
                 String sqlInRoadConditions = json.findPath("sqlInRoadConditions").asText();
                 if (districtId != null && districtId != "") {
-                    query += "and r.district_id = " + districtId;
+                    query += "and r.districtId = " + districtId;
                 }
                 if (fclass != null && fclass != "") {
                     query += " and r.fclass = " + fclass + "'";
                 }
                 if (nameFilter != null && nameFilter != "") {
-                    query += " and r.name like '%" + nameFilter + "%'  or r.LVRR_ID like '%"+nameFilter+"%'";
+                    query += " and ( r.name like '%" + nameFilter + "%'  or r.lvrrId like '%"+nameFilter+"%' )";
                 }
                 if ((!sqlInFclass.isEmpty()) && !sqlInFclass.equalsIgnoreCase("()")) {
                     query += " and r.fclass IN " + sqlInFclass;
@@ -79,20 +84,40 @@ public class RoadController {
                     query += " and r.bridge = '" + bridgeFilter + "'";
                 }
                 if ((!agriculturFacilitationFilter.isEmpty()) && !agriculturFacilitationFilter.equalsIgnoreCase("TF")) {
-                    query += " and r.agriculture_facilitation = '" + agriculturFacilitationFilter + "'";
+                    query += " and r.agricultureFacilitation = '" + agriculturFacilitationFilter + "'";
                 }
                 if ((!sqlInRoadConditions.isEmpty()) && !sqlInRoadConditions .equalsIgnoreCase("()")) {
-                    query += " and r.road_condition in " + sqlInRoadConditions ;
+                    query += " and r.roadCondition in " + sqlInRoadConditions ;
                 }
 
-                if(orderCol!=null && !orderCol.equalsIgnoreCase("")){
 
+
+
+
+
+                if(orderCol.equalsIgnoreCase("mca")){
                     query += " order by mca "+descAsc +" , cbi  "+descAsc ;
+                }else if(orderCol!=null && !orderCol.equalsIgnoreCase("")){
+                    query += " order by  "+orderCol+" "+" "+descAsc  ;
                 }
+
+                Query q = JPA.em().createQuery(query, RoadsEntity.class);
+
+                System.out.println(resultParam);
+                if(resultParam==5
+                        ||resultParam==10
+                        ||resultParam==20
+                        ||resultParam==30
+                        ||resultParam==50){
+
+                    q.setMaxResults(resultParam);
+
+                }
+
+
 
 
                 System.out.println(query);
-                Query q = JPA.em().createNativeQuery(query, RoadsEntity.class);
                 List<RoadsEntity> roadsList = q.getResultList();
                 ObjectMapper ow = new ObjectMapper();
                 HashMap<String, Object> returnList = new HashMap<String, Object>();
@@ -104,6 +129,7 @@ public class RoadController {
                     roadObject.put("id", roads.getId());
                     roadObject.put("agriculturalFacilities", roads.getAgriculturalFacilities());
                     roadObject.put("commentsOnConnections", roads.getCommentsOnConnections());
+                    roadObject.put("checked", false);
                     roadObject.put("osmId", roads.getOsmId());
                     roadObject.put("osm_id", roads.getOsmId());
                     if(!roads.getOsmId().equalsIgnoreCase("") && roads.getOsmId()!=null){
@@ -193,7 +219,7 @@ public class RoadController {
                     roadObject.put("accessToGCsRMs", roads.getAccessToGCsRMs());
                     roadObject.put("farmToTheMarket", roads.getFarmToTheMarket().toString());
                     roadObject.put("agriculturalFacilities", roads.getAgriculturalFacilities());
-                    roadObject.put("linksToMajorActivityCentres", roads.getLinksToMajorActivityCentres().toString());
+                    roadObject.put("linksToMajorActivityCentres", roads.getLinksToMajorActivityCentres());
                     roadObject.put("numberOfConnections", roads.getNumberOfConnections());
                     roadObject.put("c1Id", roads.getC1Id());
                     roadObject.put("c1Score", roads.getC1Score());
@@ -225,6 +251,266 @@ public class RoadController {
                     roadObject.put("c14Score", roads.getC14Score());
                     roadObject.put("c15Id", roads.getC15Id());
                     roadObject.put("c15Score", roads.getC15Score());
+                    roadObject.put("mcaTypos", "(c1score*weight_factor1)+(c2score*weight_factor2)+(c3score*weight_factor3)+..(c15score*weight_factor15)="+"("+ roads.getC1Score()+"*"+15+")"+"+"+"("+roads.getC2Score()+"*"+10+")"+"+"+"("+roads.getC3Score()+"*"+10+")"+"..+..."+"("+roads.getC15Score()+"*"+5+")");
+
+                    String opParamSql = "select * from operetional_parameters op ";
+                    List<OperetionalParametersEntity> opList = JPA.em().createNativeQuery(opParamSql,OperetionalParametersEntity.class).getResultList();
+                    Double opParam = opList.get(0).getEstimatedMaintenanceCost();
+                    Double    cbi2 = (opParam/roads.getLengthInMetres())/roads.getPopulationServed();
+
+
+                    roadObject.put("cbiTypos", "(Est_Maintenance_cost/length_in_metres) /"+" population_served="+"\n"+"("+opParam+"/"+roads.getLengthInMetres()+")"+"/"+roads.getPopulationServed());
+
+
+
+
+
+                    roadObject.put("mca", roads.getMca());
+                    roadObject.put("cbi", roads.getCbi());
+
+                    finalRoadsList.add(roadObject);
+                }
+
+
+
+
+                returnList.put("data", finalRoadsList);
+                returnList.put("total", total.intValue());
+                returnList.put("status", "ok");
+                DateFormat myDateFormat = new SimpleDateFormat("M/d/Y");
+                ow.setDateFormat(myDateFormat);
+                try {
+                    jsonResult = ow.writeValueAsString(returnList);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    result.put("status", "error");
+                    result.put("message", "Problem in fetch data process,communicate with the administrator");
+                    return ok(result);
+                }
+                return ok(jsonResult);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.put("status", "error");
+            result.put("message", "Problem in fetch data process,communicate with the administrator");
+            return ok(result);
+        }
+    }
+
+
+
+
+    @SuppressWarnings("Duplicates")
+    @play.db.jpa.Transactional
+    @BodyParser.Of(BodyParser.Json.class)
+    public Result getAllFromRoads() throws IOException {
+        ObjectNode result = Json.newObject();
+        try {
+            JsonNode json = request().body().asJson();
+            if (json == null ) {
+                return badRequest("Expecting Json data");
+            } else {
+                String query = " select * from roads r where 1=1 ";
+                String districtId = json.findPath("district_id").asText();
+                String fclass = json.findPath("fclass").asText();
+
+
+                String orderCol = json.findPath("orderCol").asText();
+                String descAsc = json.findPath("descAsc").asText();
+
+
+                String nameFilter = json.findPath("nameFilter").asText();
+                String sqlInFclass = json.findPath("sqlInFclass").asText();
+                String oneway = json.findPath("oneway").asText();
+                String maxSpeedFilter = json.findPath("maxSpeedFilter").asText();
+                String bridgeFilter = json.findPath("bridgeFilter").asText();
+                String agriculturFacilitationFilter = json.findPath("agriculturFacilitationFilter").asText();
+                String sqlInRoadConditions = json.findPath("sqlInRoadConditions").asText();
+                if (districtId != null && districtId != "") {
+                    query += "and r.district_id = " + districtId;
+                }
+                if (fclass != null && fclass != "") {
+                    query += " and r.fclass = " + fclass + "'";
+                }
+                if (nameFilter != null && nameFilter != "") {
+                    query += " and ( r.name like '%" + nameFilter + "%'  or r.LVRR_ID like '%"+nameFilter+"%' )";
+                }
+                if ((!sqlInFclass.isEmpty()) && !sqlInFclass.equalsIgnoreCase("()")) {
+                    query += " and r.fclass IN " + sqlInFclass;
+                }
+                if ((!oneway.isEmpty()) && !oneway.equalsIgnoreCase("FB")) {
+                    query += " and r.oneway = '" + oneway + "'";
+                }
+                if ((!maxSpeedFilter.isEmpty()) && maxSpeedFilter != "") {
+                    query += " and r.maxspeed = " + maxSpeedFilter;
+                }
+                if ((!bridgeFilter.isEmpty()) && !bridgeFilter.equalsIgnoreCase("TF")) {
+                    query += " and r.bridge = '" + bridgeFilter + "'";
+                }
+                if ((!agriculturFacilitationFilter.isEmpty()) && !agriculturFacilitationFilter.equalsIgnoreCase("TF")) {
+                    query += " and r.agriculture_facilitation = '" + agriculturFacilitationFilter + "'";
+                }
+                if ((!sqlInRoadConditions.isEmpty()) && !sqlInRoadConditions .equalsIgnoreCase("()")) {
+                    query += " and r.road_condition in " + sqlInRoadConditions ;
+                }
+
+
+                if(orderCol!=null && !orderCol.equalsIgnoreCase("")){
+
+                    query += " order by mca "+descAsc +" , cbi  "+descAsc ;
+                }
+
+
+
+                System.out.println(query);
+                Query q = JPA.em().createNativeQuery(query, RoadsEntity.class);
+                List<RoadsEntity> roadsList = q.getResultList();
+                ObjectMapper ow = new ObjectMapper();
+                HashMap<String, Object> returnList = new HashMap<String, Object>();
+                String jsonResult = "";
+                Integer total = q.getResultList().size();
+                List<HashMap<String, Object>> finalRoadsList = new ArrayList<HashMap<String, Object>>();
+                for (RoadsEntity roads : roadsList) {
+                    HashMap<String, Object> roadObject = new HashMap<String, Object>();
+                    roadObject.put("id", roads.getId());
+                    roadObject.put("agriculturalFacilities", roads.getAgriculturalFacilities());
+                    roadObject.put("commentsOnConnections", roads.getCommentsOnConnections());
+                    roadObject.put("checked", false);
+                    roadObject.put("osmId", roads.getOsmId());
+                    roadObject.put("osm_id", roads.getOsmId());
+                    if(!roads.getOsmId().equalsIgnoreCase("") && roads.getOsmId()!=null){
+                        roadObject.put("code", roads.getCode());
+
+                    }else{
+                        roadObject.put("code", "-");
+
+                    }
+                    roadObject.put("checked", false);
+
+                    roadObject.put("connectivity", roads.getConnectivity());
+
+                    roadObject.put("fclass", roads.getFclass());
+                    if(!roads.getOsmId().equalsIgnoreCase("") && roads.getOsmId()!=null){
+                        roadObject.put("name", roads.getName());
+
+                    }else{
+                        roadObject.put("name", "-");
+
+                    }
+                    if(!roads.getOsmId().equalsIgnoreCase("") && roads.getOsmId()!=null){
+                        roadObject.put("ref", roads.getRef());
+
+                    }else{
+                        roadObject.put("ref", "-");
+
+                    }
+
+                    if(!roads.getOsmId().equalsIgnoreCase("") && roads.getOsmId()!=null){
+                        roadObject.put("oneway", roads.getOneway());
+
+                    }else{
+                        roadObject.put("oneway", "-");
+
+                    }
+                    roadObject.put("maxspeed", roads.getMaxspeed());
+                    roadObject.put("layer", roads.getLayer());
+                    roadObject.put("bridge", roads.getBridge());
+
+                    if(roads.getBridge()!=null){
+                        if(roads.getBridge().equalsIgnoreCase("T")){
+                            roadObject.put("bridgeMat",true);
+                        }else{
+                            roadObject.put("bridgeMat", false);
+
+                        }
+                    }else{
+                        roadObject.put("bridgeMat", false);
+                    }
+                    roadObject.put("tunnel", roads.getTunnel());
+                    if(roads.getTunnel()!=null){
+                        if(roads.getTunnel().equalsIgnoreCase("T")){
+                            roadObject.put("tunnelMat",true);
+                        }else{
+                            roadObject.put("tunnelMat", false);
+                        }
+                    }else{
+                        roadObject.put("tunnelMat", false);
+
+                    }
+                    roadObject.put("district", roads.getDistrict());
+                    roadObject.put("source", roads.getSource());
+                    roadObject.put("roadWidthInM", roads.getRoadWidthInM());
+                    roadObject.put("roadCondition", roads.getRoadCondition());
+                    roadObject.put("maxRoadSteepnessPrc", roads.getMaxRoadSteepnessPrc());
+                    if(roads.getRoadsideEnvironment()==null){
+                        roadObject.put("roadsideEnvironment", "-");
+                    }else{
+                        roadObject.put("roadsideEnvironment", roads.getRoadsideEnvironment());
+                    }
+
+                    roadObject.put("agricultureFacilitation", roads.getAgricultureFacilitation());
+                    roadObject.put("agricultureFacilitaties", roads.getAgriculturalFacilities().toString());
+                    roadObject.put("lengthOfRoadStretchInM", roads.getLengthOfRoadStretchInM());
+                    roadObject.put("averageElevationInMAboveSealevel", roads.getAverageElevationInMAboveSealevel());
+                    roadObject.put("elevationInMetres", roads.getElevationInMetres());
+                    roadObject.put("averagePopulationInPersons", roads.getAveragePopulationInPersons());
+                    roadObject.put("LVRR_ID", roads.getLvrrId().toString());
+                    roadObject.put("security", roads.getSecurity());
+                    roadObject.put("environmentalImpacts", roads.getEnvironmentalImpacts());
+                    roadObject.put("districtId", roads.getDistrictId());
+                    roadObject.put("districtCode", roads.getDistrictId());
+                    roadObject.put("lengthInMetres", roads.getLengthInMetres());
+                    roadObject.put("populationServed", roads.getPopulationServed());
+                    roadObject.put("facilitiesServed", roads.getFacilitiesServed());
+                    roadObject.put("accessToGCsRMs", roads.getAccessToGCsRMs());
+                    roadObject.put("farmToTheMarket", roads.getFarmToTheMarket().toString());
+                    roadObject.put("agriculturalFacilities", roads.getAgriculturalFacilities());
+                    roadObject.put("linksToMajorActivityCentres", roads.getLinksToMajorActivityCentres());
+                    roadObject.put("numberOfConnections", roads.getNumberOfConnections());
+                    roadObject.put("c1Id", roads.getC1Id());
+                    roadObject.put("c1Score", roads.getC1Score());
+                    roadObject.put("c2Id", roads.getC2Id());
+                    roadObject.put("c2Score", roads.getC2Score());
+                    roadObject.put("c3Id", roads.getC3Id());
+                    roadObject.put("c3Score", roads.getC3Score());
+                    roadObject.put("c4Id", roads.getC4Id());
+                    roadObject.put("c4Score", roads.getC4Score());
+                    roadObject.put("c5Id", roads.getC5Id());
+                    roadObject.put("c5Score", roads.getC5Score());
+                    roadObject.put("c6Id", roads.getC6Id());
+                    roadObject.put("c6Score", roads.getC6Score());
+                    roadObject.put("c7Id", roads.getC7Id());
+                    roadObject.put("c7Score", roads.getC7Score());
+                    roadObject.put("c8Id", roads.getC8Id());
+                    roadObject.put("c8Score", roads.getC8Score());
+                    roadObject.put("c9Id", roads.getC9Id());
+                    roadObject.put("c9Score", roads.getC9Score());
+                    roadObject.put("c10Id", roads.getC10Id());
+                    roadObject.put("c10Score", roads.getC10Score());
+                    roadObject.put("c11Id", roads.getC11Id());
+                    roadObject.put("c11Score", roads.getC11Score());
+                    roadObject.put("c12Id", roads.getC12Id());
+                    roadObject.put("c12Score", roads.getC12Score());
+                    roadObject.put("c13Id", roads.getC13Id());
+                    roadObject.put("c13Score", roads.getC13Score());
+                    roadObject.put("c14Id", roads.getC14Id());
+                    roadObject.put("c14Score", roads.getC14Score());
+                    roadObject.put("c15Id", roads.getC15Id());
+                    roadObject.put("c15Score", roads.getC15Score());
+                    roadObject.put("mcaTypos", "(c1score*weight_factor1)+(c2score*weight_factor2)+(c3score*weight_factor3)+..(c15score*weight_factor15)="+"("+ roads.getC1Score()+"*"+15+")"+"+"+"("+roads.getC2Score()+"*"+10+")"+"+"+"("+roads.getC3Score()+"*"+10+")"+"..+..."+"("+roads.getC15Score()+"*"+5+")");
+
+                    String opParamSql = "select * from operetional_parameters op ";
+                    List<OperetionalParametersEntity> opList = JPA.em().createNativeQuery(opParamSql,OperetionalParametersEntity.class).getResultList();
+                    Double opParam = opList.get(0).getEstimatedMaintenanceCost();
+                    Double    cbi2 = (opParam/roads.getLengthInMetres())/roads.getPopulationServed();
+
+
+                    roadObject.put("cbiTypos", "(Est_Maintenance_cost/length_in_metres) /"+" population_served="+"\n"+"("+opParam+"/"+roads.getLengthInMetres()+")"+"/"+roads.getPopulationServed());
+
+
+
+
+
                     roadObject.put("mca", roads.getMca());
                     roadObject.put("cbi", roads.getCbi());
 
@@ -481,8 +767,8 @@ public class RoadController {
 
 
                                         road.setC6Id(0);
-                                        if(road.getConnectivity()<=5){
-                                            road.setC6Score(road.getConnectivity());
+                                        if(road.getLinksToMajorActivityCentres()<=5){
+                                            road.setC6Score(road.getLinksToMajorActivityCentres());
                                         }else{
                                             road.setC6Score(5.0);
                                         }
@@ -544,7 +830,7 @@ public class RoadController {
                                     mca+=road.getC15Score();
                                 }
                             }
-                            road.setLinksToMajorActivityCentres(road.getC2Score()+road.getC3Score());
+                           // road.setLinksToMajorActivityCentres(road.getC2Score()+road.getC3Score());
 
                             road.setMca(mca);
                             JPA.em().merge(road);

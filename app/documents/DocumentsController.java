@@ -55,6 +55,7 @@ public class DocumentsController {
 
             String district = body.asFormUrlEncoded().get("district")[0].trim();
             String roadId = body.asFormUrlEncoded().get("roadId")[0].trim();
+            String replace = body.asFormUrlEncoded().get("replace")[0].trim();
             List<Http.MultipartFormData.FilePart<File>> fileList;
             fileList = body.getFiles();
             String extension = "";
@@ -64,41 +65,77 @@ public class DocumentsController {
 
                 String[] fileNameArr = d.getFilename().split("\\.");
                 String fileName;
+                String originalFileName;
                 extension = fileNameArr[fileNameArr.length - 1];
-                fileName = fileNameArr[fileNameArr.length - 2];
+                originalFileName = fileNameArr[fileNameArr.length - 2];
+                fileName = fileNameArr[fileNameArr.length - 2] + "_" + roadId;
+
+
                 File filed = (File) d.getFile();
+                String fullPath = district + "/" + fileName + "." + extension;
+//                String fullPath = district +"/"+ fileName + "." + extension;
+
+                String uniquePhoto = "select * from documents d where d.original_filename='" + originalFileName + "'";
+                System.out.println(uniquePhoto);
+                List<DocumentsEntity> dList = JPA.em().createNativeQuery(uniquePhoto, DocumentsEntity.class).getResultList();
+
+                if (dList.size() > 0 && replace.equalsIgnoreCase("")) {
+
+                    System.out.println(dList.size() > 0 && replace.equalsIgnoreCase(""));
+
+                    System.out.println(dList.size());
+                    System.out.println(replace.equalsIgnoreCase(""));
 
 
-                String fullPath = district +"/"+ fileName + "." + extension;
+                    result.put("status", "warning");
+                    result.put("message", "There is already file with the same name in this location,do you want replace it? ");
+                    return ok(result);
+                } else if (dList.size() > 0 && replace.equalsIgnoreCase("yes")) {
 
-                String path_system =ConfigFactory.load().getString("uploads_dir")+district +"/"+ fileName + "." + extension;
+                    File uploadsDir = new File(ConfigFactory.load().getString("uploads_dir") + district);
+                    if (!uploadsDir.exists()) uploadsDir.mkdirs();
+                    File dest = new File(uploadsDir.getPath() + "/" + fileName + "." + extension);
+                    dest.delete();
+                    DocumentsEntity oldDoc = JPA.em().find(DocumentsEntity.class,dList.get(0).getId());
+                    JPA.em().remove(oldDoc);
 
-
-
-
-                System.out.println(district);
-                System.out.println(path_system);
-
-
-                File uploadsDir = new File(ConfigFactory.load().getString("uploads_dir")+district);
-                if (!uploadsDir.exists()) uploadsDir.mkdirs();
-
-                //File dest = new File(path_system);
-                File dest = new File(uploadsDir.getPath()  + "/" + fileName + "." + extension);
-
-                copyFileUsingFileStreams(filed, dest);
-                DocumentsEntity newDoc = new DocumentsEntity();
-                newDoc.setName(fileName);
-                newDoc.setExtension(extension);
-                newDoc.setUploadDate(new Date());
-                newDoc.setName(fileName + "." + extension);
-                newDoc.setRoadId(Integer.valueOf(roadId));
-                newDoc.setFullPath(fullPath);
-                JPA.em().persist(newDoc);
-                result.put("docId", newDoc.getId());
-                result.put("status", "ok");
-                result.put("message", "your photo has been uploaded");
-                return ok(result);
+                    copyFileUsingFileStreams(filed, dest);
+                    DocumentsEntity newDoc = new DocumentsEntity();
+                    newDoc.setName(fileName);
+                    newDoc.setOriginalFilename(originalFileName);
+                    newDoc.setExtension(extension);
+                    newDoc.setUploadDate(new Date());
+                    newDoc.setName(fileName + "." + extension);
+                    newDoc.setRoadId(Integer.valueOf(roadId));
+                    newDoc.setFullPath(fullPath);
+                    JPA.em().persist(newDoc);
+                    result.put("docId", newDoc.getId());
+                    result.put("status", "ok");
+                    result.put("message", "your photo has been uploaded !");
+                    return ok(result);
+                } else if (dList.size() > 0 && replace.equalsIgnoreCase("no")) {
+                    result.put("status", "ok");
+                    result.put("message", "the uploading has been cancelled");
+                    return ok(result);
+                } else if (dList.size() == 0) {
+                    File uploadsDir = new File(ConfigFactory.load().getString("uploads_dir") + district);
+                    if (!uploadsDir.exists()) uploadsDir.mkdirs();
+                    File dest = new File(uploadsDir.getPath() + "/" + fileName + "." + extension);
+                    copyFileUsingFileStreams(filed, dest);
+                    DocumentsEntity newDoc = new DocumentsEntity();
+                    newDoc.setName(fileName);
+                    newDoc.setOriginalFilename(originalFileName);
+                    newDoc.setExtension(extension);
+                    newDoc.setUploadDate(new Date());
+                    newDoc.setName(fileName + "." + extension);
+                    newDoc.setRoadId(Integer.valueOf(roadId));
+                    newDoc.setFullPath(fullPath);
+                    JPA.em().persist(newDoc);
+                    result.put("docId", newDoc.getId());
+                    result.put("status", "ok");
+                    result.put("message", "your photo has been uploaded ");
+                    return ok(result);
+                }
             }
             result.put("status", "error");
             result.put("message", "No image selected");
@@ -110,7 +147,8 @@ public class DocumentsController {
             return ok(result);
         }
     }
-//
+
+    //
 //
     @play.db.jpa.Transactional
 
@@ -121,8 +159,6 @@ public class DocumentsController {
         try {
             input = new FileInputStream(source);
             output = new FileOutputStream(dest);
-            System.out.println(input);
-            System.out.println(output);
             byte[] buf = new byte[2048];
             int bytesRead;
             while ((bytesRead = input.read(buf)) > 0) {
@@ -219,7 +255,26 @@ public class DocumentsController {
 //
 
 
-        @SuppressWarnings("Duplicates")
+    @SuppressWarnings("Duplicates")
+    @play.db.jpa.Transactional
+    public Result downloadDocument() {
+        ObjectNode result = Json.newObject();
+        String id = request().getQueryString("id");
+        String sql = "select * from documents d where d.id=  " + id;
+        Query qsql = JPA.em().createNativeQuery(sql, DocumentsEntity.class);
+        List<DocumentsEntity> docsList = qsql.getResultList();
+        try {
+            File previewFile = new File(ConfigFactory.load().getString("uploads_dir") + docsList.get(0).getFullPath());
+            return ok(previewFile);
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.put("status", "error");
+            result.put("message", e.getMessage());
+        }
+        return ok(result);
+    }
+
+    @SuppressWarnings("Duplicates")
     @play.db.jpa.Transactional
     @BodyParser.Of(BodyParser.Json.class)
     public Result deleteImage() {
@@ -230,11 +285,11 @@ public class DocumentsController {
             if (imgId == 0 || imgId == null) {
                 return badRequest("Expecting docId ");
             } else {
-
                 try {
-                    DocumentsEntity docForDelete = JPA.em().find(DocumentsEntity.class, imgId);
-
-                    JPA.em().remove(docForDelete);
+                    DocumentsEntity doc = JPA.em().find(DocumentsEntity.class,imgId);
+                    File dest = new File(ConfigFactory.load().getString("uploads_dir").concat(doc.getFullPath()));
+                    dest.delete();
+                    JPA.em().remove(doc);
                     result.put("status", "ok");
                     result.put("message", "your image was succesfully deleted");
                     return ok(result);
@@ -255,7 +310,6 @@ public class DocumentsController {
     }
 
 
-
     @SuppressWarnings("Duplicates")
     @play.db.jpa.Transactional
     @BodyParser.Of(BodyParser.Json.class)
@@ -274,7 +328,7 @@ public class DocumentsController {
                 } else {
 
                     //String path_system =ConfigFactory.load().getString("uploads_dir")+district +"/"+ fileName + "." + extension;
-                    String sql = "select * from documents d where d.road_id="+json.findPath("id").asText();
+                    String sql = "select * from documents d where d.road_id=" + json.findPath("id").asText() +" order by d.upload_date desc";
                     Query qsql = JPA.em().createNativeQuery(sql, DocumentsEntity.class);
                     List<DocumentsEntity> docsList = qsql.getResultList();
                     ObjectMapper ow = new ObjectMapper();
@@ -282,15 +336,15 @@ public class DocumentsController {
                     String jsonResult = "";
                     List<HashMap<String, Object>> serversList = new ArrayList<HashMap<String, Object>>();
                     for (DocumentsEntity j : docsList) {
-
                         HashMap<String, Object> sHmpam = new HashMap<String, Object>();
                         sHmpam.put("id", j.getId());
                         sHmpam.put("srcUrl", j.getFullPath());
                         sHmpam.put("previewUrl", j.getFullPath());
                         sHmpam.put("previewFile", new File(j.getFullPath()));
-
-
-
+                        sHmpam.put("extension", j.getExtension());
+                        sHmpam.put("getUrl", new File(j.getFullPath()));
+                        sHmpam.put("originalName", j.getOriginalFilename().concat(".").concat(j.getExtension()));
+                        sHmpam.put("uploadDate", j.getUploadDate());
                         serversList.add(sHmpam);
                     }
                     returnList.put("data", serversList);
@@ -316,8 +370,6 @@ public class DocumentsController {
             return ok(result);
         }
     }
-
-
 
 
 //
@@ -383,9 +435,6 @@ public class DocumentsController {
 //
 
 
-
-
-
     @SuppressWarnings("Duplicates")
     @play.db.jpa.Transactional
     @BodyParser.Of(BodyParser.Json.class)
@@ -422,8 +471,8 @@ public class DocumentsController {
                 //convert base64 string to binary data
                 byte[] data = DatatypeConverter.parseBase64Binary(strings[1]);
                 System.out.println(data);
-                String path = "C:\\developm\\qgis_angular\\bckp\\assets\\photoGallery\\"+district+"\\"+name;
-                String pathDaved = "../assets/photoGallery/"+district+"/"+name;
+                String path = "C:\\developm\\qgis_angular\\bckp\\assets\\photoGallery\\" + district + "\\" + name;
+                String pathDaved = "../assets/photoGallery/" + district + "/" + name;
                 File file = new File(path);
                 try (OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(file))) {
                     outputStream.write(data);
@@ -455,12 +504,10 @@ public class DocumentsController {
     @play.db.jpa.Transactional
     public Result downloadFile() {
         ObjectNode result = Json.newObject();
-        //System.out.println("downloadFile");
         String docId = request().getQueryString("docId");
         String sql = "select * from documents d where d.id=  " + docId;
         Query qsql = JPA.em().createNativeQuery(sql, DocumentsEntity.class);
         List<DocumentsEntity> docsList = qsql.getResultList();
-       // System.out.println(docsList.get(0).getFullPath());
         try {
             File previewFile = new File(ConfigFactory.load().getString("uploads_dir") + docsList.get(0).getFullPath());
             return ok(previewFile);
@@ -471,99 +518,6 @@ public class DocumentsController {
         }
         return ok(result);
     }
-
-
-   /* public Result previewFile() {
-        ObjectNode result = Json.newObject();
-        String filePath = request().getQueryString("filename");
-        String projectId = request().getQueryString("projectId");
-        try {
-            File uploadsDir = new File(Play.application().configuration().getString("uploads_dir"));
-            File previewFile = new File(uploadsDir.getPath() +"/"+projectId+"/"+filePath);
-            return ok(previewFile);
-        } catch (Exception e) {
-            e.printStackTrace();
-            result.put("status", "error");
-            result.put("message", e.getMessage());
-        }
-        return ok(result);
-    }*/
-//
-//
-//
-//
-//
-//    @SuppressWarnings("Duplicates")
-//    @play.db.jpa.Transactional
-//    @BodyParser.Of(BodyParser.Json.class)
-//    public Result getAllDocuments() throws IOException {
-//        ObjectNode result = Json.newObject();
-//        try {
-//            JsonNode json = Controller.request().body().asJson();
-//            if (json == null) {
-//                return badRequest("Expecting Json data");
-//            } else {
-//
-//                if (json == null) {
-//                    result.put("status", "error");
-//                    result.put("message", "Ανεπιτυχής.");
-//                    return ok(result);
-//                } else {
-//
-//
-//                    String sql = "select * from documents d ";
-//                    Query qsql = JPA.em().createNativeQuery(sql, DocumentsEntity.class);
-//                    List<DocumentsEntity> docsList = qsql.getResultList();
-//                    ObjectMapper ow = new ObjectMapper();
-//                    HashMap<String, Object> returnList = new HashMap<String, Object>();
-//                    String jsonResult = "";
-//                    List<HashMap<String, Object>> serversList = new ArrayList<HashMap<String, Object>>();
-//                    for (DocumentsEntity j : docsList) {
-//
-//                        HashMap<String, Object> sHmpam = new HashMap<String, Object>();
-//                        sHmpam.put("id", j.getId());
-//                        sHmpam.put("docId", j.getId());
-//                        sHmpam.put("fileName", j.getFilename());
-//                        sHmpam.put("extension", j.getExtension());
-//                        sHmpam.put("fullName", j.getFullName());
-//                        sHmpam.put("uploadDate", j.getUploadDate());
-//                        serversList.add(sHmpam);
-//                    }
-//                    returnList.put("data", serversList);
-//                    returnList.put("status", "ok");
-//                    returnList.put("message", "success");
-//                    DateFormat myDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//                    ow.setDateFormat(myDateFormat);
-//                    try {
-//                        jsonResult = ow.writeValueAsString(returnList);
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                        result.put("status", "error");
-//                        result.put("message", "Πρόβλημα κατά την ανάγνωση των στοιχείων ");
-//                        return ok(result);
-//                    }
-//                    return ok(jsonResult);
-//                }
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            result.put("status", "error");
-//            result.put("message", "Πρόβλημα κατά την ανάγνωση των στοιχείων");
-//            return ok(result);
-//        }
-//    }
-//
-//
-
-
-
-
-
-
-
-
-
-
 
 
 }

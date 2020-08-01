@@ -76,6 +76,7 @@ public class RoadsEntity {
     private Double cbi;
     private Double connectivity;
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 

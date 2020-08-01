@@ -164,6 +164,7 @@ public class NotesController {
                 return badRequest("Expecting Json data");
             } else {
                 String query = " select * from notes d where d.road_id= "+json.findPath("roadId").asText();
+                query+=" order by d.creation_date desc";
 
 
                 Query q = JPA.em().createNativeQuery(query, NotesEntity.class);

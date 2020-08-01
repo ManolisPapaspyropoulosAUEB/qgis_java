@@ -14,6 +14,7 @@ public class DocumentsEntity {
     private Date uploadDate;
     private String fullPath;
     private Integer roadId;
+    private String originalFilename;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -92,5 +93,15 @@ public class DocumentsEntity {
 
     public void setRoadId(Integer roadId) {
         this.roadId = roadId;
+    }
+
+    @Basic
+    @Column(name = "original_filename")
+    public String getOriginalFilename() {
+        return originalFilename;
+    }
+
+    public void setOriginalFilename(String originalFilename) {
+        this.originalFilename = originalFilename;
     }
 }
