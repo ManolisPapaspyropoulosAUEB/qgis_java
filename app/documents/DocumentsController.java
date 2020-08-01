@@ -49,16 +49,19 @@ public class DocumentsController {
         ObjectNode result = Json.newObject();
         try {
 
+            //districtId
 
             Http.MultipartFormData<File> body = request().body().asMultipartFormData();
 
 
             String district = body.asFormUrlEncoded().get("district")[0].trim();
             String roadId = body.asFormUrlEncoded().get("roadId")[0].trim();
+            String districtId = body.asFormUrlEncoded().get("districtId")[0].trim();
             String replace = body.asFormUrlEncoded().get("replace")[0].trim();
             List<Http.MultipartFormData.FilePart<File>> fileList;
             fileList = body.getFiles();
             String extension = "";
+            Random rand = new Random();
 
 
             for (Http.MultipartFormData.FilePart d : fileList) {
@@ -68,74 +71,32 @@ public class DocumentsController {
                 String originalFileName;
                 extension = fileNameArr[fileNameArr.length - 1];
                 originalFileName = fileNameArr[fileNameArr.length - 2];
-                fileName = fileNameArr[fileNameArr.length - 2] + "_" + roadId;
+                fileName = fileNameArr[fileNameArr.length - 2] + "_" + rand.nextInt(1000);
 
 
                 File filed = (File) d.getFile();
-                String fullPath = district + "/" + fileName + "." + extension;
+                String fullPath = districtId + "/" + roadId + "/" + fileName + "." + extension;
 //                String fullPath = district +"/"+ fileName + "." + extension;
 
-                String uniquePhoto = "select * from documents d where d.original_filename='" + originalFileName + "'";
-                System.out.println(uniquePhoto);
-                List<DocumentsEntity> dList = JPA.em().createNativeQuery(uniquePhoto, DocumentsEntity.class).getResultList();
-
-                if (dList.size() > 0 && replace.equalsIgnoreCase("")) {
-
-                    System.out.println(dList.size() > 0 && replace.equalsIgnoreCase(""));
-
-                    System.out.println(dList.size());
-                    System.out.println(replace.equalsIgnoreCase(""));
-
-
-                    result.put("status", "warning");
-                    result.put("message", "There is already file with the same name in this location,do you want replace it? ");
-                    return ok(result);
-                } else if (dList.size() > 0 && replace.equalsIgnoreCase("yes")) {
-
-                    File uploadsDir = new File(ConfigFactory.load().getString("uploads_dir") + district);
-                    if (!uploadsDir.exists()) uploadsDir.mkdirs();
-                    File dest = new File(uploadsDir.getPath() + "/" + fileName + "." + extension);
-                    dest.delete();
-                    DocumentsEntity oldDoc = JPA.em().find(DocumentsEntity.class,dList.get(0).getId());
-                    JPA.em().remove(oldDoc);
-
-                    copyFileUsingFileStreams(filed, dest);
-                    DocumentsEntity newDoc = new DocumentsEntity();
-                    newDoc.setName(fileName);
-                    newDoc.setOriginalFilename(originalFileName);
-                    newDoc.setExtension(extension);
-                    newDoc.setUploadDate(new Date());
-                    newDoc.setName(fileName + "." + extension);
-                    newDoc.setRoadId(Integer.valueOf(roadId));
-                    newDoc.setFullPath(fullPath);
-                    JPA.em().persist(newDoc);
-                    result.put("docId", newDoc.getId());
-                    result.put("status", "ok");
-                    result.put("message", "your photo has been uploaded !");
-                    return ok(result);
-                } else if (dList.size() > 0 && replace.equalsIgnoreCase("no")) {
-                    result.put("status", "ok");
-                    result.put("message", "the uploading has been cancelled");
-                    return ok(result);
-                } else if (dList.size() == 0) {
-                    File uploadsDir = new File(ConfigFactory.load().getString("uploads_dir") + district);
-                    if (!uploadsDir.exists()) uploadsDir.mkdirs();
-                    File dest = new File(uploadsDir.getPath() + "/" + fileName + "." + extension);
-                    copyFileUsingFileStreams(filed, dest);
-                    DocumentsEntity newDoc = new DocumentsEntity();
-                    newDoc.setName(fileName);
-                    newDoc.setOriginalFilename(originalFileName);
-                    newDoc.setExtension(extension);
-                    newDoc.setUploadDate(new Date());
-                    newDoc.setName(fileName + "." + extension);
-                    newDoc.setRoadId(Integer.valueOf(roadId));
-                    newDoc.setFullPath(fullPath);
-                    JPA.em().persist(newDoc);
-                    result.put("docId", newDoc.getId());
-                    result.put("status", "ok");
-                    result.put("message", "your photo has been uploaded ");
-                    return ok(result);
+                File uploadsDir = new File(ConfigFactory.load().getString("uploads_dir") + districtId + "/" + roadId);
+                if (!uploadsDir.exists()){
+                    uploadsDir.mkdirs();
                 }
+                File dest = new File(uploadsDir.getPath() + "/" + fileName + "." + extension);
+                copyFileUsingFileStreams(filed, dest);
+                DocumentsEntity newDoc = new DocumentsEntity();
+                newDoc.setName(fileName);
+                newDoc.setOriginalFilename(originalFileName);
+                newDoc.setExtension(extension);
+                newDoc.setUploadDate(new Date());
+                newDoc.setName(fileName + "." + extension);
+                newDoc.setRoadId(Integer.valueOf(roadId));
+                newDoc.setFullPath(fullPath);
+                JPA.em().persist(newDoc);
+                result.put("docId", newDoc.getId());
+                result.put("status", "ok");
+                result.put("message", "your photo has been uploaded ");
+                return ok(result);
             }
             result.put("status", "error");
             result.put("message", "No image selected");
@@ -327,8 +288,11 @@ public class DocumentsController {
                     return ok(result);
                 } else {
 
+                    System.out.println(json);
+
                     //String path_system =ConfigFactory.load().getString("uploads_dir")+district +"/"+ fileName + "." + extension;
                     String sql = "select * from documents d where d.road_id=" + json.findPath("id").asText() +" order by d.upload_date desc";
+                    System.out.println(sql);
                     Query qsql = JPA.em().createNativeQuery(sql, DocumentsEntity.class);
                     List<DocumentsEntity> docsList = qsql.getResultList();
                     ObjectMapper ow = new ObjectMapper();

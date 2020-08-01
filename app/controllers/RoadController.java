@@ -251,8 +251,24 @@ public class RoadController {
                     roadObject.put("c14Score", roads.getC14Score());
                     roadObject.put("c15Id", roads.getC15Id());
                     roadObject.put("c15Score", roads.getC15Score());
-                    roadObject.put("mcaTypos", "(c1score*weight_factor1)+(c2score*weight_factor2)+(c3score*weight_factor3)+..(c15score*weight_factor15)="+"("+ roads.getC1Score()+"*"+15+")"+"+"+"("+roads.getC2Score()+"*"+10+")"+"+"+"("+roads.getC3Score()+"*"+10+")"+"..+..."+"("+roads.getC15Score()+"*"+5+")");
+                    roadObject.put("mcaTypos", roads.getC1Score()+"(c1)"
+                            +roads.getC1Score()+"(c1)"
+                            +roads.getC2Score()+"(c2)"
+                            +roads.getC3Score()+"(c3)"
+                            +roads.getC4Score()+"(c4)"
+                            +roads.getC5Score()+"(c5)"
+                            +roads.getC6Score()+"(c6)"
+                            +roads.getC7Score()+"(c7)"
+                            +roads.getC8Score()+"(c8)"
+                            +roads.getC9Score()+"(c9)"
+                            +roads.getC10Score()+"(c10)"
+                            +roads.getC11Score()+"(c11)"
+                            +roads.getC12Score()+"(c12)"
+                            +roads.getC13Score()+"(c13)"
+                            +roads.getC14Score()+"(c14)"
+                            +roads.getC15Score()+"(c15)"
 
+                    );
                     String opParamSql = "select * from operetional_parameters op ";
                     List<OperetionalParametersEntity> opList = JPA.em().createNativeQuery(opParamSql,OperetionalParametersEntity.class).getResultList();
                     Double opParam = opList.get(0).getEstimatedMaintenanceCost();
@@ -267,6 +283,8 @@ public class RoadController {
 
                     roadObject.put("mca", roads.getMca());
                     roadObject.put("cbi", roads.getCbi());
+
+
 
                     finalRoadsList.add(roadObject);
                 }
@@ -497,7 +515,25 @@ public class RoadController {
                     roadObject.put("c14Score", roads.getC14Score());
                     roadObject.put("c15Id", roads.getC15Id());
                     roadObject.put("c15Score", roads.getC15Score());
-                    roadObject.put("mcaTypos", "(c1score*weight_factor1)+(c2score*weight_factor2)+(c3score*weight_factor3)+..(c15score*weight_factor15)="+"("+ roads.getC1Score()+"*"+15+")"+"+"+"("+roads.getC2Score()+"*"+10+")"+"+"+"("+roads.getC3Score()+"*"+10+")"+"..+..."+"("+roads.getC15Score()+"*"+5+")");
+                    roadObject.put("mcaTypos",
+                             roads.getC1Score()+"(c1)+"
+                            +roads.getC2Score()+"(c2)+"
+                            +roads.getC3Score()+"(c3)+"
+                            +roads.getC4Score()+"(c4)+"
+                            +roads.getC5Score()+"(c5)+"
+                            +roads.getC6Score()+"(c6)+"+"\n"+
+                            +roads.getC7Score()+"(c7)+"
+                            +roads.getC8Score()+"(c8)+"
+                            +roads.getC9Score()+"(c9)+"
+                            +roads.getC10Score()+"(c10)+"+"\n"+
+                            +roads.getC11Score()+"(c11)+"
+                            +roads.getC12Score()+"(c12)+"
+                            +roads.getC13Score()+"(c13)+"
+                            +roads.getC14Score()+"(c14)+"
+                            +roads.getC15Score()+"(c15)"
+
+                    );
+
 
                     String opParamSql = "select * from operetional_parameters op ";
                     List<OperetionalParametersEntity> opList = JPA.em().createNativeQuery(opParamSql,OperetionalParametersEntity.class).getResultList();
@@ -507,8 +543,10 @@ public class RoadController {
 
                     roadObject.put("cbiTypos", "(Est_Maintenance_cost/length_in_metres) /"+" population_served="+"\n"+"("+opParam+"/"+roads.getLengthInMetres()+")"+"/"+roads.getPopulationServed());
 
-
-
+//
+//                    String sqlNotes = "select * from notes where notes.road_id="+roads.getId();
+//                    List<NotesEntity> notesList = JPA.em().createNativeQuery(sqlNotes,NotesEntity.class).getResultList();
+//                    roadObject.put("notes", notesList);
 
 
                     roadObject.put("mca", roads.getMca());
@@ -820,8 +858,44 @@ public class RoadController {
                                     mca+=road.getC13Score();
                                 }
                                 if(cm.getId()==14){
-                                    road.setC14Score(0.0);
-                                    road.setC14Id(0);
+
+                                    if(road.getDistrictId()==164){
+                                        road.setC14Score(0.0);
+                                        road.setC14Id(98);
+                                    }else if (road.getDistrictId()==167){
+                                        road.setC14Score(0.0);
+                                        road.setC14Id(99);
+                                    }else if (road.getDistrictId()==173){
+                                        road.setC14Score(0.0);
+                                        road.setC14Id(100);
+                                    }else if (road.getDistrictId()==163){
+                                        road.setC14Score(0.0);
+                                        road.setC14Id(101);
+                                    }else if(road.getDistrictId()==174){
+                                        road.setC14Score(0.0);
+                                        road.setC14Id(102);
+                                    }else if (road.getDistrictId()==169){
+                                        road.setC14Score(2.0);
+                                        road.setC14Id(103);
+                                    }else if (road.getDistrictId()==162){
+                                        road.setC14Score(2.0);
+                                        road.setC14Id(104);
+                                    }else if (road.getDistrictId()==166){
+                                        road.setC14Score(5.0);
+                                        road.setC14Id(105);
+                                    }else if (road.getDistrictId()==165){
+                                        road.setC14Score(3.0);
+                                        road.setC14Id(106);
+                                    }else if (road.getDistrictId()==170){
+                                        road.setC14Score(3.0);
+                                        road.setC14Id(107);
+                                    }else if (road.getDistrictId()==171){
+                                        road.setC14Score(0.0);
+                                        road.setC14Id(108);
+                                    }else if (road.getDistrictId()==171){
+                                        road.setC14Score(0.0);
+                                        road.setC14Id(109);
+                                    }
                                     mca+=road.getC14Score();
                                 }
                                 if(cm.getId()==15){
