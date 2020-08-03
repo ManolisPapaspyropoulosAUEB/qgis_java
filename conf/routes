@@ -29,17 +29,27 @@ POST        /getAllCriteriaMaster                  GeneralApi.CoreDataController
 POST        /updateEstimatedMaintenanceCost        GeneralApi.CoreDataController.updateEstimatedMaintenanceCost()
 
 
-#RoadsController getRoadsForExporter
+#RoadsController
 
 POST        /getAllFromRoads                       controllers.RoadController.getAllFromRoads()
-POST        /getRoadsForExporter                       controllers.RoadController.getRoadsForExporter()
+POST        /getAllFromRoadsHistory                       controllers.RoadController.getAllFromRoadsHistory()
+POST        /getRoadsForExporter                   controllers.RoadController.getRoadsForExporter()
 POST        /calculateCriteria                     controllers.RoadController.calculateCriteria()
+POST        /getAllSnapshotsRecords                controllers.RoadController.getAllSnapshotsRecords()
 POST        /resetCriteria                         controllers.RoadController.resetCriteria()
 POST        /updateRoad                            controllers.RoadController.updateRoad()
+POST        /deleteSnapshot                        controllers.RoadController.deleteSnapshot()
 
 
 #FacilitiesController
 
+POST        /importFacilitiesDataFromJson          controllers.FacilitiesController.importFacilitiesDataFromJson()
+POST        /addFacilitie                          controllers.FacilitiesController.addFacilitie()
+POST        /updateFacilitie                       controllers.FacilitiesController.updateFacilitie()
+POST        /deleteFacilitie                       controllers.FacilitiesController.deleteFacilitie()
+
+
+#old routes------------------------------------------------------------------------------------------------------------------------------
 POST        /getAllFacilities                      controllers.FacilitiesController.getAllFacilities()
 POST        /addDistrictCenter                     controllers.FacilitiesController.addDistrictCenter()
 POST        /updateDistrictCenter                  controllers.FacilitiesController.updateDistrictCenter()
@@ -47,10 +57,10 @@ POST        /deleteDistrictCenter                  controllers.FacilitiesControl
 POST        /addSchool                             controllers.FacilitiesController.addSchool()
 POST        /updateSchool                          controllers.FacilitiesController.updateSchool()
 POST        /deleteSchool                          controllers.FacilitiesController.deleteSchool()
-
 POST        /addMosque                             controllers.FacilitiesController.addMosque()
 POST        /updateMosque                          controllers.FacilitiesController.updateMosque()
 POST        /deleteMosque                          controllers.FacilitiesController.deleteMosque()
+#old routes------------------------------------------------------------------------------------------------------------------------------
 
 
 #VillagesController

@@ -19,6 +19,9 @@
         <class>models.OperetionalParametersEntity</class>
         <class>models.DocumentsEntity</class>
         <class>models.NotesEntity</class>
+        <class>models.RoadsRevisionsEntity</class>
+        <class>models.SnapshotEntity</class>
+        <class>models.FacilitiesEntity</class>
 
 
         <properties>
