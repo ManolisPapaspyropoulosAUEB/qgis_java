@@ -460,6 +460,33 @@ public class RoadController {
                     roadObject.put("c14Score", roads.getC14Score());
                     roadObject.put("c15Id", roads.getC15Id());
                     roadObject.put("c15Score", roads.getC15Score());
+
+                    String notes = "select * from notes n where n.road_id="+roads.getId();
+                    List<NotesEntity> notesList = JPA.em().createNativeQuery(notes,NotesEntity.class).getResultList();
+
+                    if(notesList.size()>0){
+                        roadObject.put("notesSize", notesList.size());
+
+                    }else{
+                        roadObject.put("notesSize", 0);
+
+                    }
+
+
+
+                    String uploads = "select * from documents d where d.road_id="+roads.getId();
+                    List<DocumentsEntity> docList = JPA.em().createNativeQuery(uploads,DocumentsEntity.class).getResultList();
+
+                    if(docList.size()>0){
+                        roadObject.put("docSize", docList.size());
+
+                    }else{
+                        roadObject.put("docSize", 0);
+
+                    }
+
+
+
                     roadObject.put("mcaTypos",
                              roads.getC1Score()+"(c1)+"
                             +roads.getC2Score()+"(c2)+"
@@ -599,11 +626,8 @@ public class RoadController {
                 return badRequest("Expecting Json data");
             } else {
                 String query = " select * from roads_revisions r where 1=1 ";
-
                 Integer snapId = json.findPath("id").asInt();
                 query+=" and r.snapshot_id="+snapId;
-
-
                 Query q = JPA.em().createNativeQuery(query, RoadsRevisionsEntity.class);
                 List<RoadsRevisionsEntity> roadsList = q.getResultList();
                 ObjectMapper ow = new ObjectMapper();
@@ -631,36 +655,27 @@ public class RoadController {
                     roadObject.put("fclass", roads.getFclass());
                     if(!roads.getOsmId().equalsIgnoreCase("") && roads.getOsmId()!=null){
                         roadObject.put("name", roads.getName());
-
                     }else{
                         roadObject.put("name", "-");
-
                     }
                     if(!roads.getOsmId().equalsIgnoreCase("") && roads.getOsmId()!=null){
                         roadObject.put("ref", roads.getRef());
-
                     }else{
                         roadObject.put("ref", "-");
-
                     }
-
                     if(!roads.getOsmId().equalsIgnoreCase("") && roads.getOsmId()!=null){
                         roadObject.put("oneway", roads.getOneway());
-
                     }else{
                         roadObject.put("oneway", "-");
-
                     }
                     roadObject.put("maxspeed", roads.getMaxspeed());
                     roadObject.put("layer", roads.getLayer());
                     roadObject.put("bridge", roads.getBridge());
-
                     if(roads.getBridge()!=null){
                         if(roads.getBridge().equalsIgnoreCase("T")){
                             roadObject.put("bridgeMat",true);
                         }else{
                             roadObject.put("bridgeMat", false);
-
                         }
                     }else{
                         roadObject.put("bridgeMat", false);
@@ -686,7 +701,6 @@ public class RoadController {
                     }else{
                         roadObject.put("roadsideEnvironment", roads.getRoadsideEnvironment());
                     }
-
                     roadObject.put("agricultureFacilitation", roads.getAgricultureFacilitation());
                     roadObject.put("agricultureFacilitaties", roads.getAgriculturalFacilities().toString());
                     roadObject.put("lengthOfRoadStretchInM", roads.getLengthOfRoadStretchInM());
@@ -736,7 +750,6 @@ public class RoadController {
                     roadObject.put("c14Score", roads.getC14Score());
                     roadObject.put("c15Id", roads.getC15Id());
                     roadObject.put("c15Score", roads.getC15Score());
-
                     String opParamSql = "select * from operetional_parameters op ";
                     List<OperetionalParametersEntity> opList = JPA.em().createNativeQuery(opParamSql,OperetionalParametersEntity.class).getResultList();
                     Double opParam = opList.get(0).getEstimatedMaintenanceCost();
@@ -783,7 +796,6 @@ public class RoadController {
                 return badRequest("Expecting Json data");
             } else {
                 String query = " select * from snapshot d where 1=1 order by creation_date desc";
-
                 Query q = JPA.em().createNativeQuery(query, SnapshotEntity.class);
                 List<SnapshotEntity> distList = q.getResultList();
                 ObjectMapper ow = new ObjectMapper();
@@ -820,15 +832,6 @@ public class RoadController {
         }
     }
 
-
-
-
-
-
-
-
-
-
     @SuppressWarnings("Duplicates")
     @play.db.jpa.Transactional
     @BodyParser.Of(BodyParser.Json.class)
@@ -842,29 +845,21 @@ public class RoadController {
                 String district_id = json.findPath("district_id").asText();
                 String lvrr_id = json.findPath("lvrr_id").asText();
                 boolean snapshot = json.findPath("snapshot").asBoolean();
-
-
                 if (district_id.isEmpty() || district_id.equalsIgnoreCase("0")) {
                     result.put("status", "error");
                     result.put("message", "Ανεπιτυχής Διαδικασία.");
                     return ok(result);
                 } else {
-
-
                     String criteriaMasterSql = "select cm.* FROM criteria_master cm";
                     List<CriteriaMasterEntity> cmList = JPA.em().createNativeQuery(criteriaMasterSql, CriteriaMasterEntity.class).getResultList();
-
                     String roadsSql = "select * from roads r where 1=1";
-
                     if (!district_id.isEmpty()) {
                         roadsSql += " and r.district_id=" + district_id;
                     }
-                    System.out.println("lvrr_id " + lvrr_id);
                     if (!lvrr_id.isEmpty()) {
                         roadsSql += " and r.lvrr_id=" + lvrr_id;
                     }
                     if (!district_id.isEmpty()) {
-
                         List<RoadsEntity> roadsList = JPA.em().createNativeQuery(roadsSql, RoadsEntity.class).getResultList();
                         if(snapshot==true) {
                             SnapshotEntity s = new SnapshotEntity();
@@ -880,9 +875,6 @@ public class RoadController {
                                 JPA.em().persist(roadRevision);
                             }
                         }
-
-
-
                         for (RoadsEntity road : roadsList) {
                             Double mca =0.0;
                             String opParamSql = "select * from operetional_parameters op ";
@@ -892,25 +884,17 @@ public class RoadController {
                             if(road.getPopulationServed()>0 && road.getLengthInMetres() >0){
                                 cbi = (opParam/road.getLengthInMetres())/road.getPopulationServed();
                             }
-
                             if(cbi > 0){
                                 BigDecimal finalCbi = new BigDecimal(cbi).setScale(2, RoundingMode.HALF_UP);
-                                System.out.println(df2.format(cbi));
-                                //System.out.println(cbi.doubleValue());
-                                //double finalCbi  = Double.parseDouble((df2.format(cbi)));
                                 System.out.println(finalCbi);
                                 road.setCbi(finalCbi.doubleValue());//  value =Double.parseDouble(new DecimalFormat("##.####").format(value));
                             }else{
                                 road.setCbi(new Double(0));
                             }
-
-
-
                             for(CriteriaMasterEntity cm : cmList){
                                 if(cm.getId()==1){
                                     Integer weightFactor = 1;
                                     if(cm.getCalculateIndicator()==1){
-
                                         if(road.getPopulationServed()==0){
                                             road.setC1Score(0.0);
                                             road.setC1Id(1);
@@ -979,7 +963,6 @@ public class RoadController {
                                         road.setC4Score(0.0);
                                     }
                                 }
-
                                 if(cm.getId()==5){
                                     Integer weightFactor = 1;
                                     String sqlMasterDetail = "select cmd.* from criteria_master_details cmd where cmd.score="+road.getAgriculturalFacilities()+" and cmd.criteria_master_id=5";
@@ -996,16 +979,12 @@ public class RoadController {
                                 }
                                 if(cm.getId()==6){
                                     Integer weightFactor = 5;
-
-
                                         road.setC6Id(0);
                                         if(road.getLinksToMajorActivityCentres()<=5){
                                             road.setC6Score(road.getLinksToMajorActivityCentres());
                                         }else{
                                             road.setC6Score(5.0);
                                         }
-
-
                                 }
                                 if(cm.getId()==7){
                                     road.setC7Score(0.0);
@@ -1147,10 +1126,6 @@ public class RoadController {
         }
     }
 
-
-
-
-
     @SuppressWarnings("Duplicates")
     @play.db.jpa.Transactional
     @BodyParser.Of(BodyParser.Json.class)
@@ -1225,9 +1200,4 @@ public class RoadController {
             return ok(result);
         }
     }
-
-
-
-
-
 }

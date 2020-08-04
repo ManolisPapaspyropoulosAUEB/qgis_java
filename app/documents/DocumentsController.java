@@ -159,6 +159,8 @@ public class DocumentsController {
     }
 
 
+
+
     @SuppressWarnings("Duplicates")
     @play.db.jpa.Transactional
     @BodyParser.Of(BodyParser.Json.class)
@@ -195,6 +197,7 @@ public class DocumentsController {
                         serversList.add(sHmpam);
                     }
                     returnList.put("data", serversList);
+                    returnList.put("total", docsList.size());
                     returnList.put("status", "ok");
                     returnList.put("message", "success");
                     DateFormat myDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
