@@ -172,6 +172,7 @@ public class DocumentsController {
                 return badRequest("Expecting Json data");
             } else {
 
+
                 if (json == null) {
                     result.put("status", "error");
                     result.put("message", "Ανεπιτυχής.");

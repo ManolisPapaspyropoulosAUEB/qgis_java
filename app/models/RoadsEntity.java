@@ -220,6 +220,7 @@ public class RoadsEntity {
         this.roadWidthInM = roadWidthInM;
     }
 
+
     @Basic
     @Column(name = "road_condition")
     public String getRoadCondition() {

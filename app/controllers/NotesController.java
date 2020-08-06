@@ -167,6 +167,7 @@ public class NotesController {
                 query+=" order by d.creation_date desc";
 
 
+
                 Query q = JPA.em().createNativeQuery(query, NotesEntity.class);
                 List<NotesEntity> distList = q.getResultList();
                 ObjectMapper ow = new ObjectMapper();
