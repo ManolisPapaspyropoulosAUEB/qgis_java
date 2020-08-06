@@ -1003,7 +1003,6 @@ public class RoadController {
                         }
                     }
                 }
-
                 returnList.put("data", finalRoadsList);
                 returnList.put("status", "ok");
                 returnList.put("message", "Roads from file has been updated succesfully");
