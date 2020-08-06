@@ -30,9 +30,9 @@ POST        /updateEstimatedMaintenanceCost        GeneralApi.CoreDataController
 
 
 #RoadsController
-
+POST        /importRoadsData                       controllers.RoadController.importRoadsData()
 POST        /getAllFromRoads                       controllers.RoadController.getAllFromRoads()
-POST        /getAllFromRoadsHistory                       controllers.RoadController.getAllFromRoadsHistory()
+POST        /getAllFromRoadsHistory                controllers.RoadController.getAllFromRoadsHistory()
 POST        /getRoadsForExporter                   controllers.RoadController.getRoadsForExporter()
 POST        /calculateCriteria                     controllers.RoadController.calculateCriteria()
 POST        /getAllSnapshotsRecords                controllers.RoadController.getAllSnapshotsRecords()
