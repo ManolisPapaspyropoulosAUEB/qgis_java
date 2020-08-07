@@ -966,39 +966,40 @@ public class RoadController {
                             notNullFieldsRoad.setDistrictId((int) dlist.get(0).getNumericalDistrictCode());
                         }
 
-                        if (notNullFieldsRoad.getLvrrId() != null && notNullFieldsRoad.getLvrrId() != 0) { //ama prokeitai gia update pare enan enan tous dromous kai upologise paralhla mca cbi rates
+                        if (notNullFieldsRoad.getLvrrId() != null && notNullFieldsRoad.getLvrrId() != 0) {
                             String roadByLvrrId = "select * from roads r where r.lvrr_id=" + notNullFieldsRoad.getLvrrId();
                             List<RoadsEntity> roadsList = JPA.em().createNativeQuery(roadByLvrrId, RoadsEntity.class).getResultList();
-                            notNullFieldsRoad.setId(roadsList.get(0).getId());
-                            if (json.findPath("criteriaCheckBox").asText().equalsIgnoreCase("true")) {
-                                HashMap<String, Object> roadMapResult = new HashMap<>();
-                                roadMapResult = calculateCriteriaAfterImport(notNullFieldsRoad);
-                                JsonNode mapedRoadMcaCbi = Json.toJson(roadMapResult);
-                                if (mapedRoadMcaCbi.findPath("status").asText().equalsIgnoreCase("ok")) {
-                                    RoadsEntity roadCalculatedMcaCbi = (RoadsEntity) roadMapResult.get("road");
-                                    JPA.em().merge(roadCalculatedMcaCbi);
-                                }else {
+                            if (roadsList.size()>0) {
+                                notNullFieldsRoad.setId(roadsList.get(0).getId());
+                                if (json.findPath("criteriaCheckBox").asText().equalsIgnoreCase("true")) {
+                                    HashMap<String, Object> roadMapResult = new HashMap<>();
+                                    roadMapResult = calculateCriteriaAfterImport(notNullFieldsRoad);
+                                    JsonNode mapedRoadMcaCbi = Json.toJson(roadMapResult);
+                                    if (mapedRoadMcaCbi.findPath("status").asText().equalsIgnoreCase("ok")) {
+                                        RoadsEntity roadCalculatedMcaCbi = (RoadsEntity) roadMapResult.get("road");
+                                        JPA.em().merge(roadCalculatedMcaCbi);
+                                    }else {
+                                        JPA.em().merge(notNullFieldsRoad);
+                                    }
+
+                                } else {
                                     JPA.em().merge(notNullFieldsRoad);
                                 }
+                            }else{
+                                if (json.findPath("criteriaCheckBox").asText().equalsIgnoreCase("true")) {
+                                    HashMap<String, Object> roadMapResult = new HashMap<>();
+                                    roadMapResult = calculateCriteriaAfterImport(notNullFieldsRoad);
+                                    JsonNode mapedRoadMcaCbi = Json.toJson(roadMapResult);
+                                    if (mapedRoadMcaCbi.findPath("status").asText().equalsIgnoreCase("ok")) {
+                                        RoadsEntity roadCalculatedMcaCbi = (RoadsEntity) roadMapResult.get("road");
+                                        JPA.em().persist(roadCalculatedMcaCbi);
+                                    }else {
+                                        JPA.em().persist(notNullFieldsRoad);
+                                    }
 
-                            } else {
-                                JPA.em().merge(notNullFieldsRoad);
-                            }
-                        } else {
-
-                            if (json.findPath("criteriaCheckBox").asText().equalsIgnoreCase("true")) {
-                                HashMap<String, Object> roadMapResult = new HashMap<>();
-                                roadMapResult = calculateCriteriaAfterImport(notNullFieldsRoad);
-                                JsonNode mapedRoadMcaCbi = Json.toJson(roadMapResult);
-                                if (mapedRoadMcaCbi.findPath("status").asText().equalsIgnoreCase("ok")) {
-                                    RoadsEntity roadCalculatedMcaCbi = (RoadsEntity) roadMapResult.get("road");
-                                    JPA.em().persist(roadCalculatedMcaCbi);
-                                }else {
+                                } else {
                                     JPA.em().persist(notNullFieldsRoad);
                                 }
-
-                            } else {
-                                JPA.em().persist(notNullFieldsRoad);
                             }
                         }
                     }
