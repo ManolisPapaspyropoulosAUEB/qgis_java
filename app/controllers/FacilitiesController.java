@@ -1,5 +1,4 @@
 package controllers;
-
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -9,235 +8,16 @@ import play.db.jpa.JPA;
 import play.libs.Json;
 import play.mvc.BodyParser;
 import play.mvc.Result;
-
 import javax.persistence.Query;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
-
 import static play.mvc.Http.Context.Implicit.request;
 import static play.mvc.Results.badRequest;
 import static play.mvc.Results.ok;
-
 public class FacilitiesController {
-
-
-
-//    @SuppressWarnings("Duplicates")
-//    @play.db.jpa.Transactional
-//    @BodyParser.Of(BodyParser.Json.class)
-//    public Result getAllFacilities() throws IOException {
-//        ObjectNode result = Json.newObject();
-//        try {
-//            JsonNode json = request().body().asJson();
-//            if (json == null) {
-//                return badRequest("Expecting Json data");
-//            } else {
-//                List<HashMap<String, Object>> dataDistCenters = new ArrayList<HashMap<String, Object>>();
-//                List<HashMap<String, Object>> dataSchools = new ArrayList<HashMap<String, Object>>();
-//                List<HashMap<String, Object>> dataMosques = new ArrayList<HashMap<String, Object>>();
-//                HashMap<String, Object> returnList = new HashMap<String, Object>();
-//                Integer totalDistCenters = 0;
-//                Integer totalMosques = 0;
-//                Integer totalSchools = 0;
-//                ObjectMapper ow = new ObjectMapper();
-//                String jsonResult = "";
-//                String type = json.findPath("type").asText();
-//                String districtCode = json.findPath("num_district_code").asText();
-//                String provinceCode = json.findPath("num_province_code").asText();
-//                String nameFilter = json.findPath("nameFilter").asText();
-//                String districtCenters = "select * from district_centers d where 1=1 ";
-//                String schools = "select * from schools s where 1=1 ";
-//                String mosques = "select * from mosques m where 1=1 ";
-//                if(provinceCode!=null && !provinceCode.equalsIgnoreCase("")){
-//                    districtCenters+=" and d.pro_code="+provinceCode;
-//                    schools+=" and s.pro_code="+provinceCode;
-//                    mosques+=" and m.pro_code="+provinceCode;
-//                }
-//                if(districtCode!=null && !districtCode.equalsIgnoreCase("")){
-//                    districtCenters+=" and d.dist_code="+districtCode;
-//                    schools+=" and s.dist_code="+districtCode;
-//                    mosques+=" and m.dist_code="+districtCode;
-//                }
-//
-//                if(nameFilter!=null && !nameFilter.equalsIgnoreCase("")){
-//                    //query+=" and d.criterion_label like '%"+label+"%'";
-//                    districtCenters+=" and d.pro_center  like   '%"+nameFilter+"%'";
-//                    schools+=" and s.name  like  '%"+nameFilter+"%'";
-//                    mosques+=" and m.name like '%"+nameFilter+"%'";
-//                }
-//                if(type.equalsIgnoreCase("Schools")){
-//                    Query qS = JPA.em().createNativeQuery(schools, SchoolsEntity.class);
-//                    totalSchools = qS.getResultList().size();
-//                    List<SchoolsEntity> schoolsList = qS.getResultList();
-//                    for (SchoolsEntity school : schoolsList) {
-//                        HashMap<String, Object> distHM = new HashMap<String, Object>();
-//                        distHM.put("id", school.getId());
-//                        distHM.put("targetFid", school.getTargetFid());
-//                        distHM.put("name", school.getName());
-//                        distHM.put("type", school.getType());
-//                        distHM.put("east", school.getEast());
-//                        distHM.put("north", school.getNorth());
-//                        distHM.put("eastUtm42", school.getEastUtm42());
-//                        distHM.put("northUtm42", school.getNorthUtm42());
-//                        distHM.put("from", school.getFromSource());
-//                        distHM.put("distName", school.getDistName());
-//                        distHM.put("proCode", school.getProCode());
-//
-//                        distHM.put("distCode", school.getDistCode());
-//                        distHM.put("altDistName", school.getAltDistName());
-//                        distHM.put("distId", school.getDistCode());
-//                        dataSchools.add(distHM);
-//                    }
-//                }
-//                if(type.equalsIgnoreCase("Mosques")){
-//                    Query qM = JPA.em().createNativeQuery(mosques, MosquesEntity.class);
-//                    totalMosques = qM.getResultList().size();
-//                    List<MosquesEntity> mosquesList = qM.getResultList();
-//                    for (MosquesEntity mosque : mosquesList) {
-//                        HashMap<String, Object> distHM = new HashMap<String, Object>();
-//                        distHM.put("id", mosque.getId());
-//                        distHM.put("targetFid", mosque.getTargetFid());
-//                        distHM.put("name", mosque.getName());
-//                        distHM.put("type", mosque.getType());
-//                        distHM.put("east", mosque.getEast());
-//                        distHM.put("north", mosque.getNorth());
-//                        distHM.put("eastUtm42", mosque.getEastUtm42());
-//                        distHM.put("northUtm42", mosque.getNorthUtm42());
-//                        distHM.put("from", mosque.getFromSource());
-//                        distHM.put("proCode", mosque.getProCode());
-//
-//                        distHM.put("distName", mosque.getDistName());
-//                        distHM.put("distCode", mosque.getDistCode());
-//                        distHM.put("altDistName", mosque.getAltDistName());
-//                        distHM.put("distId", mosque.getDistCode());
-//                        dataMosques.add(distHM);
-//                    }
-//                }
-//                if(type.equalsIgnoreCase("Distcenters")){
-//                    Query qDC = JPA.em().createNativeQuery(districtCenters, DistrictCentersEntity.class);
-//                    totalDistCenters = qDC.getResultList().size();
-//                    List<DistrictCentersEntity> districtList = qDC.getResultList();
-//                    for (DistrictCentersEntity distrct : districtList) {
-//                        HashMap<String, Object> distHM = new HashMap<String, Object>();
-//                        distHM.put("id", distrct.getId());
-//                        distHM.put("proName", distrct.getProName());
-//                        distHM.put("proCenter", distrct.getProCenter());
-//                        distHM.put("proCode", distrct.getProCode());
-//                        distHM.put("distName", distrct.getDistName());
-//                        distHM.put("distCode", distrct.getDistCode());
-//                        distHM.put("centerType", distrct.getCenterType());
-//                        distHM.put("east", distrct.getEast());
-//                        distHM.put("north", distrct.getNorth());
-//                        distHM.put("eastUtm42", distrct.getEastUtm42());
-//                        distHM.put("northUtm42", distrct.getNorthUtm42());
-//                        distHM.put("checked", false);
-//                        distHM.put("checkedFilter", false);
-//                        dataDistCenters.add(distHM);
-//                    }
-//                }
-//                if(type.equalsIgnoreCase("Both")){
-//                    Query qDC = JPA.em().createNativeQuery(districtCenters, DistrictCentersEntity.class);
-//                    Query qM = JPA.em().createNativeQuery(mosques, MosquesEntity.class);
-//                    Query qS = JPA.em().createNativeQuery(schools, SchoolsEntity.class);
-//                    List<DistrictCentersEntity> districtList = qDC.getResultList();
-//                    List<MosquesEntity> mosquesList = qM.getResultList();
-//                    List<SchoolsEntity> schoolsList = qS.getResultList();
-//                     totalDistCenters = qDC.getResultList().size();
-//                     totalMosques = qM.getResultList().size();
-//                     totalSchools = qS.getResultList().size();
-//                    for (DistrictCentersEntity distrct : districtList) {
-//                        HashMap<String, Object> distHM = new HashMap<String, Object>();
-//                        distHM.put("id", distrct.getId());
-//                        distHM.put("proName", distrct.getProName());
-//                        distHM.put("proCenter", distrct.getProCenter());
-//                        distHM.put("proCode", distrct.getProCode());
-//                        distHM.put("distName", distrct.getDistName());
-//                        distHM.put("distCode", distrct.getDistCode());
-//                        distHM.put("centerType", distrct.getCenterType());
-//                        distHM.put("east", distrct.getEast());
-//                        distHM.put("north", distrct.getNorth());
-//                        distHM.put("proCode", distrct.getProCode());
-//
-//                        distHM.put("facilitie", "districtcenter");
-//                        distHM.put("eastUtm42", distrct.getEastUtm42());
-//                        distHM.put("northUtm42", distrct.getNorthUtm42());
-//                        dataDistCenters.add(distHM);
-//                    }
-//                    for (SchoolsEntity school : schoolsList) {
-//                        HashMap<String, Object> distHM = new HashMap<String, Object>();
-//                        distHM.put("id", school.getId());
-//                        distHM.put("targetFid", school.getTargetFid());
-//                        distHM.put("name", school.getName());
-//                        distHM.put("facilitie", "school");
-//                        distHM.put("type", school.getType());
-//                        distHM.put("east", school.getEast());
-//                        distHM.put("north", school.getNorth());
-//                        distHM.put("proCode", school.getProCode());
-//
-//                        distHM.put("eastUtm42", school.getEastUtm42());
-//                        distHM.put("northUtm42", school.getNorthUtm42());
-//                        distHM.put("from", school.getFromSource());
-//                        distHM.put("distName", school.getDistName());
-//                        distHM.put("distCode", school.getDistCode());
-//                        distHM.put("distCode", school.getDistCode());
-//                        String district = "select * from districts d where d.numerical_district_code="+school.getDistCode();
-//                        List<DistrictsEntity> districtsList = JPA.em().createNativeQuery(district,DistrictsEntity.class).getResultList();
-//                        distHM.put("distName", districtsList.get(0).getDistrictName());
-//                        distHM.put("altDistName", school.getAltDistName());
-//                        distHM.put("distId", school.getDistCode());
-//                        dataSchools.add(distHM);
-//                    }
-//                    for (MosquesEntity mosque : mosquesList) {
-//                        HashMap<String, Object> distHM = new HashMap<String, Object>();
-//                        distHM.put("id", mosque.getId());
-//                        distHM.put("targetFid", mosque.getTargetFid());
-//                        distHM.put("name", mosque.getName());
-//                        distHM.put("type", mosque.getType());
-//                        distHM.put("east", mosque.getEast());
-//                        distHM.put("facilitie", "mosque");
-//                        distHM.put("proCode", mosque.getProCode());
-//
-//                        distHM.put("north", mosque.getNorth());
-//                        distHM.put("eastUtm42", mosque.getEastUtm42());
-//                        distHM.put("northUtm42", mosque.getNorthUtm42());
-//                        distHM.put("from", mosque.getFromSource());
-//                        distHM.put("distName", mosque.getDistName());
-//                        distHM.put("distCode", mosque.getDistCode());
-//                        distHM.put("altDistName", mosque.getAltDistName());
-//                        distHM.put("distId", mosque.getDistCode());
-//                        dataMosques.add(distHM);
-//                    }
-//                }
-//                returnList.put("dataMosques", dataMosques);
-//                returnList.put("dataSchools", dataSchools);
-//                returnList.put("dataDistCenters", dataDistCenters);
-//                returnList.put("totalDistCenters", totalDistCenters);
-//                returnList.put("totalMosques", totalMosques);
-//                returnList.put("totalSchools", totalSchools);
-//                returnList.put("status", "ok");
-//                DateFormat myDateFormat = new SimpleDateFormat("M/d/Y");
-//                ow.setDateFormat(myDateFormat);
-//                try {
-//                    jsonResult = ow.writeValueAsString(returnList);
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                    result.put("status", "error");
-//                    result.put("message", "Problem in fetch data process,communicate with the administrator");
-//                    return ok(result);
-//                }
-//                return ok(jsonResult);
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            result.put("status", "error");
-//            result.put("message", "Problem in fetch data process,communicate with the administrator");
-//            return ok(result);
-//        }
-//    }
-
 
     @SuppressWarnings("Duplicates")
     @play.db.jpa.Transactional
@@ -493,14 +273,8 @@ public class FacilitiesController {
                 f.setFromSource(from);
                 f.setLabel(label);
                 f.setPoiType(type);
-
-
-
-
-
                 f.setDistrictName(distrName);
                 f.setDistrictCode(num_district_code);
-
                 f.setProvinceName(proName);
                 f.setProvinceCode(num_province_code);
 
@@ -552,13 +326,8 @@ public class FacilitiesController {
                 f.setFromSource(from);
                 f.setLabel(label);
                 f.setPoiType(type);
-
-
-
-
                 f.setDistrictName(distrName);
                 f.setDistrictCode(num_district_code);
-
                 f.setProvinceName(proName);
                 f.setProvinceCode(num_province_code);
 
@@ -758,7 +527,7 @@ public class FacilitiesController {
             return ok(result);
         }
     }
-    /**meta apo entolh olandou ta parapanw paragrafontai...eleos**/
+
     @SuppressWarnings("Duplicates")
     @play.db.jpa.Transactional
     @BodyParser.Of(BodyParser.Json.class)
@@ -778,14 +547,9 @@ public class FacilitiesController {
                     item.put("POI",facilitie.findPath("POI"));
                     item.put("Label",facilitie.findPath("Label"));
                     item.put("Source",facilitie.findPath("Source"));
-                    itC=null;
                     itC = facilitie.findPath("coordinates").iterator();
                     String east =  itC.next().toString();
                     String north =  itC.next().toString();
-
-                    System.out.println(east);
-                    System.out.println(north);
-
                     String districtProvince = "select * from districts d where d.district_name='"+facilitie.findPath("district").asText()  +"'";
                     List<DistrictsEntity> dList = JPA.em().createNativeQuery(districtProvince,DistrictsEntity.class).getResultList();
                     FacilitiesEntity f = new FacilitiesEntity();
@@ -856,8 +620,6 @@ public class FacilitiesController {
                 if(type!=null && !type.equalsIgnoreCase("") && !type.equalsIgnoreCase("Both") ){
                     query+=" and d.poi_type ="+"'"+type+"'";
                 }
-
-                System.out.println(query);
 
                 Query q = JPA.em().createNativeQuery(query, FacilitiesEntity.class);
                 List<FacilitiesEntity> distList = q.getResultList();

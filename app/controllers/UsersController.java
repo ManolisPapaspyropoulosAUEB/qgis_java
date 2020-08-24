@@ -6,7 +6,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.inject.Inject;
 
+import models.DistrictsEntity;
 import models.UsersEntity;
+import models.VillagesEntity;
 import org.apache.commons.mail.DefaultAuthenticator;
 import play.Configuration;
 import play.db.jpa.JPA;
@@ -20,6 +22,8 @@ import play.mvc.Result;
 import javax.mail.internet.InternetAddress;
 import javax.persistence.Query;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import static play.mvc.Controller.request;
@@ -101,6 +105,66 @@ public class UsersController {
             return ok(result);
         }
     }
+
+
+
+    @SuppressWarnings("Duplicates")
+    @play.db.jpa.Transactional
+    @BodyParser.Of(BodyParser.Json.class)
+    public Result getUsers() throws IOException {
+        ObjectNode result = Json.newObject();
+        try {
+            JsonNode json = Http.Context.Implicit.request().body().asJson();
+            if (json == null) {
+                return badRequest("Expecting Json data");
+            } else {
+
+                Query q = JPA.em().createNativeQuery("select * from users", UsersEntity.class);
+                List<UsersEntity> distList = q.getResultList();
+                ObjectMapper ow = new ObjectMapper();
+                HashMap<String, Object> returnList = new HashMap<String, Object>();
+                String jsonResult = "";
+                Integer total = q.getResultList().size();
+                List<HashMap<String, Object>> finalRoadsList = new ArrayList<HashMap<String, Object>>();
+                for (UsersEntity d: distList) {
+                    HashMap<String, Object> roadObject = new HashMap<String, Object>();
+                    roadObject.put("id", d.getId());
+                    roadObject.put("name", d.getName());
+                    roadObject.put("lastname", d.getLastName());
+                    roadObject.put("fullName", d.getName()+" "+d.getLastName());
+                    roadObject.put("username", d.getUsername());
+                    roadObject.put("creationDate", d.getCreationDate());
+                    roadObject.put("role", d.getRole());
+                    roadObject.put("password", d.getPassword());
+                    roadObject.put("email", d.getEmail());
+                    roadObject.put("creationDate", d.getCreationDate());
+                    finalRoadsList.add(roadObject);
+                }
+
+                returnList.put("data", finalRoadsList);
+                returnList.put("total", total.intValue());
+                returnList.put("status", "ok");
+                DateFormat myDateFormat = new SimpleDateFormat("M/d/Y");
+                ow.setDateFormat(myDateFormat);
+                try {
+                    jsonResult = ow.writeValueAsString(returnList);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    result.put("status", "error");
+                    result.put("message", "Problem in fetch data process,communicate with the administrator");
+                    return ok(result);
+                }
+                return ok(jsonResult);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.put("status", "error");
+            result.put("message", "Problem in fetch data process,communicate with the administrator");
+            return ok(result);
+        }
+    }
+
+
 
     @SuppressWarnings("Duplicates")
     @play.db.jpa.Transactional

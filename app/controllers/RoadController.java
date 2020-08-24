@@ -485,16 +485,16 @@ public class RoadController {
 
                     roadObject.put("mcaTypos",
                             roads.getC1Score() + "(c1)+"
-                                    + roads.getC2Score() + "(c2)+"
-                                    + roads.getC3Score() + "(c3)+"
-                                    + roads.getC4Score() + "(c4)+"
-                                    + roads.getC5Score() + "(c5)+"
-                                    + roads.getC6Score() + "(c6)+" + "\n" +
-                                    +roads.getC7Score() + "(c7)+"
-                                    + roads.getC8Score() + "(c8)+"
-                                    + roads.getC9Score() + "(c9)+"
+                                    + roads.getC2Score()  + "(c2)+"
+                                    + roads.getC3Score()  + "(c3)+"
+                                    + roads.getC4Score()  + "(c4)+"
+                                    + roads.getC5Score()  + "(c5)+"
+                                    + roads.getC6Score()  + "(c6)+" + "\n" +
+                                    + roads.getC7Score()  + "(c7)+"
+                                    + roads.getC8Score()  + "(c8)+"
+                                    + roads.getC9Score()  + "(c9)+"
                                     + roads.getC10Score() + "(c10)+" + "\n" +
-                                    +roads.getC11Score() + "(c11)+"
+                                    + roads.getC11Score() + "(c11)+"
                                     + roads.getC12Score() + "(c12)+"
                                     + roads.getC13Score() + "(c13)+"
                                     + roads.getC14Score() + "(c14)+"

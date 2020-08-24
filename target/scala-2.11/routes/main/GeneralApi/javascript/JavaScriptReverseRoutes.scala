@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
 // @SOURCE:C:/developm/qgis_angular/back/conf/routes
-// @DATE:Wed Jul 22 01:19:56 EEST 2020
+// @DATE:Sun Aug 23 18:40:14 EEST 2020
 
 import play.api.routing.JavaScriptReverseRoute
 import play.api.mvc.{ QueryStringBindable, PathBindable, Call, JavascriptLiteral }
@@ -11,11 +11,11 @@ import play.core.routing.{ HandlerDef, ReverseRouteContext, queryString, dynamic
 import _root_.controllers.Assets.Asset
 import _root_.play.libs.F
 
-// @LINE:23
+// @LINE:25
 package GeneralApi.javascript {
   import ReverseRouteContext.empty
 
-  // @LINE:27
+  // @LINE:29
   class ReverseCoreDataController(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -23,7 +23,7 @@ package GeneralApi.javascript {
     }
 
   
-    // @LINE:27
+    // @LINE:29
     def getAllCriteriaMaster: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "GeneralApi.CoreDataController.getAllCriteriaMaster",
       """
@@ -33,9 +33,19 @@ package GeneralApi.javascript {
       """
     )
   
+    // @LINE:30
+    def updateEstimatedMaintenanceCost: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "GeneralApi.CoreDataController.updateEstimatedMaintenanceCost",
+      """
+        function() {
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "updateEstimatedMaintenanceCost"})
+        }
+      """
+    )
+  
   }
 
-  // @LINE:23
+  // @LINE:25
   class ReverseGeneralController(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -43,7 +53,7 @@ package GeneralApi.javascript {
     }
 
   
-    // @LINE:24
+    // @LINE:26
     def getAllDistricts: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "GeneralApi.GeneralController.getAllDistricts",
       """
@@ -53,7 +63,7 @@ package GeneralApi.javascript {
       """
     )
   
-    // @LINE:23
+    // @LINE:25
     def getAllProvinces: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "GeneralApi.GeneralController.getAllProvinces",
       """

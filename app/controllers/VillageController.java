@@ -188,13 +188,9 @@ public class VillageController {
                     roadObject.put("villageCo", d.getVillageCo());
                     if(!d.getVillage1().equalsIgnoreCase("") && d.getVillage1()!=null){
                         roadObject.put("village1", d.getVillage1());
-
                     }else{
                         roadObject.put("village1", "-");
-
                     }
-
-
                     roadObject.put("proCode", d.getProCode());
                     roadObject.put("distCode", d.getDistCode());
                     roadObject.put("mapLong", d.getMapLong());

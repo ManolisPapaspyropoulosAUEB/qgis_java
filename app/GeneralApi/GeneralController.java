@@ -91,9 +91,15 @@ public class GeneralController {
             } else {
                 String query = " select * from districts d where 1=1 ";
                 String province_code = json.findPath("num_province_code").asText();
+                String districtName = json.findPath("districtName").asText();
                 if(province_code!=null && !province_code.equalsIgnoreCase("")){
                     query+=" and d.numerical_province_code="+province_code;
                 }
+                if(districtName!=null && !districtName.equalsIgnoreCase("")){
+                    query+=" and d.district_name='"+districtName+"'";
+                }
+
+
                 Query q = JPA.em().createNativeQuery(query, DistrictsEntity.class);
                 List<DistrictsEntity> distList = q.getResultList();
                 ObjectMapper ow = new ObjectMapper();
