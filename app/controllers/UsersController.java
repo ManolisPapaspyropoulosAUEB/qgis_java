@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.inject.Inject;
 
 import models.DistrictsEntity;
+import models.UsersDistrictsEntity;
 import models.UsersEntity;
 import models.VillagesEntity;
 import org.apache.commons.mail.DefaultAuthenticator;
@@ -81,6 +82,8 @@ public class UsersController {
                 }
                 if(emailExist==true && pwdExist==true){
                     result.put("status", "ok");
+                    result.put("id",  usList.get(0).getId());
+                    result.put("email",  usList.get(0).getEmail());
                     result.put("role", usList.get(0).getRole());
                     result.put("fullName", usList.get(0).getName()+" "+usList.get(0).getLastName());
                     result.put("message", "Success login!");
@@ -106,6 +109,8 @@ public class UsersController {
         }
     }
 
+    //editUser
+
 
 
     @SuppressWarnings("Duplicates")
@@ -118,11 +123,23 @@ public class UsersController {
             if (json == null) {
                 return badRequest("Expecting Json data");
             } else {
+                String userId = json.findPath("userId").asText();
+                String name = json.findPath("name").asText();
+                String sqlQuery = "select * from users where 1=1";
+                if(userId!=null && !userId.equalsIgnoreCase("")){
+                    sqlQuery+=" and users.id="+userId;
+                }
+                if(name!=null && !name.equalsIgnoreCase("")){
+                    sqlQuery+=" and users.name like  '%"+  name+"%'" +" or users.last_name  like '%"+name+"%'"+" or users.email like '%"+name+"%' or users.role like '%"+name+"%'";
 
-                Query q = JPA.em().createNativeQuery("select * from users", UsersEntity.class);
+                }
+                HashMap<String, Object> returnList = new HashMap<String, Object>();
+
+
+
+                Query q = JPA.em().createNativeQuery(sqlQuery, UsersEntity.class);
                 List<UsersEntity> distList = q.getResultList();
                 ObjectMapper ow = new ObjectMapper();
-                HashMap<String, Object> returnList = new HashMap<String, Object>();
                 String jsonResult = "";
                 Integer total = q.getResultList().size();
                 List<HashMap<String, Object>> finalRoadsList = new ArrayList<HashMap<String, Object>>();
@@ -137,6 +154,17 @@ public class UsersController {
                     roadObject.put("role", d.getRole());
                     roadObject.put("password", d.getPassword());
                     roadObject.put("email", d.getEmail());
+
+                    String userDistricts= "select * from users_districts ud where ud.user_id="+ d.getId();
+                    List<UsersDistrictsEntity> udList =  JPA.em().createNativeQuery(userDistricts,UsersDistrictsEntity.class).getResultList();
+                    String [] userDistrictsArray = new  String[udList.size()];
+                    for(int i =0;i<udList.size();i++){
+                        userDistrictsArray[i]=udList.get(i).getDistrictName();
+                    }
+
+                    roadObject.put("selectedDistricts", userDistrictsArray);
+
+
                     roadObject.put("creationDate", d.getCreationDate());
                     finalRoadsList.add(roadObject);
                 }
@@ -205,6 +233,179 @@ public class UsersController {
             return ok(result);
         }
     }
+
+
+
+    //editUser
+
+
+
+    @SuppressWarnings("Duplicates")
+    @play.db.jpa.Transactional
+    @BodyParser.Of(BodyParser.Json.class)
+    public Result editUser() {
+        try {
+            JsonNode json = request().body().asJson(); //
+            ObjectNode result = Json.newObject();
+            if (json == null) {
+                return badRequest("Expecting Json data");
+            } else {
+                String email = json.findPath("email").asText();
+                Integer userId = json.findPath("userId").asInt();
+                String emailUnique = "select * from users u where u.email='" + email + "'" + "and  u.id != "+userId;
+                Query qemail = JPA.em().createNativeQuery(emailUnique, UsersEntity.class);
+                List<UsersEntity> usersListEmail = qemail.getResultList();
+                if (usersListEmail.size() > 0) {
+                    result.put("status", "error");
+                    result.put("message", "The email you provided already exists.");
+                    return ok(result);
+                }
+                String password = json.findPath("password").asText();
+                String name = json.findPath("name").asText();
+                String lastname = json.findPath("lastname").asText();
+                String username = json.findPath("username").asText();
+                String role = json.findPath("role").asText();
+                UsersEntity user = JPA.em().find(UsersEntity.class,userId);
+                if(password!=null && !password.equalsIgnoreCase("")){
+                    user.setPassword(password);
+                }
+                if(name!=null && !name.equalsIgnoreCase("")){
+                    user.setName(name);
+                }
+                if(lastname!=null && !lastname.equalsIgnoreCase("")){
+                    user.setLastName(lastname);
+                }
+                if(username!=null && !username.equalsIgnoreCase("")){
+                    user.setUsername(username);
+                }
+                if(role!=null && !role.equalsIgnoreCase("")){
+                    user.setRole(role);
+                }
+                user.setUpdateDate(new Date());
+                JPA.em().merge(user);
+                JsonNode selectedDistricts = json.findPath("selectedDistricts");
+                if(selectedDistricts.size()>0){
+                    String userDistricts= "select * from users_districts ud where ud.user_id="+ userId;
+                    List<UsersDistrictsEntity> udList =  JPA.em().createNativeQuery(userDistricts,UsersDistrictsEntity.class).getResultList();
+                    for(UsersDistrictsEntity ud : udList ){
+                        JPA.em().remove(ud);
+                    }
+                    for(int i = 0;i<selectedDistricts.size();i++){
+                        UsersDistrictsEntity userDistrictEntry = new UsersDistrictsEntity();
+                        userDistrictEntry.setDistrictName(selectedDistricts.get(i).asText());
+                        userDistrictEntry.setUserId(user.getId());
+                        userDistrictEntry.setCreationDate(new Date());
+                        JPA.em().persist(userDistrictEntry);
+                    }
+                }
+                result.put("status", "ok");
+                result.put("message", "Update was successful");
+                result.put("fullName", user.getName()+" "+user.getLastName());
+                return ok(result);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            ObjectNode result = Json.newObject();
+            result.put("status", "error");
+            result.put("message", "Error while creation new user");
+            return ok(result);
+        }
+    }
+
+
+    @SuppressWarnings("Duplicates")
+    @play.db.jpa.Transactional
+    @BodyParser.Of(BodyParser.Json.class)
+    public Result deleteUser() {
+        try {
+            JsonNode json = Http.Context.Implicit.request().body().asJson(); //
+            ObjectNode result = Json.newObject();
+            if (json == null) {
+                return badRequest("Expecting Json data");
+            } else {
+                UsersEntity user = JPA.em().find(UsersEntity.class,json.findPath("id").asInt());
+                JPA.em().remove(user);
+
+                String userDistricts= "select * from users_districts ud where ud.user_id="+json.findPath("id").asInt();
+                List<UsersDistrictsEntity> udList =  JPA.em().createNativeQuery(userDistricts,UsersDistrictsEntity.class).getResultList();
+                for(UsersDistrictsEntity ud : udList ){
+                    JPA.em().remove(ud);
+                }
+                result.put("status", "ok");
+                result.put("message", "User has been deleted succesfully!");
+                return ok(result);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            ObjectNode result = Json.newObject();
+            result.put("status", "error");
+            result.put("message", "Error while commiting,please contact with administrator and report the problem");
+            return ok(result);
+        }
+    }
+
+
+
+
+    @SuppressWarnings("Duplicates")
+    @play.db.jpa.Transactional
+    @BodyParser.Of(BodyParser.Json.class)
+    public Result addUser() {
+        try {
+            JsonNode json = request().body().asJson(); //
+            ObjectNode result = Json.newObject();
+            if (json == null) {
+                return badRequest("Expecting Json data");
+            } else {
+                String email = json.findPath("email").asText();
+                String password = json.findPath("password").asText();
+                String name = json.findPath("name").asText();
+                String lastname = json.findPath("lastname").asText();
+                String username = json.findPath("username").asText();
+                String role = json.findPath("role").asText();
+                UsersEntity user = new UsersEntity();
+                user.setName(name);
+                user.setLastName(lastname);
+                user.setUsername(username);
+                user.setRole(role);
+                user.setEmail(email);
+                user.setPassword(password);
+                String emailUnique = "select * from users u where u.email='" + user.getEmail() + "'";
+                Query qemail = JPA.em().createNativeQuery(emailUnique, UsersEntity.class);
+                List<UsersEntity> usersListEmail = qemail.getResultList();
+                if (usersListEmail.size() > 0) {
+                    result.put("status", "error");
+                    result.put("message", "The email you provided already exists.");
+                    return ok(result);
+                } else {
+                    user.setEmail(email);
+                }
+                user.setCreationDate(new Date());
+                 JPA.em().persist(user);
+                JsonNode selectedDistricts = json.findPath("selectedDistricts");
+                for(int i = 0;i<selectedDistricts.size();i++){
+                    UsersDistrictsEntity userDistrictEntry = new UsersDistrictsEntity();
+                    userDistrictEntry.setDistrictName(selectedDistricts.get(i).asText());
+                    userDistrictEntry.setUserId(user.getId());
+                    userDistrictEntry.setCreationDate(new Date());
+                    JPA.em().persist(userDistrictEntry);
+                }
+                result.put("status", "ok");
+                result.put("message", "Registration was successful");
+                return ok(result);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            ObjectNode result = Json.newObject();
+            result.put("status", "error");
+            result.put("message", "Error while creation new user");
+            return ok(result);
+        }
+    }
+
+
+
+
 
     @SuppressWarnings("Duplicates")
     @play.db.jpa.Transactional

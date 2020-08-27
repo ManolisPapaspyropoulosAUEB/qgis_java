@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.DistrictsEntity;
+import models.UsersDistrictsEntity;
+import models.UsersEntity;
 import play.db.jpa.JPA;
 import play.libs.Json;
 import play.mvc.BodyParser;
@@ -92,14 +94,29 @@ public class GeneralController {
                 String query = " select * from districts d where 1=1 ";
                 String province_code = json.findPath("num_province_code").asText();
                 String districtName = json.findPath("districtName").asText();
+                Integer userId = json.findPath("userId").asInt();
+                UsersEntity user = JPA.em().find(UsersEntity.class,userId);
                 if(province_code!=null && !province_code.equalsIgnoreCase("")){
                     query+=" and d.numerical_province_code="+province_code;
                 }
                 if(districtName!=null && !districtName.equalsIgnoreCase("")){
-                    query+=" and d.district_name='"+districtName+"'";
+                    query+=" and d.district_name like '%"+districtName+"%'";
                 }
+                if(user.getRole().equalsIgnoreCase("user")){
+                    String inDistrictsSql = "(";
+                    String userDistricts= "select * from users_districts ud where ud.user_id="+ userId;
+                    List<UsersDistrictsEntity> udList =  JPA.em().createNativeQuery(userDistricts,UsersDistrictsEntity.class).getResultList();
+                    for(UsersDistrictsEntity ud:udList){
+                        inDistrictsSql+="'"+ud.getDistrictName()+"'";
+                        inDistrictsSql+=",";
+                    }
+                    if (inDistrictsSql != null && inDistrictsSql.length() > 0) {
+                        inDistrictsSql=inDistrictsSql.substring(0, inDistrictsSql.length() - 1);
+                        inDistrictsSql+=")";
+                        query+=" and d.district_name in "+inDistrictsSql;
+                    }
 
-
+                }
                 Query q = JPA.em().createNativeQuery(query, DistrictsEntity.class);
                 List<DistrictsEntity> distList = q.getResultList();
                 ObjectMapper ow = new ObjectMapper();

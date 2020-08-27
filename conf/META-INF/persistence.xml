@@ -22,6 +22,7 @@
         <class>models.RoadsRevisionsEntity</class>
         <class>models.SnapshotEntity</class>
         <class>models.FacilitiesEntity</class>
+        <class>models.UsersDistrictsEntity</class>
 
 
         <properties>

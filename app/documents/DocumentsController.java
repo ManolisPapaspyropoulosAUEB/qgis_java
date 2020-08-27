@@ -290,8 +290,10 @@ public class DocumentsController {
         Query qsql = JPA.em().createNativeQuery(sql, DocumentsEntity.class);
         List<DocumentsEntity> docsList = qsql.getResultList();
         try {
+
             File previewFile = new File(ConfigFactory.load().getString("uploads_dir") + docsList.get(0).getFullPath());
             return ok(previewFile);
+
         } catch (Exception e) {
             e.printStackTrace();
             result.put("status", "error");
