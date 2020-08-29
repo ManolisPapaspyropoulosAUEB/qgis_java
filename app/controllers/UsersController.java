@@ -97,8 +97,6 @@ public class UsersController {
                     result.put("message", "The system cannot find user with this email and password");
                     return ok(result);
                 }
-
-
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -131,12 +129,8 @@ public class UsersController {
                 }
                 if(name!=null && !name.equalsIgnoreCase("")){
                     sqlQuery+=" and users.name like  '%"+  name+"%'" +" or users.last_name  like '%"+name+"%'"+" or users.email like '%"+name+"%' or users.role like '%"+name+"%'";
-
                 }
                 HashMap<String, Object> returnList = new HashMap<String, Object>();
-
-
-
                 Query q = JPA.em().createNativeQuery(sqlQuery, UsersEntity.class);
                 List<UsersEntity> distList = q.getResultList();
                 ObjectMapper ow = new ObjectMapper();
@@ -154,17 +148,13 @@ public class UsersController {
                     roadObject.put("role", d.getRole());
                     roadObject.put("password", d.getPassword());
                     roadObject.put("email", d.getEmail());
-
                     String userDistricts= "select * from users_districts ud where ud.user_id="+ d.getId();
                     List<UsersDistrictsEntity> udList =  JPA.em().createNativeQuery(userDistricts,UsersDistrictsEntity.class).getResultList();
                     String [] userDistrictsArray = new  String[udList.size()];
                     for(int i =0;i<udList.size();i++){
                         userDistrictsArray[i]=udList.get(i).getDistrictName();
                     }
-
                     roadObject.put("selectedDistricts", userDistrictsArray);
-
-
                     roadObject.put("creationDate", d.getCreationDate());
                     finalRoadsList.add(roadObject);
                 }
