@@ -7,8 +7,8 @@ import java.util.Objects;
 @Table(name = "roads_revisions", schema = "afggis_db", catalog = "")
 public class RoadsRevisionsEntity {
     private int id;
-    private int roadId;
-    private int snapshotId;
+    private Integer roadId;
+    private Integer snapshotId;
     private String osmId;
     private String code;
     private String fclass;
@@ -75,8 +75,9 @@ public class RoadsRevisionsEntity {
     private Integer c15Id;
     private Double c15Score;
     private Double mca;
-    private Double cbi;
     private Double connectivity;
+    private Double cbi1;
+    private Double cbi2;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -92,21 +93,21 @@ public class RoadsRevisionsEntity {
 
     @Basic
     @Column(name = "road_id")
-    public int getRoadId() {
+    public Integer getRoadId() {
         return roadId;
     }
 
-    public void setRoadId(int roadId) {
+    public void setRoadId(Integer roadId) {
         this.roadId = roadId;
     }
 
     @Basic
     @Column(name = "snapshot_id")
-    public int getSnapshotId() {
+    public Integer getSnapshotId() {
         return snapshotId;
     }
 
-    public void setSnapshotId(int snapshotId) {
+    public void setSnapshotId(Integer snapshotId) {
         this.snapshotId = snapshotId;
     }
 
@@ -771,16 +772,6 @@ public class RoadsRevisionsEntity {
     }
 
     @Basic
-    @Column(name = "cbi")
-    public Double getCbi() {
-        return cbi;
-    }
-
-    public void setCbi(Double cbi) {
-        this.cbi = cbi;
-    }
-
-    @Basic
     @Column(name = "connectivity")
     public Double getConnectivity() {
         return connectivity;
@@ -790,14 +781,34 @@ public class RoadsRevisionsEntity {
         this.connectivity = connectivity;
     }
 
+    @Basic
+    @Column(name = "cbi1")
+    public Double getCbi1() {
+        return cbi1;
+    }
+
+    public void setCbi1(Double cbi1) {
+        this.cbi1 = cbi1;
+    }
+
+    @Basic
+    @Column(name = "cbi2")
+    public Double getCbi2() {
+        return cbi2;
+    }
+
+    public void setCbi2(Double cbi2) {
+        this.cbi2 = cbi2;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         RoadsRevisionsEntity that = (RoadsRevisionsEntity) o;
         return id == that.id &&
-                roadId == that.roadId &&
-                snapshotId == that.snapshotId &&
+                Objects.equals(roadId, that.roadId) &&
+                Objects.equals(snapshotId, that.snapshotId) &&
                 Objects.equals(osmId, that.osmId) &&
                 Objects.equals(code, that.code) &&
                 Objects.equals(fclass, that.fclass) &&
@@ -864,12 +875,13 @@ public class RoadsRevisionsEntity {
                 Objects.equals(c15Id, that.c15Id) &&
                 Objects.equals(c15Score, that.c15Score) &&
                 Objects.equals(mca, that.mca) &&
-                Objects.equals(cbi, that.cbi) &&
-                Objects.equals(connectivity, that.connectivity);
+                Objects.equals(connectivity, that.connectivity) &&
+                Objects.equals(cbi1, that.cbi1) &&
+                Objects.equals(cbi2, that.cbi2);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, roadId, snapshotId, osmId, code, fclass, name, ref, oneway, maxspeed, layer, bridge, tunnel, district, source, roadWidthInM, roadCondition, maxRoadSteepnessPrc, roadsideEnvironment, agricultureFacilitation, commentsOnConnections, lengthOfRoadStretchInM, averageElevationInMAboveSealevel, averagePopulationInPersons, lvrrId, security, environmentalImpacts, districtId, lengthInMetres, widthInMetres, elevationInMetres, populationServed, facilitiesServed, accessToGCsRMs, farmToTheMarket, agriculturalFacilities, linksToMajorActivityCentres, numberOfConnections, c1Id, c1Score, c2Id, c2Score, c3Id, c3Score, c4Id, c4Score, c5Id, c5Score, c6Id, c6Score, c7Id, c7Score, c8Id, c8Score, c9Id, c9Score, c10Id, c10Score, c11Id, c11Score, c12Id, c12Score, c13Id, c13Score, c14Id, c14Score, c15Id, c15Score, mca, cbi, connectivity);
+        return Objects.hash(id, roadId, snapshotId, osmId, code, fclass, name, ref, oneway, maxspeed, layer, bridge, tunnel, district, source, roadWidthInM, roadCondition, maxRoadSteepnessPrc, roadsideEnvironment, agricultureFacilitation, commentsOnConnections, lengthOfRoadStretchInM, averageElevationInMAboveSealevel, averagePopulationInPersons, lvrrId, security, environmentalImpacts, districtId, lengthInMetres, widthInMetres, elevationInMetres, populationServed, facilitiesServed, accessToGCsRMs, farmToTheMarket, agriculturalFacilities, linksToMajorActivityCentres, numberOfConnections, c1Id, c1Score, c2Id, c2Score, c3Id, c3Score, c4Id, c4Score, c5Id, c5Score, c6Id, c6Score, c7Id, c7Score, c8Id, c8Score, c9Id, c9Score, c10Id, c10Score, c11Id, c11Score, c12Id, c12Score, c13Id, c13Score, c14Id, c14Score, c15Id, c15Score, mca, connectivity, cbi1, cbi2);
     }
 }

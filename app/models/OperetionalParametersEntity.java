@@ -7,7 +7,8 @@ import java.util.Objects;
 @Table(name = "operetional_parameters", schema = "afggis_db", catalog = "")
 public class OperetionalParametersEntity {
     private int id;
-    private Double estimatedMaintenanceCost;
+    private Double estimatedRoutineMaintenanceCost;
+    private Double estimatedPeriodicMaintenanceCost;
 
     @Id
     @Column(name = "id")
@@ -20,13 +21,23 @@ public class OperetionalParametersEntity {
     }
 
     @Basic
-    @Column(name = "estimated_maintenance_cost")
-    public Double getEstimatedMaintenanceCost() {
-        return estimatedMaintenanceCost;
+    @Column(name = "estimated_routine_maintenance_cost")
+    public Double getEstimatedRoutineMaintenanceCost() {
+        return estimatedRoutineMaintenanceCost;
     }
 
-    public void setEstimatedMaintenanceCost(Double estimatedMaintenanceCost) {
-        this.estimatedMaintenanceCost = estimatedMaintenanceCost;
+    public void setEstimatedRoutineMaintenanceCost(Double estimatedRoutineMaintenanceCost) {
+        this.estimatedRoutineMaintenanceCost = estimatedRoutineMaintenanceCost;
+    }
+
+    @Basic
+    @Column(name = "estimated_periodic_maintenance_cost")
+    public Double getEstimatedPeriodicMaintenanceCost() {
+        return estimatedPeriodicMaintenanceCost;
+    }
+
+    public void setEstimatedPeriodicMaintenanceCost(Double estimatedPeriodicMaintenanceCost) {
+        this.estimatedPeriodicMaintenanceCost = estimatedPeriodicMaintenanceCost;
     }
 
     @Override
@@ -35,11 +46,12 @@ public class OperetionalParametersEntity {
         if (o == null || getClass() != o.getClass()) return false;
         OperetionalParametersEntity that = (OperetionalParametersEntity) o;
         return id == that.id &&
-                Objects.equals(estimatedMaintenanceCost, that.estimatedMaintenanceCost);
+                Objects.equals(estimatedRoutineMaintenanceCost, that.estimatedRoutineMaintenanceCost) &&
+                Objects.equals(estimatedPeriodicMaintenanceCost, that.estimatedPeriodicMaintenanceCost);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, estimatedMaintenanceCost);
+        return Objects.hash(id, estimatedRoutineMaintenanceCost, estimatedPeriodicMaintenanceCost);
     }
 }

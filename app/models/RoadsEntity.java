@@ -73,13 +73,17 @@ public class RoadsEntity {
     private Integer c15Id;
     private Double c15Score;
     private Double mca;
-    private Double cbi;
+    private Double cbi1;
+    private Double cbi2;
     private Double connectivity;
-
+    private Double roadAccessibility;
+    private Double requirementsForEarthWorks;
+    private Double trafficVolume;
+    private Double safety;
+    private Double roadQualityAndNeeds;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
 
     @Column(name = "id")
     public int getId() {
@@ -219,7 +223,6 @@ public class RoadsEntity {
     public void setRoadWidthInM(Integer roadWidthInM) {
         this.roadWidthInM = roadWidthInM;
     }
-
 
     @Basic
     @Column(name = "road_condition")
@@ -752,13 +755,83 @@ public class RoadsEntity {
     }
 
     @Basic
-    @Column(name = "cbi")
-    public Double getCbi() {
-        return cbi;
+    @Column(name = "cbi_1")
+    public Double getCbi1() {
+        return cbi1;
     }
 
-    public void setCbi(Double cbi) {
-        this.cbi = cbi;
+    public void setCbi1(Double cbi1) {
+        this.cbi1 = cbi1;
+    }
+
+    @Basic
+    @Column(name = "cbi_2")
+    public Double getCbi2() {
+        return cbi2;
+    }
+
+    public void setCbi2(Double cbi2) {
+        this.cbi2 = cbi2;
+    }
+
+    @Basic
+    @Column(name = "connectivity")
+    public Double getConnectivity() {
+        return connectivity;
+    }
+
+    public void setConnectivity(Double connectivity) {
+        this.connectivity = connectivity;
+    }
+
+    @Basic
+    @Column(name = "road_accessibility")
+    public Double getRoadAccessibility() {
+        return roadAccessibility;
+    }
+
+    public void setRoadAccessibility(Double roadAccessibility) {
+        this.roadAccessibility = roadAccessibility;
+    }
+
+    @Basic
+    @Column(name = "requirements_for_earth_works")
+    public Double getRequirementsForEarthWorks() {
+        return requirementsForEarthWorks;
+    }
+
+    public void setRequirementsForEarthWorks(Double requirementsForEarthWorks) {
+        this.requirementsForEarthWorks = requirementsForEarthWorks;
+    }
+
+    @Basic
+    @Column(name = "traffic_volume")
+    public Double getTrafficVolume() {
+        return trafficVolume;
+    }
+
+    public void setTrafficVolume(Double trafficVolume) {
+        this.trafficVolume = trafficVolume;
+    }
+
+    @Basic
+    @Column(name = "safety")
+    public Double getSafety() {
+        return safety;
+    }
+
+    public void setSafety(Double safety) {
+        this.safety = safety;
+    }
+
+    @Basic
+    @Column(name = "road_quality_and_needs")
+    public Double getRoadQualityAndNeeds() {
+        return roadQualityAndNeeds;
+    }
+
+    public void setRoadQualityAndNeeds(Double roadQualityAndNeeds) {
+        this.roadQualityAndNeeds = roadQualityAndNeeds;
     }
 
     @Override
@@ -833,21 +906,18 @@ public class RoadsEntity {
                 Objects.equals(c15Id, that.c15Id) &&
                 Objects.equals(c15Score, that.c15Score) &&
                 Objects.equals(mca, that.mca) &&
-                Objects.equals(cbi, that.cbi);
+                Objects.equals(cbi1, that.cbi1) &&
+                Objects.equals(cbi2, that.cbi2) &&
+                Objects.equals(connectivity, that.connectivity) &&
+                Objects.equals(roadAccessibility, that.roadAccessibility) &&
+                Objects.equals(requirementsForEarthWorks, that.requirementsForEarthWorks) &&
+                Objects.equals(trafficVolume, that.trafficVolume) &&
+                Objects.equals(safety, that.safety) &&
+                Objects.equals(roadQualityAndNeeds, that.roadQualityAndNeeds);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, osmId, code, fclass, name, ref, oneway, maxspeed, layer, bridge, tunnel, district, source, roadWidthInM, roadCondition, maxRoadSteepnessPrc, roadsideEnvironment, agricultureFacilitation, commentsOnConnections, lengthOfRoadStretchInM, averageElevationInMAboveSealevel, averagePopulationInPersons, lvrrId, security, environmentalImpacts, districtId, lengthInMetres, widthInMetres, elevationInMetres, populationServed, facilitiesServed, accessToGCsRMs, farmToTheMarket, agriculturalFacilities, linksToMajorActivityCentres, numberOfConnections, c1Id, c1Score, c2Id, c2Score, c3Id, c3Score, c4Id, c4Score, c5Id, c5Score, c6Id, c6Score, c7Id, c7Score, c8Id, c8Score, c9Id, c9Score, c10Id, c10Score, c11Id, c11Score, c12Id, c12Score, c13Id, c13Score, c14Id, c14Score, c15Id, c15Score, mca, cbi);
-    }
-
-    @Basic
-    @Column(name = "connectivity")
-    public Double getConnectivity() {
-        return connectivity;
-    }
-
-    public void setConnectivity(Double connectivity) {
-        this.connectivity = connectivity;
+        return Objects.hash(id, osmId, code, fclass, name, ref, oneway, maxspeed, layer, bridge, tunnel, district, source, roadWidthInM, roadCondition, maxRoadSteepnessPrc, roadsideEnvironment, agricultureFacilitation, commentsOnConnections, lengthOfRoadStretchInM, averageElevationInMAboveSealevel, averagePopulationInPersons, lvrrId, security, environmentalImpacts, districtId, lengthInMetres, widthInMetres, elevationInMetres, populationServed, facilitiesServed, accessToGCsRMs, farmToTheMarket, agriculturalFacilities, linksToMajorActivityCentres, numberOfConnections, c1Id, c1Score, c2Id, c2Score, c3Id, c3Score, c4Id, c4Score, c5Id, c5Score, c6Id, c6Score, c7Id, c7Score, c8Id, c8Score, c9Id, c9Score, c10Id, c10Score, c11Id, c11Score, c12Id, c12Score, c13Id, c13Score, c14Id, c14Score, c15Id, c15Score, mca, cbi1, cbi2, connectivity, roadAccessibility, requirementsForEarthWorks, trafficVolume, safety, roadQualityAndNeeds);
     }
 }

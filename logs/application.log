@@ -1,11 +1,8 @@
-2020-08-24 21:12:33,447 [WARN] from application in ForkJoinPool-1-worker-1 - Logger configuration in conf files is deprecated and has no effect. Use a logback configuration file instead.
-2020-08-24 21:12:35,163 [WARN] from application in ForkJoinPool-1-worker-1 - application.conf @ file:/C:/developm/qgis_angular/back/target/scala-2.11/classes/application.conf: 138: user is deprecated, use username instead
-2020-08-24 21:12:35,224 [INFO] from application in ForkJoinPool-1-worker-1 - Creating Pool for datasource 'default'
-2020-08-24 21:12:35,865 [INFO] from play.api.db.HikariCPConnectionPool in ForkJoinPool-1-worker-1 - datasource [default] bound to JNDI as DefaultDS
-2020-08-24 21:12:35,884 [INFO] from play.api.db.DefaultDBApi in ForkJoinPool-1-worker-1 - Database [default] connected at jdbc:mysql://localhost:3306/afggis_db?characterEncoding=UTF-8
-2020-08-24 21:12:36,352 [INFO] from application in ForkJoinPool-1-worker-1 - ApplicationTimer demo: Starting application at 2020-08-24T18:12:36.352Z
-2020-08-24 21:12:37,368 [INFO] from play.api.Play in ForkJoinPool-1-worker-1 - Application started (Dev)
-2020-08-24 21:34:07,197 [ERROR] from akka.stream.impl.io.FileSubscriber in application-akka.actor.default-dispatcher-122 - Tearing down FileSink(C:\Users\MANOSP~1\AppData\Local\Temp\playtemp9005078022222783780\multipartBody206551388365262681asTemporaryFile) due to upstream error
-play.api.mvc.BodyParsers$MaxLengthLimitAttained: null
-2020-08-24 21:34:29,451 [ERROR] from akka.stream.impl.io.FileSubscriber in application-akka.actor.default-dispatcher-101 - Tearing down FileSink(C:\Users\MANOSP~1\AppData\Local\Temp\playtemp9005078022222783780\multipartBody2876258142031687465asTemporaryFile) due to upstream error
-play.api.mvc.BodyParsers$MaxLengthLimitAttained: null
+2020-09-11 03:59:32,687 [WARN] from application in ForkJoinPool-1-worker-1 - Logger configuration in conf files is deprecated and has no effect. Use a logback configuration file instead.
+2020-09-11 03:59:33,378 [WARN] from application in ForkJoinPool-1-worker-1 - application.conf @ file:/C:/development/qgis/back/target/scala-2.11/classes/application.conf: 138: user is deprecated, use username instead
+2020-09-11 03:59:33,394 [INFO] from application in ForkJoinPool-1-worker-1 - Creating Pool for datasource 'default'
+2020-09-11 03:59:33,711 [INFO] from play.api.db.HikariCPConnectionPool in ForkJoinPool-1-worker-1 - datasource [default] bound to JNDI as DefaultDS
+2020-09-11 03:59:33,737 [INFO] from play.api.db.DefaultDBApi in ForkJoinPool-1-worker-1 - Database [default] connected at jdbc:mysql://localhost:3306/afggis_db?characterEncoding=UTF-8
+2020-09-11 03:59:33,980 [INFO] from application in ForkJoinPool-1-worker-1 - ApplicationTimer demo: Starting application at 2020-09-11T00:59:33.979Z
+2020-09-11 03:59:34,267 [INFO] from play.api.Play in ForkJoinPool-1-worker-1 - Application started (Dev)
+2020-09-11 10:01:23,808 [WARN] from com.zaxxer.hikari.pool.HikariPool in HikariPool-1 housekeeper - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5h54m50s98ms922µs500ns).

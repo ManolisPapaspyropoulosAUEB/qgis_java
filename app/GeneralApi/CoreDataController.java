@@ -63,10 +63,13 @@ public class CoreDataController {
                     finalRoadsList.add(roadObject);
                 }
                 returnList.put("data", finalRoadsList);
-                String opParam = "select * from operetional_parameters op ";
-                List<OperetionalParametersEntity> opList = JPA.em().createNativeQuery(opParam,OperetionalParametersEntity.class).getResultList();
+                String  oper = "select * from operetional_parameters op ";
+                List<OperetionalParametersEntity> opList = JPA.em().createNativeQuery(oper,OperetionalParametersEntity.class).getResultList();
                 returnList.put("data", finalRoadsList);
-                returnList.put("opParam", opList.get(0).getEstimatedMaintenanceCost());
+
+                returnList.put("estimatedRoutineMaintenanceCost", opList.get(0).getEstimatedRoutineMaintenanceCost());
+                returnList.put("estimatedPeriodicMaintenanceCost", opList.get(0).getEstimatedPeriodicMaintenanceCost());
+
                 returnList.put("opId", opList.get(0).getId());
                 returnList.put("total", total.intValue());
                 returnList.put("status", "ok");
@@ -99,10 +102,13 @@ public class CoreDataController {
             if (json.findPath("id") == null) {
                 return badRequest("Expecting Json data");
             } else {
-                Double estimatedMaintenanceCost = json.findPath("opParam").asDouble();
+                Double estimatedRoutineMaintenanceCost = json.findPath("estimatedRoutineMaintenanceCost").asDouble();
+                Double estimatedPeriodicMaintenanceCost = json.findPath("estimatedPeriodicMaintenanceCost").asDouble();
+
                 Integer id = json.findPath("opId").asInt();
                 OperetionalParametersEntity op = JPA.em().find(OperetionalParametersEntity.class,id);
-                op.setEstimatedMaintenanceCost(estimatedMaintenanceCost);
+                op.setEstimatedPeriodicMaintenanceCost(estimatedPeriodicMaintenanceCost);
+                op.setEstimatedRoutineMaintenanceCost(estimatedRoutineMaintenanceCost);
                 JPA.em().merge(op);
                 result.put("status", "ok");
                 result.put("message", "Update successfully");

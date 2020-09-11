@@ -86,10 +86,11 @@ public class RoadController {
                 if ((!sqlInRoadConditions.isEmpty()) && !sqlInRoadConditions.equalsIgnoreCase("()")) {
                     query += " and r.roadCondition in " + sqlInRoadConditions;
                 }
+
                 if (orderCol.equalsIgnoreCase("mca")) {
-                    query += " order by mca " + descAsc + " , cbi  " + descAsc;
+                     query += " order by mca " + descAsc ;
                 } else if (orderCol != null && !orderCol.equalsIgnoreCase("")) {
-                    query += " order by  " + orderCol + " " + " " + descAsc;
+                      query += " order by  " + orderCol + " " + descAsc;
                 }
                 Query q = JPA.em().createQuery(query, RoadsEntity.class);
                 System.out.println(resultParam);
@@ -239,11 +240,9 @@ public class RoadController {
                     );
                     String opParamSql = "select * from operetional_parameters op ";
                     List<OperetionalParametersEntity> opList = JPA.em().createNativeQuery(opParamSql, OperetionalParametersEntity.class).getResultList();
-                    Double opParam = opList.get(0).getEstimatedMaintenanceCost();
-                    Double cbi2 = (opParam / roads.getLengthInMetres()) / roads.getPopulationServed();
-                    roadObject.put("cbiTypos", "(Est_Maintenance_cost/length_in_metres) /" + " population_served=" + "\n" + "(" + opParam + "/" + roads.getLengthInMetres() + ")" + "/" + roads.getPopulationServed());
+                    roadObject.put("cbiRoutine", roads.getCbi1());
+                    roadObject.put("cbiPeriodic", roads.getCbi2());
                     roadObject.put("mca", roads.getMca());
-                    roadObject.put("cbi", roads.getCbi());
                     finalRoadsList.add(roadObject);
                 }
                 returnList.put("data", finalRoadsList);
@@ -283,12 +282,8 @@ public class RoadController {
                 String query = " select * from roads r where 1=1 ";
                 String districtId = json.findPath("district_id").asText();
                 String fclass = json.findPath("fclass").asText();
-
-
                 String orderCol = json.findPath("orderCol").asText();
                 String descAsc = json.findPath("descAsc").asText();
-
-
                 String nameFilter = json.findPath("nameFilter").asText();
                 String sqlInFclass = json.findPath("sqlInFclass").asText();
                 String oneway = json.findPath("oneway").asText();
@@ -324,7 +319,7 @@ public class RoadController {
                     query += " and r.road_condition in " + sqlInRoadConditions;
                 }
                 if (orderCol != null && !orderCol.equalsIgnoreCase("")) {
-                    query += " order by mca " + descAsc + " , cbi  " + descAsc;
+                    query += " order by mca " +" "+ descAsc;
                 }
                 Query q = JPA.em().createNativeQuery(query, RoadsEntity.class);
                 List<RoadsEntity> roadsList = q.getResultList();
@@ -408,24 +403,36 @@ public class RoadController {
                     } else {
                         roadObject.put("roadsideEnvironment", roads.getRoadsideEnvironment());
                     }
-
-                    roadObject.put("agricultureFacilitation", roads.getAgricultureFacilitation());
-                    roadObject.put("agricultureFacilitaties", roads.getAgriculturalFacilities().toString());
+                    roadObject.put("agriculturalFacilities", roads.getAgriculturalFacilities());
                     roadObject.put("lengthOfRoadStretchInM", roads.getLengthOfRoadStretchInM());
                     roadObject.put("averageElevationInMAboveSealevel", roads.getAverageElevationInMAboveSealevel());
                     roadObject.put("elevationInMetres", roads.getElevationInMetres());
                     roadObject.put("averagePopulationInPersons", roads.getAveragePopulationInPersons());
                     roadObject.put("LVRR_ID", roads.getLvrrId().toString());
-                    roadObject.put("security", roads.getSecurity());
                     roadObject.put("environmentalImpacts", roads.getEnvironmentalImpacts());
                     roadObject.put("districtId", roads.getDistrictId());
                     roadObject.put("districtCode", roads.getDistrictId());
                     roadObject.put("lengthInMetres", roads.getLengthInMetres());
+//criteria//
                     roadObject.put("populationServed", roads.getPopulationServed());
+                    roadObject.put("checked", false);
+                    roadObject.put("checkedFilter",false);
+
                     roadObject.put("facilitiesServed", roads.getFacilitiesServed());
                     roadObject.put("accessToGCsRMs", roads.getAccessToGCsRMs());
                     roadObject.put("farmToTheMarket", roads.getFarmToTheMarket().toString());
-                    roadObject.put("agriculturalFacilities", roads.getAgriculturalFacilities());
+                    roadObject.put("agricultureFacilitation", roads.getAgricultureFacilitation());
+                    roadObject.put("connectivity", roads.getConnectivity());
+                    roadObject.put("roadAccessibility", roads.getRoadAccessibility());
+                    roadObject.put("numberOfConnections", roads.getNumberOfConnections());
+                    roadObject.put("roadCondition", roads.getRoadCondition());
+                    roadObject.put("roadQualityAndNeeds", roads.getRoadQualityAndNeeds());
+                    roadObject.put("requirementsForEarthWorks", roads.getRequirementsForEarthWorks());
+                    roadObject.put("trafficVolume", roads.getTrafficVolume());
+                    roadObject.put("safety", roads.getSafety());
+                    roadObject.put("security", roads.getSecurity());
+                    roadObject.put("environmentalImpacts", roads.getEnvironmentalImpacts());
+//end of criteria//
                     roadObject.put("linksToMajorActivityCentres", roads.getLinksToMajorActivityCentres());
                     roadObject.put("numberOfConnections", roads.getNumberOfConnections());
                     roadObject.put("c1Id", roads.getC1Id());
@@ -505,11 +512,10 @@ public class RoadController {
 
                     String opParamSql = "select * from operetional_parameters op ";
                     List<OperetionalParametersEntity> opList = JPA.em().createNativeQuery(opParamSql, OperetionalParametersEntity.class).getResultList();
-                    Double opParam = opList.get(0).getEstimatedMaintenanceCost();
-                    Double cbi2 = (opParam / roads.getLengthInMetres()) / roads.getPopulationServed();
-                    roadObject.put("cbiTypos", "(Est_Maintenance_cost/length_in_metres) /" + " population_served=" + "\n" + "(" + opParam + "/" + roads.getLengthInMetres() + ")" + "/" + roads.getPopulationServed());
                     roadObject.put("mca", roads.getMca());
-                    roadObject.put("cbi", roads.getCbi());
+                    roadObject.put("cbiRoutine", roads.getCbi1());
+                    roadObject.put("cbiPeriodic", roads.getCbi2());
+
                     finalRoadsList.add(roadObject);
                 }
                 returnList.put("data", finalRoadsList);
@@ -594,7 +600,8 @@ public class RoadController {
                     road.setC15Score(0.0);
 
                     road.setMca(0.0);
-                    road.setCbi(0.0);
+                    road.setCbi1(0.0);
+                    road.setCbi2(0.0);
                 }
                 result.put("status", "ok");
                 result.put("message", "success");
@@ -745,12 +752,9 @@ public class RoadController {
                     roadObject.put("c15Id", roads.getC15Id());
                     roadObject.put("c15Score", roads.getC15Score());
                     String opParamSql = "select * from operetional_parameters op ";
-                    List<OperetionalParametersEntity> opList = JPA.em().createNativeQuery(opParamSql, OperetionalParametersEntity.class).getResultList();
-                    Double opParam = opList.get(0).getEstimatedMaintenanceCost();
-                    Double cbi2 = (opParam / roads.getLengthInMetres()) / roads.getPopulationServed();
-                    roadObject.put("cbiTypos", "(Est_Maintenance_cost/length_in_metres) /" + " population_served=" + "\n" + "(" + opParam + "/" + roads.getLengthInMetres() + ")" + "/" + roads.getPopulationServed());
+                    roadObject.put("cbiRoutine", roads.getCbi1());
+                    roadObject.put("cbiPeriodic", roads.getCbi2());
                     roadObject.put("mca", roads.getMca());
-                    roadObject.put("cbi", roads.getCbi());
                     finalRoadsList.add(roadObject);
                 }
                 returnList.put("data", finalRoadsList);
@@ -918,7 +922,8 @@ public class RoadController {
         roadsEntity.setC14Score(0.0);
         roadsEntity.setC15Score(0.0);
         roadsEntity.setMca(0.0);
-        roadsEntity.setCbi(0.0);
+        roadsEntity.setCbi1(0.0);
+        roadsEntity.setCbi2(0.0);
 
 
         return roadsEntity;
@@ -1123,18 +1128,32 @@ public class RoadController {
                             Double mca = 0.0;
                             String opParamSql = "select * from operetional_parameters op ";
                             List<OperetionalParametersEntity> opList = JPA.em().createNativeQuery(opParamSql, OperetionalParametersEntity.class).getResultList();
-                            Double opParam = opList.get(0).getEstimatedMaintenanceCost();
-                            Double cbi = 0.0;
-                            if (road.getPopulationServed() > 0 && road.getLengthInMetres() > 0) {
-                                cbi = (opParam / road.getLengthInMetres()) / road.getPopulationServed();
+                            Double estimatedPeriodicMaintenanceCost = opList.get(0).getEstimatedPeriodicMaintenanceCost();
+                            Double estimatedRoutineMaintenanceCost = opList.get(0).getEstimatedRoutineMaintenanceCost();
+                            Double cbiPeriodic = 0.0;
+                            Double cbiRoutine = 0.0;
+                            if (road.getLengthInMetres() > 0) {
+                                cbiPeriodic =  estimatedPeriodicMaintenanceCost *(road.getLengthInMetres()/new Double(1000));
+                                cbiRoutine =  estimatedRoutineMaintenanceCost *(road.getLengthInMetres()/new Double(1000));
                             }
-                            if (cbi > 0) {
-                                BigDecimal finalCbi = new BigDecimal(cbi).setScale(2, RoundingMode.HALF_UP);
+
+
+                            if (cbiPeriodic > 0) {
+                                BigDecimal finalCbi = new BigDecimal(cbiPeriodic).setScale(2, RoundingMode.HALF_UP);
                                 System.out.println(finalCbi);
-                                road.setCbi(finalCbi.doubleValue());//  value =Double.parseDouble(new DecimalFormat("##.####").format(value));
+                                road.setCbi1(finalCbi.doubleValue());//  value =Double.parseDouble(new DecimalFormat("##.####").format(value));
                             } else {
-                                road.setCbi(new Double(0));
+                                road.setCbi1(new Double(0));
                             }
+
+                            if (cbiRoutine > 0) {
+                                BigDecimal finalCbi = new BigDecimal(cbiRoutine).setScale(2, RoundingMode.HALF_UP);
+                                System.out.println(finalCbi);
+                                road.setCbi2(finalCbi.doubleValue());//  value =Double.parseDouble(new DecimalFormat("##.####").format(value));
+                            } else {
+                                road.setCbi2(new Double(0));
+                            }
+
                             for (CriteriaMasterEntity cm : cmList) {
                                 if (cm.getId() == 1) {
                                     Integer weightFactor = 1;
@@ -1348,17 +1367,31 @@ public class RoadController {
             Double mca = 0.0;
             String opParamSql = "select * from operetional_parameters op ";
             List<OperetionalParametersEntity> opList = JPA.em().createNativeQuery(opParamSql, OperetionalParametersEntity.class).getResultList();
-            Double opParam = opList.get(0).getEstimatedMaintenanceCost();
-            Double cbi = 0.0;
+
+            Double estimatedPeriodicMaintenanceCost = opList.get(0).getEstimatedPeriodicMaintenanceCost();
+            Double getEstimatedRoutineMaintenanceCost = opList.get(0).getEstimatedRoutineMaintenanceCost();
+            Double cbiPeriodic = 0.0;
+            Double cbiRoutine = 0.0;
             if (road.getPopulationServed() > 0 && road.getLengthInMetres() > 0) {
-                cbi = (opParam / road.getLengthInMetres()) / road.getPopulationServed();
+                cbiPeriodic =  estimatedPeriodicMaintenanceCost *(road.getLengthInMetres()/new Double(1000));
+                cbiRoutine =  getEstimatedRoutineMaintenanceCost *(road.getLengthInMetres()/new Double(1000));
             }
-            if (cbi > 0) {
-                BigDecimal finalCbi = new BigDecimal(cbi).setScale(2, RoundingMode.HALF_UP);
+
+
+            if (cbiPeriodic > 0) {
+                BigDecimal finalCbi = new BigDecimal(cbiPeriodic).setScale(2, RoundingMode.HALF_UP);
                 System.out.println(finalCbi);
-                road.setCbi(finalCbi.doubleValue());//  value =Double.parseDouble(new DecimalFormat("##.####").format(value));
+                road.setCbi1(finalCbi.doubleValue());//  value =Double.parseDouble(new DecimalFormat("##.####").format(value));
             } else {
-                road.setCbi(new Double(0));
+                road.setCbi1(new Double(0));
+            }
+
+            if (cbiRoutine > 0) {
+                BigDecimal finalCbi = new BigDecimal(cbiRoutine).setScale(2, RoundingMode.HALF_UP);
+                System.out.println(finalCbi);
+                road.setCbi2(finalCbi.doubleValue());//  value =Double.parseDouble(new DecimalFormat("##.####").format(value));
+            } else {
+                road.setCbi2(new Double(0));
             }
 
             for (CriteriaMasterEntity cm : cmList) {
