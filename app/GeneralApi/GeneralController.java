@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import models.DistrictsEntity;
+import models.RoadsEntity;
 import models.UsersDistrictsEntity;
 import models.UsersEntity;
 import play.db.jpa.JPA;
@@ -158,6 +159,52 @@ public class GeneralController {
         }
     }
 
+
+    @SuppressWarnings("Duplicates")
+    @play.db.jpa.Transactional
+    @BodyParser.Of(BodyParser.Json.class)
+    public Result updateMalakies() throws IOException {
+        ObjectNode result = Json.newObject();
+        try {
+            JsonNode json = request().body().asJson();
+            if (json == null) {
+                return badRequest("Expecting Json data");
+            } else {
+                String query = " select * from roads d where 1=1 ";
+
+
+                List<RoadsEntity> roadsList = JPA.em().createNativeQuery(query,RoadsEntity.class).getResultList();
+                ObjectMapper ow = new ObjectMapper();
+                HashMap<String, Object> returnList = new HashMap<String, Object>();
+                String jsonResult = "";
+                List<HashMap<String, Object>> finalRoadsList = new ArrayList<HashMap<String, Object>>();
+                for (RoadsEntity d: roadsList) {
+
+                    d.setConnectivity(d.getNumberOfConnections());
+                    d.setC6Score(d.getNumberOfConnections());
+
+                }
+                returnList.put("data", finalRoadsList);
+                returnList.put("status", "ok");
+                DateFormat myDateFormat = new SimpleDateFormat("M/d/Y");
+                ow.setDateFormat(myDateFormat);
+                try {
+                    jsonResult = ow.writeValueAsString(returnList);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    result.put("status", "error");
+                    result.put("message", "Problem in fetch data process,communicate with the administrator");
+                    return ok(result);
+                }
+                return ok(jsonResult);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.put("status", "error");
+            result.put("message", "Problem in fetch data process,communicate with the administrator");
+            return ok(result);
+        }
+    }
 
 
 

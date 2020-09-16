@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
-// @SOURCE:C:/developm/qgis_angular/back/conf/routes
-// @DATE:Sun Aug 23 18:40:14 EEST 2020
+// @SOURCE:C:/development/qgis/back/conf/routes
+// @DATE:Mon Sep 14 20:56:44 EEST 2020
 
 
 package router {

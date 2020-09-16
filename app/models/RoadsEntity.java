@@ -81,10 +81,10 @@ public class RoadsEntity {
     private Double trafficVolume;
     private Double safety;
     private Double roadQualityAndNeeds;
+    private Double roadConditionCriterio;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @Column(name = "id")
     public int getId() {
         return id;
@@ -834,6 +834,16 @@ public class RoadsEntity {
         this.roadQualityAndNeeds = roadQualityAndNeeds;
     }
 
+    @Basic
+    @Column(name = "road_condition_criterio")
+    public Double getRoadConditionCriterio() {
+        return roadConditionCriterio;
+    }
+
+    public void setRoadConditionCriterio(Double roadConditionCriterio) {
+        this.roadConditionCriterio = roadConditionCriterio;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -913,11 +923,12 @@ public class RoadsEntity {
                 Objects.equals(requirementsForEarthWorks, that.requirementsForEarthWorks) &&
                 Objects.equals(trafficVolume, that.trafficVolume) &&
                 Objects.equals(safety, that.safety) &&
-                Objects.equals(roadQualityAndNeeds, that.roadQualityAndNeeds);
+                Objects.equals(roadQualityAndNeeds, that.roadQualityAndNeeds) &&
+                Objects.equals(roadConditionCriterio, that.roadConditionCriterio);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, osmId, code, fclass, name, ref, oneway, maxspeed, layer, bridge, tunnel, district, source, roadWidthInM, roadCondition, maxRoadSteepnessPrc, roadsideEnvironment, agricultureFacilitation, commentsOnConnections, lengthOfRoadStretchInM, averageElevationInMAboveSealevel, averagePopulationInPersons, lvrrId, security, environmentalImpacts, districtId, lengthInMetres, widthInMetres, elevationInMetres, populationServed, facilitiesServed, accessToGCsRMs, farmToTheMarket, agriculturalFacilities, linksToMajorActivityCentres, numberOfConnections, c1Id, c1Score, c2Id, c2Score, c3Id, c3Score, c4Id, c4Score, c5Id, c5Score, c6Id, c6Score, c7Id, c7Score, c8Id, c8Score, c9Id, c9Score, c10Id, c10Score, c11Id, c11Score, c12Id, c12Score, c13Id, c13Score, c14Id, c14Score, c15Id, c15Score, mca, cbi1, cbi2, connectivity, roadAccessibility, requirementsForEarthWorks, trafficVolume, safety, roadQualityAndNeeds);
+        return Objects.hash(id, osmId, code, fclass, name, ref, oneway, maxspeed, layer, bridge, tunnel, district, source, roadWidthInM, roadCondition, maxRoadSteepnessPrc, roadsideEnvironment, agricultureFacilitation, commentsOnConnections, lengthOfRoadStretchInM, averageElevationInMAboveSealevel, averagePopulationInPersons, lvrrId, security, environmentalImpacts, districtId, lengthInMetres, widthInMetres, elevationInMetres, populationServed, facilitiesServed, accessToGCsRMs, farmToTheMarket, agriculturalFacilities, linksToMajorActivityCentres, numberOfConnections, c1Id, c1Score, c2Id, c2Score, c3Id, c3Score, c4Id, c4Score, c5Id, c5Score, c6Id, c6Score, c7Id, c7Score, c8Id, c8Score, c9Id, c9Score, c10Id, c10Score, c11Id, c11Score, c12Id, c12Score, c13Id, c13Score, c14Id, c14Score, c15Id, c15Score, mca, cbi1, cbi2, connectivity, roadAccessibility, requirementsForEarthWorks, trafficVolume, safety, roadQualityAndNeeds, roadConditionCriterio);
     }
 }

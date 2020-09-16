@@ -76,8 +76,8 @@ Seq[Any](format.raw/*1.1*/("""<!doctype html>
 object index extends index_Scope0.index
               /*
                   -- GENERATED --
-                  DATE: Wed Jul 29 17:12:47 EEST 2020
-                  SOURCE: C:/developm/qgis_angular/back/app/views/index.scala.html
+                  DATE: Fri Sep 11 03:43:57 EEST 2020
+                  SOURCE: C:/development/qgis/back/app/views/index.scala.html
                   HASH: 94faa07d94e8c400acac420e919d6be3fb9c3399
                   MATRIX: 827->0
                   LINES: 32->1

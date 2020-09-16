@@ -76,8 +76,8 @@ Seq[Any](format.raw/*7.32*/("""
 object main extends main_Scope0.main
               /*
                   -- GENERATED --
-                  DATE: Sun Jul 26 17:30:11 EEST 2020
-                  SOURCE: C:/developm/qgis_angular/back/app/views/main.scala.html
+                  DATE: Fri Sep 11 03:43:57 EEST 2020
+                  SOURCE: C:/development/qgis/back/app/views/main.scala.html
                   HASH: 9c42738213746256b9efafff4f49f7f2f5fc0d27
                   MATRIX: 1002->260|1127->290|1155->292|1235->397|1271->406|1306->414|1332->419|1422->482|1437->488|1533->562|1621->623|1636->629|1716->687|1768->712|1783->718|1864->778|1958->934|1995->944|2023->951|2055->956
                   LINES: 32->7|37->7|39->9|42->12|43->13|43->13|43->13|45->15|45->15|45->15|46->16|46->16|46->16|47->17|47->17|47->17|50->21|51->22|51->22|52->23

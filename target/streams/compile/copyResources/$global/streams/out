@@ -1,6 +1,6 @@
 [0m[[0mdebug[0m] [0mCopy resource mappings: [0m
-[0m[[0mdebug[0m] [0m	(C:\developm\qgis_angular\back\conf\application.conf,C:\developm\qgis_angular\back\target\scala-2.11\classes\application.conf)[0m
-[0m[[0mdebug[0m] [0m	(C:\developm\qgis_angular\back\conf\logback.xml,C:\developm\qgis_angular\back\target\scala-2.11\classes\logback.xml)[0m
-[0m[[0mdebug[0m] [0m	(C:\developm\qgis_angular\back\conf\META-INF,C:\developm\qgis_angular\back\target\scala-2.11\classes\META-INF)[0m
-[0m[[0mdebug[0m] [0m	(C:\developm\qgis_angular\back\conf\routes,C:\developm\qgis_angular\back\target\scala-2.11\classes\routes)[0m
-[0m[[0mdebug[0m] [0m	(C:\developm\qgis_angular\back\conf\META-INF\persistence.xml,C:\developm\qgis_angular\back\target\scala-2.11\classes\META-INF\persistence.xml)[0m
+[0m[[0mdebug[0m] [0m	(C:\development\qgis\back\conf\application.conf,C:\development\qgis\back\target\scala-2.11\classes\application.conf)[0m
+[0m[[0mdebug[0m] [0m	(C:\development\qgis\back\conf\logback.xml,C:\development\qgis\back\target\scala-2.11\classes\logback.xml)[0m
+[0m[[0mdebug[0m] [0m	(C:\development\qgis\back\conf\META-INF,C:\development\qgis\back\target\scala-2.11\classes\META-INF)[0m
+[0m[[0mdebug[0m] [0m	(C:\development\qgis\back\conf\routes,C:\development\qgis\back\target\scala-2.11\classes\routes)[0m
+[0m[[0mdebug[0m] [0m	(C:\development\qgis\back\conf\META-INF\persistence.xml,C:\development\qgis\back\target\scala-2.11\classes\META-INF\persistence.xml)[0m

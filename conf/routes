@@ -24,6 +24,7 @@ GET         /app/*file                             controllers.WebAppAssets.at(p
 
 POST        /getAllProvinces                       GeneralApi.GeneralController.getAllProvinces()
 POST        /getAllDistricts                       GeneralApi.GeneralController.getAllDistricts()
+POST        /updateMalakies                       GeneralApi.GeneralController.updateMalakies()
 
 #CoreDataController
 POST        /getAllCriteriaMaster                  GeneralApi.CoreDataController.getAllCriteriaMaster()

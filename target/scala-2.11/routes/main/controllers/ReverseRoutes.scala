@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
-// @SOURCE:C:/developm/qgis_angular/back/conf/routes
-// @DATE:Sun Aug 23 18:40:14 EEST 2020
+// @SOURCE:C:/development/qgis/back/conf/routes
+// @DATE:Mon Sep 14 20:56:44 EEST 2020
 
 import play.api.mvc.{ QueryStringBindable, PathBindable, Call, JavascriptLiteral }
 import play.core.routing.{ HandlerDef, ReverseRouteContext, queryString, dynamicString }
@@ -28,62 +28,62 @@ package controllers {
   
   }
 
-  // @LINE:34
+  // @LINE:35
   class ReverseRoadController(_prefix: => String) {
     def _defaultPrefix: String = {
       if (_prefix.endsWith("/")) "" else "/"
     }
 
   
-    // @LINE:41
+    // @LINE:42
     def updateRoad(): Call = {
       import ReverseRouteContext.empty
       Call("POST", _prefix + { _defaultPrefix } + "updateRoad")
     }
   
-    // @LINE:37
+    // @LINE:38
     def getRoadsForExporter(): Call = {
       import ReverseRouteContext.empty
       Call("POST", _prefix + { _defaultPrefix } + "getRoadsForExporter")
     }
   
-    // @LINE:39
+    // @LINE:40
     def getAllSnapshotsRecords(): Call = {
       import ReverseRouteContext.empty
       Call("POST", _prefix + { _defaultPrefix } + "getAllSnapshotsRecords")
     }
   
-    // @LINE:40
+    // @LINE:41
     def resetCriteria(): Call = {
       import ReverseRouteContext.empty
       Call("POST", _prefix + { _defaultPrefix } + "resetCriteria")
     }
   
-    // @LINE:36
+    // @LINE:37
     def getAllFromRoadsHistory(): Call = {
       import ReverseRouteContext.empty
       Call("POST", _prefix + { _defaultPrefix } + "getAllFromRoadsHistory")
     }
   
-    // @LINE:35
+    // @LINE:36
     def getAllFromRoads(): Call = {
       import ReverseRouteContext.empty
       Call("POST", _prefix + { _defaultPrefix } + "getAllFromRoads")
     }
   
-    // @LINE:38
+    // @LINE:39
     def calculateCriteria(): Call = {
       import ReverseRouteContext.empty
       Call("POST", _prefix + { _defaultPrefix } + "calculateCriteria")
     }
   
-    // @LINE:42
+    // @LINE:43
     def deleteSnapshot(): Call = {
       import ReverseRouteContext.empty
       Call("POST", _prefix + { _defaultPrefix } + "deleteSnapshot")
     }
   
-    // @LINE:34
+    // @LINE:35
     def importRoadsData(): Call = {
       import ReverseRouteContext.empty
       Call("POST", _prefix + { _defaultPrefix } + "importRoadsData")
@@ -91,32 +91,32 @@ package controllers {
   
   }
 
-  // @LINE:69
+  // @LINE:70
   class ReverseVillageController(_prefix: => String) {
     def _defaultPrefix: String = {
       if (_prefix.endsWith("/")) "" else "/"
     }
 
   
-    // @LINE:72
+    // @LINE:73
     def deleteVillage(): Call = {
       import ReverseRouteContext.empty
       Call("POST", _prefix + { _defaultPrefix } + "deleteVillage")
     }
   
-    // @LINE:69
+    // @LINE:70
     def getAllVillages(): Call = {
       import ReverseRouteContext.empty
       Call("POST", _prefix + { _defaultPrefix } + "getAllVillages")
     }
   
-    // @LINE:70
+    // @LINE:71
     def addVillage(): Call = {
       import ReverseRouteContext.empty
       Call("POST", _prefix + { _defaultPrefix } + "addVillage")
     }
   
-    // @LINE:71
+    // @LINE:72
     def updateVillage(): Call = {
       import ReverseRouteContext.empty
       Call("POST", _prefix + { _defaultPrefix } + "updateVillage")
@@ -139,32 +139,50 @@ package controllers {
   
   }
 
-  // @LINE:77
+  // @LINE:78
   class ReverseUsersController(_prefix: => String) {
     def _defaultPrefix: String = {
       if (_prefix.endsWith("/")) "" else "/"
     }
 
   
-    // @LINE:80
+    // @LINE:82
+    def addUser(): Call = {
+      import ReverseRouteContext.empty
+      Call("POST", _prefix + { _defaultPrefix } + "addUser")
+    }
+  
+    // @LINE:85
+    def deleteUser(): Call = {
+      import ReverseRouteContext.empty
+      Call("POST", _prefix + { _defaultPrefix } + "deleteUser")
+    }
+  
+    // @LINE:81
     def getUsers(): Call = {
       import ReverseRouteContext.empty
       Call("POST", _prefix + { _defaultPrefix } + "getUsers")
     }
   
     // @LINE:79
+    def register(): Call = {
+      import ReverseRouteContext.empty
+      Call("POST", _prefix + { _defaultPrefix } + "register")
+    }
+  
+    // @LINE:84
+    def editUser(): Call = {
+      import ReverseRouteContext.empty
+      Call("POST", _prefix + { _defaultPrefix } + "editUser")
+    }
+  
+    // @LINE:80
     def forgotPwd(): Call = {
       import ReverseRouteContext.empty
       Call("POST", _prefix + { _defaultPrefix } + "forgotPwd")
     }
   
     // @LINE:78
-    def register(): Call = {
-      import ReverseRouteContext.empty
-      Call("POST", _prefix + { _defaultPrefix } + "register")
-    }
-  
-    // @LINE:77
     def login(): Call = {
       import ReverseRouteContext.empty
       Call("POST", _prefix + { _defaultPrefix } + "login")
@@ -202,92 +220,92 @@ package controllers {
   
   }
 
-  // @LINE:47
+  // @LINE:48
   class ReverseFacilitiesController(_prefix: => String) {
     def _defaultPrefix: String = {
       if (_prefix.endsWith("/")) "" else "/"
     }
 
   
-    // @LINE:49
+    // @LINE:50
     def updateFacilitie(): Call = {
       import ReverseRouteContext.empty
       Call("POST", _prefix + { _defaultPrefix } + "updateFacilitie")
     }
   
-    // @LINE:56
+    // @LINE:57
     def updateDistrictCenter(): Call = {
       import ReverseRouteContext.empty
       Call("POST", _prefix + { _defaultPrefix } + "updateDistrictCenter")
     }
   
-    // @LINE:60
+    // @LINE:61
     def deleteSchool(): Call = {
       import ReverseRouteContext.empty
       Call("POST", _prefix + { _defaultPrefix } + "deleteSchool")
     }
   
-    // @LINE:59
+    // @LINE:60
     def updateSchool(): Call = {
       import ReverseRouteContext.empty
       Call("POST", _prefix + { _defaultPrefix } + "updateSchool")
     }
   
-    // @LINE:57
+    // @LINE:58
     def deleteDistrictCenter(): Call = {
       import ReverseRouteContext.empty
       Call("POST", _prefix + { _defaultPrefix } + "deleteDistrictCenter")
     }
   
-    // @LINE:48
+    // @LINE:49
     def addFacilitie(): Call = {
       import ReverseRouteContext.empty
       Call("POST", _prefix + { _defaultPrefix } + "addFacilitie")
     }
   
-    // @LINE:58
+    // @LINE:59
     def addSchool(): Call = {
       import ReverseRouteContext.empty
       Call("POST", _prefix + { _defaultPrefix } + "addSchool")
     }
   
-    // @LINE:47
+    // @LINE:48
     def importFacilitiesDataFromJson(): Call = {
       import ReverseRouteContext.empty
       Call("POST", _prefix + { _defaultPrefix } + "importFacilitiesDataFromJson")
     }
   
-    // @LINE:54
+    // @LINE:55
     def getAllFacilities(): Call = {
       import ReverseRouteContext.empty
       Call("POST", _prefix + { _defaultPrefix } + "getAllFacilities")
     }
   
-    // @LINE:50
+    // @LINE:51
     def deleteFacilitie(): Call = {
       import ReverseRouteContext.empty
       Call("POST", _prefix + { _defaultPrefix } + "deleteFacilitie")
     }
   
-    // @LINE:63
+    // @LINE:64
     def deleteMosque(): Call = {
       import ReverseRouteContext.empty
       Call("POST", _prefix + { _defaultPrefix } + "deleteMosque")
     }
   
-    // @LINE:61
+    // @LINE:62
     def addMosque(): Call = {
       import ReverseRouteContext.empty
       Call("POST", _prefix + { _defaultPrefix } + "addMosque")
     }
   
-    // @LINE:62
+    // @LINE:63
     def updateMosque(): Call = {
       import ReverseRouteContext.empty
       Call("POST", _prefix + { _defaultPrefix } + "updateMosque")
     }
   
-    // @LINE:55
+    // @LINE:56
     def addDistrictCenter(): Call = {
       import ReverseRouteContext.empty
       Call("POST", _prefix + { _defaultPrefix } + "addDistrictCenter")
@@ -310,32 +328,32 @@ package controllers {
   
   }
 
-  // @LINE:93
+  // @LINE:98
   class ReverseNotesController(_prefix: => String) {
     def _defaultPrefix: String = {
       if (_prefix.endsWith("/")) "" else "/"
     }
 
   
-    // @LINE:95
+    // @LINE:100
     def editNote(): Call = {
       import ReverseRouteContext.empty
       Call("POST", _prefix + { _defaultPrefix } + "editNote")
     }
   
-    // @LINE:94
+    // @LINE:99
     def getNoteByRoadId(): Call = {
       import ReverseRouteContext.empty
       Call("POST", _prefix + { _defaultPrefix } + "getNoteByRoadId")
     }
   
-    // @LINE:93
+    // @LINE:98
     def addNote(): Call = {
       import ReverseRouteContext.empty
       Call("POST", _prefix + { _defaultPrefix } + "addNote")
     }
   
-    // @LINE:96
+    // @LINE:101
     def deleteNote(): Call = {
       import ReverseRouteContext.empty
       Call("POST", _prefix + { _defaultPrefix } + "deleteNote")

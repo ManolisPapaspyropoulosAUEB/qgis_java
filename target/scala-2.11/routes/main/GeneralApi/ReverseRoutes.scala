@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
-// @SOURCE:C:/developm/qgis_angular/back/conf/routes
-// @DATE:Sun Aug 23 18:40:14 EEST 2020
+// @SOURCE:C:/development/qgis/back/conf/routes
+// @DATE:Mon Sep 14 20:56:44 EEST 2020
 
 import play.api.mvc.{ QueryStringBindable, PathBindable, Call, JavascriptLiteral }
 import play.core.routing.{ HandlerDef, ReverseRouteContext, queryString, dynamicString }
@@ -13,20 +13,20 @@ import _root_.play.libs.F
 // @LINE:25
 package GeneralApi {
 
-  // @LINE:29
+  // @LINE:30
   class ReverseCoreDataController(_prefix: => String) {
     def _defaultPrefix: String = {
       if (_prefix.endsWith("/")) "" else "/"
     }
 
   
-    // @LINE:29
+    // @LINE:30
     def getAllCriteriaMaster(): Call = {
       import ReverseRouteContext.empty
       Call("POST", _prefix + { _defaultPrefix } + "getAllCriteriaMaster")
     }
   
-    // @LINE:30
+    // @LINE:31
     def updateEstimatedMaintenanceCost(): Call = {
       import ReverseRouteContext.empty
       Call("POST", _prefix + { _defaultPrefix } + "updateEstimatedMaintenanceCost")
@@ -45,6 +45,12 @@ package GeneralApi {
     def getAllDistricts(): Call = {
       import ReverseRouteContext.empty
       Call("POST", _prefix + { _defaultPrefix } + "getAllDistricts")
+    }
+  
+    // @LINE:27
+    def updateMalakies(): Call = {
+      import ReverseRouteContext.empty
+      Call("POST", _prefix + { _defaultPrefix } + "updateMalakies")
     }
   
     // @LINE:25

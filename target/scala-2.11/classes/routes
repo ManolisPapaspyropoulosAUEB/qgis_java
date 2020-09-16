@@ -24,6 +24,7 @@ GET         /app/*file                             controllers.WebAppAssets.at(p
 
 POST        /getAllProvinces                       GeneralApi.GeneralController.getAllProvinces()
 POST        /getAllDistricts                       GeneralApi.GeneralController.getAllDistricts()
+POST        /updateMalakies                       GeneralApi.GeneralController.updateMalakies()
 
 #CoreDataController
 POST        /getAllCriteriaMaster                  GeneralApi.CoreDataController.getAllCriteriaMaster()
@@ -72,12 +73,16 @@ POST        /updateVillage                         controllers.VillageController
 POST        /deleteVillage                         controllers.VillageController.deleteVillage()
 
 
-#UsersController
+#UsersController updateUser
 
 POST        /login                                 controllers.UsersController.login()
 POST        /register                              controllers.UsersController.register()
 POST        /forgotPwd                             controllers.UsersController.forgotPwd()
-POST        /getUsers                           controllers.UsersController.getUsers()
+POST        /getUsers                              controllers.UsersController.getUsers()
+POST        /addUser                               controllers.UsersController.addUser()
+#POST        /updateUser                            controllers.UsersController.updateUser()
+POST        /editUser                              controllers.UsersController.editUser()
+POST        /deleteUser                            controllers.UsersController.deleteUser()
 
 #DocumentsController
 

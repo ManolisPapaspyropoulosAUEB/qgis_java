@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
-// @SOURCE:C:/developm/qgis_angular/back/conf/routes
-// @DATE:Sun Aug 23 18:40:14 EEST 2020
+// @SOURCE:C:/development/qgis/back/conf/routes
+// @DATE:Mon Sep 14 20:56:44 EEST 2020
 
 import play.api.routing.JavaScriptReverseRoute
 import play.api.mvc.{ QueryStringBindable, PathBindable, Call, JavascriptLiteral }
@@ -15,7 +15,7 @@ import _root_.play.libs.F
 package GeneralApi.javascript {
   import ReverseRouteContext.empty
 
-  // @LINE:29
+  // @LINE:30
   class ReverseCoreDataController(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -23,7 +23,7 @@ package GeneralApi.javascript {
     }
 
   
-    // @LINE:29
+    // @LINE:30
     def getAllCriteriaMaster: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "GeneralApi.CoreDataController.getAllCriteriaMaster",
       """
@@ -33,7 +33,7 @@ package GeneralApi.javascript {
       """
     )
   
-    // @LINE:30
+    // @LINE:31
     def updateEstimatedMaintenanceCost: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "GeneralApi.CoreDataController.updateEstimatedMaintenanceCost",
       """
@@ -59,6 +59,16 @@ package GeneralApi.javascript {
       """
         function() {
           return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "getAllDistricts"})
+        }
+      """
+    )
+  
+    // @LINE:27
+    def updateMalakies: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "GeneralApi.GeneralController.updateMalakies",
+      """
+        function() {
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "updateMalakies"})
         }
       """
     )
