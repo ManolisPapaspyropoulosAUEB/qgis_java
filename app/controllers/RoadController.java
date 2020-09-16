@@ -436,7 +436,7 @@ public class RoadController {
                         roadObject.put("safetyLabel","Very bad safety history/potential (road is very frequently connected to injuries and fatalities) – more than 10 road accidents with people killed");
                     }else if(roads.getSafety()==4){
                         roadObject.put("safetyLabel", "Bad safety history/potential (road is frequently connected to injuries and fatalities) – up to 10 road accidents with people killed and seriously injured\t");
-                    }else if(roads.getSafety()==5){
+                    }else if(roads.getSafety()==3){
                         roadObject.put("safetyLabel", "Average safety history/potential – 5 to 10 road accidents with people killed and/or seriously injured");
                     }else if(roads.getSafety()==2 ){
                         roadObject.put("safetyLabel","Good safety history/potential (road is not frequently connected to injuries and fatalities) - less than 5 road accidents – with people injured or serious injured, no deaths");
