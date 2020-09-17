@@ -31,7 +31,7 @@ public class RoadsRevisionsEntity {
     private Integer averageElevationInMAboveSealevel;
     private String averagePopulationInPersons;
     private Integer lvrrId;
-    private Integer security;
+    private Double security;
     private Integer environmentalImpacts;
     private Integer districtId;
     private Integer lengthInMetres;
@@ -333,11 +333,11 @@ public class RoadsRevisionsEntity {
 
     @Basic
     @Column(name = "security")
-    public Integer getSecurity() {
+    public Double getSecurity() {
         return security;
     }
 
-    public void setSecurity(Integer security) {
+    public void setSecurity(Double security) {
         this.security = security;
     }
 

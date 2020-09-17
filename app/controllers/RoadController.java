@@ -3,18 +3,13 @@ package controllers;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import jdk.nashorn.internal.parser.JSONParser;
 import models.*;
-import org.cloudinary.json.JSONObject;
 import play.db.jpa.JPA;
 import play.libs.Json;
 import play.mvc.BodyParser;
 import play.mvc.Http;
 import play.mvc.Result;
-import scala.util.parsing.json.JSON;
-
 import javax.persistence.Query;
-import javax.xml.transform.Source;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -22,19 +17,12 @@ import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
-
 import static play.mvc.Http.Context.Implicit.request;
 import static play.mvc.Results.badRequest;
 import static play.mvc.Results.ok;
-
 public class RoadController {
 
-
     private static DecimalFormat df2 = new DecimalFormat("#.##");
-
-    //
-
-
     @SuppressWarnings("Duplicates")
     @play.db.jpa.Transactional
     @BodyParser.Of(BodyParser.Json.class)
@@ -50,7 +38,6 @@ public class RoadController {
                 String fclass = json.findPath("fclass").asText();
                 String orderCol = json.findPath("orderCol").asText();
                 String descAsc = json.findPath("descAsc").asText();
-                //result
                 Integer resultParam = json.findPath("result").asInt();
                 String nameFilter = json.findPath("nameFilter").asText();
                 String sqlInFclass = json.findPath("sqlInFclass").asText();
@@ -121,12 +108,8 @@ public class RoadController {
                         roadObject.put("code", "-");
                     }
                     roadObject.put("checked", false);
-
-
                     roadObject.put("linksToMajorActivityCentres", roads.getAccessToGCsRMs()+roads.getFacilitiesServed());
                     roadObject.put("connectivity", roads.getConnectivity());
-
-
                     roadObject.put("fclass", roads.getFclass());
                     if (!roads.getOsmId().equalsIgnoreCase("") && roads.getOsmId() != null) {
                         roadObject.put("name", roads.getName());
@@ -271,6 +254,9 @@ public class RoadController {
     }
 
 
+
+
+
     @SuppressWarnings("Duplicates")
     @play.db.jpa.Transactional
     @BodyParser.Of(BodyParser.Json.class)
@@ -409,7 +395,6 @@ public class RoadController {
                     roadObject.put("districtId", roads.getDistrictId());
                     roadObject.put("districtCode", roads.getDistrictId());
                     roadObject.put("lengthInMetres", roads.getLengthInMetres());
-//criteria//
                     roadObject.put("populationServed", roads.getPopulationServed());
                     roadObject.put("checked", false);
                     roadObject.put("roadConditionCriterio", roads.getRoadConditionCriterio().toString());
@@ -422,20 +407,39 @@ public class RoadController {
                     roadObject.put("linksToMajorActivityCentres", roads.getAccessToGCsRMs()+roads.getFacilitiesServed());
                     roadObject.put("connectivity", roads.getConnectivity());
                     roadObject.put("roadAccessibility", roads.getRoadAccessibility().toString());
+                    if(roads.getRoadAccessibility()==10){
+                        roadObject.put("roadAccessibilityLabel", "Bad");
+                    }else if(roads.getRoadAccessibility()==6){
+                        roadObject.put("roadAccessibilityLabel",    "Poor");
+                    }else if(roads.getRoadAccessibility()==3){
+                        roadObject.put("roadAccessibilityLabel", "Limited/fair");
+                    }else if(roads.getRoadAccessibility()==0 ){
+                        roadObject.put("roadAccessibilityLabel", "Good");
+                    }
                     roadObject.put("numberOfConnections", roads.getNumberOfConnections());
                     roadObject.put("roadCondition", roads.getRoadCondition());
                     roadObject.put("roadQualityAndNeeds", roads.getRoadQualityAndNeeds().toString());
                     roadObject.put("requirementsForEarthWorks", roads.getRequirementsForEarthWorks().toString());
                     roadObject.put("trafficVolume", roads.getTrafficVolume().toString());
+                    if(roads.getTrafficVolume()==5){
+                        roadObject.put("trafficVolumeLabel","Very Heavy volume (150 - 200 Vehicles Per Day)");
+                    }else if(roads.getTrafficVolume()==4){
+                        roadObject.put("trafficVolumeLabel", "Heavy volume (100 - 150 Vehicles Per Day)");
+                    }else if(roads.getTrafficVolume()==3){
+                        roadObject.put("trafficVolumeLabel", "Medium volume (50 - 100 Vehicles Per Day)");
+                    }else if(roads.getTrafficVolume()==2 ){
+                        roadObject.put("trafficVolumeLabel","Light volume (10 - 50 Vehicles Per Day)");
+                    }else if(roads.getTrafficVolume()==1){
+                        roadObject.put("trafficVolumeLabel", "Very Light volume (1 – 10 Vehicles Per Day)");
+                    }else if(roads.getTrafficVolume()==0){
+                        roadObject.put("trafficVolumeLabel", "No volume (0 Vehicles Per Day)");
+                    }
                     roadObject.put("safety", roads.getSafety().toString());
                     roadObject.put("safetyLabel", roads.getSafety().toString());
-
-
-
                     if(roads.getSafety()==5){
                         roadObject.put("safetyLabel","Very bad safety history/potential (road is very frequently connected to injuries and fatalities) – more than 10 road accidents with people killed");
                     }else if(roads.getSafety()==4){
-                        roadObject.put("safetyLabel", "Bad safety history/potential (road is frequently connected to injuries and fatalities) – up to 10 road accidents with people killed and seriously injured\t");
+                        roadObject.put("safetyLabel", "Bad safety history/potential (road is frequently connected to injuries and fatalities) – up to 10 road accidents with people killed and seriously injured");
                     }else if(roads.getSafety()==3){
                         roadObject.put("safetyLabel", "Average safety history/potential – 5 to 10 road accidents with people killed and/or seriously injured");
                     }else if(roads.getSafety()==2 ){
@@ -445,16 +449,12 @@ public class RoadController {
                     }else if(roads.getSafety()==0){
                         roadObject.put("safetyLabel", "Perfect safety history/potential (no injuries and fatalities have been recorded)");
                     }
-
-
-                    roadObject.put("security", roads.getSecurity());
                     roadObject.put("environmentalImpacts", roads.getEnvironmentalImpacts().toString());
-
                     if(roads.getEnvironmentalImpacts()==5){
                         roadObject.put("environmentalImpactsLabel","Extremely adverse environmental impacts (road use activities result in extremely harmful effects on the environment and/or on cultural heritage preservation areas. Traffic diversion, control and calming measures must be taken immediately)");
                     }else if(roads.getEnvironmentalImpacts()==4){
                         roadObject.put("environmentalImpactsLabel", "Serious adverse environmental impacts (road use activities result in seriously harmful effects on the environment and/or on cultural heritage preservation areas. There is an urgent need to take traffic control and calming measures)");
-                    }else if(roads.getEnvironmentalImpacts()==5){
+                    }else if(roads.getEnvironmentalImpacts()==3){
                         roadObject.put("environmentalImpactsLabel", "Average environmental impacts (road use activities to be seriously assessed as to the harmful effects on the environment and/or on cultural heritage preservation areas)");
                     }else if(roads.getEnvironmentalImpacts()==2 ){
                         roadObject.put("environmentalImpactsLabel","Few adverse environmental impacts (road use activities result in limited harmful effects on the environment and/or on cultural heritage preservation areas.)");
@@ -463,10 +463,20 @@ public class RoadController {
                     }else if(roads.getEnvironmentalImpacts()==0){
                         roadObject.put("environmentalImpactsLabel", "Perfect- No negative environmental impacts");
                     }
-
-
-
-//end of criteria//
+                    roadObject.put("security", roads.getSecurity().toString());
+                    if(roads.getSecurity()==5){
+                        roadObject.put("securityLabel","Very bad security history/potential (the District is very frequently connected to criminal activities and terrorism) – 100% Taliban control (TB)");
+                    }else if(roads.getSecurity()==4){
+                        roadObject.put("securityLabel", "Bad security history/potential (The District is frequently connected to criminal activities and terrorism) – Government control 10-40% - TB control 90-60% ");
+                    }else if(roads.getSecurity()==3){
+                        roadObject.put("securityLabel", "Average security history/potential – Government control 60-50%, TB control 40-50% over District");
+                    }else if(roads.getSecurity()==2 ){
+                        roadObject.put("securityLabel","Good security history/potential (The district is not frequently connected to criminal activities and terrorism) – Government control 70-90%, TB control 10-30%");
+                    }else if(roads.getSecurity()==1){
+                        roadObject.put("securityLabel", "Excellent security history/potential (criminal activities and terrorism are very rare) – Government control 90-100% - TB control up to 10%");
+                    }else if(roads.getSecurity()==0){
+                        roadObject.put("securityLabel", "Perfect security history/potential (no criminal activities and terrorism have ever been recorded) – 100% Government control");
+                    }
                     roadObject.put("numberOfConnections", roads.getNumberOfConnections());
                     roadObject.put("c1Id", roads.getC1Id());
                     roadObject.put("c1Score", roads.getC1Score());
@@ -533,11 +543,8 @@ public class RoadController {
 
                     String opParamSql = "select * from operetional_parameters op ";
                     List<OperetionalParametersEntity> opList = JPA.em().createNativeQuery(opParamSql, OperetionalParametersEntity.class).getResultList();
-
                     roadObject.put("CBI1_ROUTINE_TYPOS", "(" +opList.get(0).getEstimatedRoutineMaintenanceCost()  +"*" +"(" + roads.getLengthInMetres()/1000.00+"))"+"/"+roads.getPopulationServed()   );
                     roadObject.put("CBI2_PERIODIC_TYPOS", "(" +opList.get(0).getEstimatedPeriodicMaintenanceCost()  +"*" +"(" + roads.getLengthInMetres()/1000.00+"))"+"/"+roads.getPopulationServed()   );
-
-
                     roadObject.put("mca", roads.getMca());
                     roadObject.put("cbiRoutine", roads.getCbi2());
                     roadObject.put("cbiPeriodic", roads.getCbi1());
@@ -877,7 +884,7 @@ public class RoadController {
         }
 
         if (roadsEntity.getSecurity() == null) {
-            roadsEntity.setSecurity(0);
+            roadsEntity.setSecurity(0.0);
         }
         if (roadsEntity.getEnvironmentalImpacts() == null) {
             roadsEntity.setEnvironmentalImpacts(0);
@@ -1300,42 +1307,9 @@ public class RoadController {
                                     mca += road.getC13Score();
                                 }
                                 if (cm.getId() == 14) {
-
-                                    if (road.getDistrictId() == 1409) {
-                                        road.setC14Score(0.0);
-                                        road.setC14Id(98);
-                                    } else if (road.getDistrictId() == 1403) {
-                                        road.setC14Score(0.0);
-                                        road.setC14Id(99);
-                                    } else if (road.getDistrictId() == 1401) {
-                                        road.setC14Score(0.0);
-                                        road.setC14Id(100);
-                                    } else if (road.getDistrictId() == 1402) {
-                                        road.setC14Score(0.0);
-                                        road.setC14Id(101);
-                                    } else if (road.getDistrictId() == 1405) {
-                                        road.setC14Score(2.0);
-                                        road.setC14Id(102);
-                                    } else if (road.getDistrictId() == 1406) {
-                                        road.setC14Score(2.0);
-                                        road.setC14Id(103);
-                                    } else if (road.getDistrictId() == 1410) {
-                                        road.setC14Score(5.0);
-                                        road.setC14Id(104);
-                                    } else if (road.getDistrictId() == 1407) {
-                                        road.setC14Score(3.0);
-                                        road.setC14Id(105);
-                                    } else if (road.getDistrictId() == 1412) {
-                                        road.setC14Score(3.0);
-                                        road.setC14Id(106);
-                                    } else if (road.getDistrictId() == 1404) {
-                                        road.setC14Score(0.0);
-                                        road.setC14Id(107);
-                                    } else if (road.getDistrictId() == 1408) {
-                                        road.setC14Score(0.0);
-                                        road.setC14Id(108);
-                                    }
+                                    road.setC14Score(road.getSecurity());
                                     mca += road.getC14Score();
+
                                 }
                                 if (cm.getId() == 15) {
                                     road.setC15Score(Double.valueOf(road.getEnvironmentalImpacts()));
@@ -1360,279 +1334,7 @@ public class RoadController {
     }
 
 
-//    @SuppressWarnings("Duplicates")
-//    @play.db.jpa.Transactional
-//    @BodyParser.Of(BodyParser.Json.class)
-//    public Result calculateCriteria() {
-//        ObjectNode result = Json.newObject();
-//        try {
-//            JsonNode json = request().body().asJson();
-//            if (json == null) {
-//                return badRequest("Expecting Json data");
-//            } else {
-//                String district_id = json.findPath("district_id").asText();
-//                String lvrr_id = json.findPath("lvrr_id").asText();
-//                boolean snapshot = json.findPath("snapshot").asBoolean();
-//                if (district_id.isEmpty() || district_id.equalsIgnoreCase("0")) {
-//                    result.put("status", "error");
-//                    result.put("message", "Ανεπιτυχής Διαδικασία.");
-//                    return ok(result);
-//                } else {
-//                    String criteriaMasterSql = "select cm.* FROM criteria_master cm";
-//                    List<CriteriaMasterEntity> cmList = JPA.em().createNativeQuery(criteriaMasterSql, CriteriaMasterEntity.class).getResultList();
-//                    String roadsSql = "select * from roads r where 1=1";
-//                    if (!district_id.isEmpty()) {
-//                        roadsSql += " and r.district_id=" + district_id;
-//                    }
-//                    if (!lvrr_id.isEmpty()) {
-//                        roadsSql += " and r.lvrr_id=" + lvrr_id;
-//                    }
-//                    if (!district_id.isEmpty()) {
-//                        List<RoadsEntity> roadsList = JPA.em().createNativeQuery(roadsSql, RoadsEntity.class).getResultList();
-//                        if (snapshot == true) {
-//                            SnapshotEntity s = new SnapshotEntity();
-//                            s.setCreationDate(new Date());
-//                            s.setTitle("snapshot taked " + new Date());
-//                            JPA.em().persist(s);
-//                            for (RoadsEntity road : roadsList) {
-//                                JsonNode roadObject = Json.toJson(road);
-//                                ((ObjectNode) roadObject).remove("id");
-//                                RoadsRevisionsEntity roadRevision = Json.fromJson(roadObject, RoadsRevisionsEntity.class);
-//                                roadRevision.setRoadId(road.getId());
-//                                roadRevision.setSnapshotId(s.getId());
-//                                JPA.em().persist(roadRevision);
-//                            }
-//                        }
-//                        for (RoadsEntity road : roadsList) {
-//                            Double mca = 0.0;
-//                            String opParamSql = "select * from `operetional_parameters` op ";
-//                            List<OperetionalParametersEntity> opList = JPA.em().createNativeQuery(opParamSql, OperetionalParametersEntity.class).getResultList();
-//                            Double estimatedPeriodicMaintenanceCost = opList.get(0).getEstimatedPeriodicMaintenanceCost();
-//                            Double estimatedRoutineMaintenanceCost = opList.get(0).getEstimatedRoutineMaintenanceCost();
-//                            Double cbiPeriodic = 0.0;
-//                            Double cbiRoutine = 0.0;
-//                            if (road.getLengthInMetres() > 0) {
-//                                cbiPeriodic =  (estimatedPeriodicMaintenanceCost *(road.getLengthInMetres()/new Double(1000)))/road.getPopulationServed();
-//                                cbiRoutine =  (estimatedRoutineMaintenanceCost *(road.getLengthInMetres()/new Double(1000)))/road.getPopulationServed();
-//                            }
-//                            if (cbiPeriodic > 0) {
-//                                BigDecimal finalCbi = new BigDecimal(cbiPeriodic).setScale(2, RoundingMode.HALF_UP);
-//                                System.out.println(finalCbi);
-//                                road.setCbi1(finalCbi.doubleValue());//  value =Double.parseDouble(new DecimalFormat("##.####").format(value));
-//                            } else {
-//                                road.setCbi1(new Double(0));
-//                            }
-//                            if (cbiRoutine > 0) {
-//                                BigDecimal finalCbi = new BigDecimal(cbiRoutine).setScale(2, RoundingMode.HALF_UP);
-//                                System.out.println(finalCbi);
-//                                road.setCbi2(finalCbi.doubleValue());//  value =Double.parseDouble(new DecimalFormat("##.####").format(value));
-//                            } else {
-//                                road.setCbi2(new Double(0));
-//                            }
-//                            for (CriteriaMasterEntity cm : cmList) {
-//                                if (cm.getId() == 1) {
-//                                    Integer weightFactor = 1;
-//                                    if (cm.getCalculateIndicator() == 1) {
-//                                        if (road.getPopulationServed() == 0) {
-//                                            road.setC1Score(0.0);
-//                                            road.setC1Id(1);
-//                                        }
-//                                        if (road.getPopulationServed() > 0 && road.getPopulationServed() < 999) {
-//                                            road.setC1Score(Double.valueOf(4 * weightFactor));
-//                                            road.setC1Id(2);
-//                                        }
-//                                        if (road.getPopulationServed() > 1000 && road.getPopulationServed() < 1999) {
-//                                            road.setC1Score(Double.valueOf(8 * weightFactor));
-//                                            road.setC1Id(3);
-//                                        }
-//                                        if (road.getPopulationServed() > 2000 && road.getPopulationServed() < 2999) {
-//                                            road.setC1Score(Double.valueOf(12 * weightFactor));
-//                                            road.setC1Id(4);
-//                                        }
-//                                        if (road.getPopulationServed() > 3000) {
-//                                            road.setC1Score(Double.valueOf(15 * weightFactor));
-//                                            road.setC1Id(5);
-//                                        }
-//                                    }
-//                                    mca += road.getC1Score();
-//                                }
-//                                if (cm.getId() == 2) {
-//                                    Integer weightFactor = 1;
-//                                    if (cm.getCalculateIndicator() == 1) {
-//                                        if (road.getFacilitiesServed() == 0) {
-//                                            road.setC2Score(0.0);
-//                                            road.setC2Id(10);
-//                                        }
-//                                        if (road.getFacilitiesServed() >= 1 && road.getFacilitiesServed() <= 9) {
-//                                            road.setC2Score(road.getFacilitiesServed().doubleValue());
-//                                            road.setC2Id((int) (10 + road.getFacilitiesServed()));
-//                                        }
-//                                        if (road.getFacilitiesServed() >= 10) {
-//                                            road.setC2Score(10.0);
-//                                            road.setC2Id(20);
-//                                        }
-//                                    }
-//                                    mca += road.getC2Score() * weightFactor;
-//                                }
-//                                if (cm.getId() == 3) {
-//                                    Integer weightFactor = 1;
-//                                    String sqlMasterDetail = "select cmd.* from criteria_master_details cmd where cmd.score=" + road.getAccessToGCsRMs() + " and cmd.criteria_master_id=3";
-//                                    List<CriteriaMasterDetailsEntity> cmdList = JPA.em().createNativeQuery(sqlMasterDetail, CriteriaMasterDetailsEntity.class).getResultList();
-//                                    if (cmdList.size() > 0) {
-//                                        road.setC3Id(cmdList.get(0).getId());
-//                                        road.setC3Score(road.getAccessToGCsRMs());
-//                                        mca += road.getC3Score() * weightFactor;
-//                                    } else {
-//                                        road.setC3Id(0);
-//                                        road.setC3Score(0.0);
-//                                    }
-//                                }
-//                                if (cm.getId() == 4) {
-//                                    Integer weightFactor = 1;
-//                                    String sqlMasterDetail = "select cmd.* from criteria_master_details cmd where cmd.score=" + road.getFarmToTheMarket() + " and cmd.criteria_master_id=4";
-//                                    List<CriteriaMasterDetailsEntity> cmdList = JPA.em().createNativeQuery(sqlMasterDetail, CriteriaMasterDetailsEntity.class).getResultList();
-//                                    if (cmdList.size() > 0) {
-//
-//                                        road.setC4Id(cmdList.get(0).getId());
-//                                        road.setC4Score(road.getFarmToTheMarket());
-//                                        mca += road.getC4Score() * weightFactor;
-//                                    } else {
-//                                        road.setC4Id(0);
-//                                        road.setC4Score(0.0);
-//                                    }
-//                                }
-//                                if (cm.getId() == 5) {
-//                                    Integer weightFactor = 1;
-//                                    String sqlMasterDetail = "select cmd.* from criteria_master_details cmd where cmd.score=" + road.getAgriculturalFacilities() + " and cmd.criteria_master_id=5";
-//                                    List<CriteriaMasterDetailsEntity> cmdList = JPA.em().createNativeQuery(sqlMasterDetail, CriteriaMasterDetailsEntity.class).getResultList();
-//
-//                                    if (cmdList.size() > 0) {
-//                                        road.setC5Id(cmdList.get(0).getId());
-//                                        road.setC5Score(road.getAgriculturalFacilities());
-//                                        mca += road.getC5Score() * weightFactor;
-//                                    } else {
-//                                        road.setC5Id(0);
-//                                        road.setC5Score(0.0);
-//                                    }
-//                                }
-//                                if (cm.getId() == 6) {
-//                                    Integer weightFactor = 5;
-//                                    road.setC6Id(0);
-//                                    if (road.getLinksToMajorActivityCentres() <= 5) {
-//                                        road.setC6Score(road.getConnectivity());
-//                                    } else {
-//                                        road.setC6Score(5.0);
-//                                    }
-//                                }
-//                                if (cm.getId() == 7) {
-//                                    road.setC7Score(0.0);
-//                                    road.setC7Id(0);
-//                                    mca += road.getC7Score();
-//                                }
-//                                if (cm.getId() == 8) {
-//                                    Integer weightFactor = 1;
-//                                    String sqlMasterDetail = "select cmd.* from criteria_master_details cmd where cmd.score=" + road.getNumberOfConnections() + " and cmd.criteria_master_id=8";
-//                                    List<CriteriaMasterDetailsEntity> cmdList = JPA.em().createNativeQuery(sqlMasterDetail, CriteriaMasterDetailsEntity.class).getResultList();
-//                                    if (cmdList.size() > 0) {
-//                                        road.setC8Id(cmdList.get(0).getId());
-//                                        road.setC8Score(road.getNumberOfConnections());
-//                                        mca += road.getC8Score() * weightFactor;
-//                                    } else {
-//                                        road.setC8Id(0);
-//                                        road.setC8Score(0.0);
-//                                    }
-//                                }
-//                                if (cm.getId() == 9) {
-//                                    road.setC9Score(0.0);
-//
-//                                    road.setC9Id(0);
-//                                    mca += road.getC9Score();
-//                                }
-//                                if (cm.getId() == 10) {
-//                                    road.setC10Score(0.0);
-//                                    road.setC10Id(0);
-//                                    mca += road.getC10Score();
-//                                }
-//                                if (cm.getId() == 11) {
-//                                    road.setC11Score(0.0);
-//                                    road.setC11Id(0);
-//                                    mca += road.getC11Score();
-//                                }
-//                                if (cm.getId() == 12) {
-//                                    road.setC12Score(0.0);
-//                                    road.setC12Id(0);
-//                                    mca += road.getC12Score();
-//                                }
-//                                if (cm.getId() == 13) {
-//                                    road.setC13Score(0.0);
-//                                    road.setC13Id(0);
-//                                    mca += road.getC13Score();
-//                                }
-//                                if (cm.getId() == 14) {
-//
-//                                    if (road.getDistrictId() == 1409) {
-//                                        road.setC14Score(0.0);
-//                                        road.setC14Id(98);
-//                                    } else if (road.getDistrictId() == 1403) {
-//                                        road.setC14Score(0.0);
-//                                        road.setC14Id(99);
-//                                    } else if (road.getDistrictId() == 1401) {
-//                                        road.setC14Score(0.0);
-//                                        road.setC14Id(100);
-//                                    } else if (road.getDistrictId() == 1402) {
-//                                        road.setC14Score(0.0);
-//                                        road.setC14Id(101);
-//                                    } else if (road.getDistrictId() == 1405) {
-//                                        road.setC14Score(2.0);
-//                                        road.setC14Id(102);
-//                                    } else if (road.getDistrictId() == 1406) {
-//                                        road.setC14Score(2.0);
-//                                        road.setC14Id(103);
-//                                    } else if (road.getDistrictId() == 1410) {
-//                                        road.setC14Score(5.0);
-//                                        road.setC14Id(104);
-//                                    } else if (road.getDistrictId() == 1407) {
-//                                        road.setC14Score(3.0);
-//                                        road.setC14Id(105);
-//                                    } else if (road.getDistrictId() == 1412) {
-//                                        road.setC14Score(3.0);
-//                                        road.setC14Id(106);
-//                                    } else if (road.getDistrictId() == 1404) {
-//                                        road.setC14Score(0.0);
-//                                        road.setC14Id(107);
-//                                    } else if (road.getDistrictId() == 1408) {
-//                                        road.setC14Score(0.0);
-//                                        road.setC14Id(108);
-//                                    }
-//                                    mca += road.getC14Score();
-//                                }
-//                                if (cm.getId() == 15) {
-//                                    road.setC15Score(0.0);
-//                                    road.setC15Id(0);
-//                                    mca += road.getC15Score();
-//                                }
-//                            }
-//                            // road.setLinksToMajorActivityCentres(road.getC2Score()+road.getC3Score());
-//
-//                            road.setMca(mca);
-//                            JPA.em().merge(road);
-//                        }
-//                    }
-//                    result.put("status", "ok");
-//                    result.put("message", "Criteria has been updated succesfully");
-//                    return ok(result);
-//                }
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            result.put("status", "error");
-//            result.put("message", "Not selected District");
-//            return ok(result);
-//        }
-//    }
-
     @SuppressWarnings("Duplicates")
-
     private HashMap<String, Object> calculateCriteriaAfterImport(RoadsEntity road) {
         try {
             HashMap<String, Object> result = new HashMap<>();
@@ -1654,7 +1356,6 @@ public class RoadController {
 
             if (cbiPeriodic > 0) {
                 BigDecimal finalCbi = new BigDecimal(cbiPeriodic).setScale(2, RoundingMode.HALF_UP);
-                System.out.println(finalCbi);
                 road.setCbi1(finalCbi.doubleValue());//  value =Double.parseDouble(new DecimalFormat("##.####").format(value));
             } else {
                 road.setCbi1(new Double(0));
@@ -1662,12 +1363,10 @@ public class RoadController {
 
             if (cbiRoutine > 0) {
                 BigDecimal finalCbi = new BigDecimal(cbiRoutine).setScale(2, RoundingMode.HALF_UP);
-                System.out.println(finalCbi);
                 road.setCbi2(finalCbi.doubleValue());//  value =Double.parseDouble(new DecimalFormat("##.####").format(value));
             } else {
                 road.setCbi2(new Double(0));
             }
-
             for (CriteriaMasterEntity cm : cmList) {
                 if (cm.getId() == 1) {
                     Integer weightFactor = 1;
@@ -1757,7 +1456,9 @@ public class RoadController {
                 if (cm.getId() == 6) {
                     Integer weightFactor = 5;
                     road.setC6Id(0);
-                    road.setC6Score(road.getNumberOfConnections());
+                    road.setC6Score(road.getConnectivity());
+                    mca += road.getC6Score();
+
                 }
                 if (cm.getId() == 7) {
                     road.setC7Score(0.0);
@@ -1778,9 +1479,12 @@ public class RoadController {
                     }
                 }
                 if (cm.getId() == 9) {
+                    Integer weightFactor = 1;
+
                     road.setC9Id(0);
                     if(road.getRoadCondition()=="asphalt" || road.getRoadCondition()=="concrete"){
                         road.setC9Score(5.0);
+                        mca += road.getC9Score() * weightFactor;
 
                     }else {
                         road.setC9Score(0.0);
@@ -1788,17 +1492,17 @@ public class RoadController {
                     mca += road.getC9Score();
                 }
                 if (cm.getId() == 10) {
-                    road.setC10Score(0.0);
+                    road.setC10Score(road.getRoadQualityAndNeeds());
                     road.setC10Id(0);
                     mca += road.getC10Score();
                 }
                 if (cm.getId() == 11) {
-                    road.setC11Score(0.0);
+                    road.setC11Score(road.getRequirementsForEarthWorks());
                     road.setC11Id(0);
                     mca += road.getC11Score();
                 }
                 if (cm.getId() == 12) {
-                    road.setC12Score(0.0);
+                    road.setC12Score(road.getTrafficVolume());
                     road.setC12Id(0);
                     mca += road.getC12Score();
                 }
@@ -1808,42 +1512,9 @@ public class RoadController {
                     mca += road.getC13Score();
                 }
                 if (cm.getId() == 14) {
-
-                    if (road.getDistrictId() == 1409) {
-                        road.setC14Score(0.0);
-                        road.setC14Id(98);
-                    } else if (road.getDistrictId() == 1403) {
-                        road.setC14Score(0.0);
-                        road.setC14Id(99);
-                    } else if (road.getDistrictId() == 1401) {
-                        road.setC14Score(0.0);
-                        road.setC14Id(100);
-                    } else if (road.getDistrictId() == 1402) {
-                        road.setC14Score(0.0);
-                        road.setC14Id(101);
-                    } else if (road.getDistrictId() == 1405) {
-                        road.setC14Score(2.0);
-                        road.setC14Id(102);
-                    } else if (road.getDistrictId() == 1406) {
-                        road.setC14Score(2.0);
-                        road.setC14Id(103);
-                    } else if (road.getDistrictId() == 1410) {
-                        road.setC14Score(5.0);
-                        road.setC14Id(104);
-                    } else if (road.getDistrictId() == 1407) {
-                        road.setC14Score(3.0);
-                        road.setC14Id(105);
-                    } else if (road.getDistrictId() == 1412) {
-                        road.setC14Score(3.0);
-                        road.setC14Id(106);
-                    } else if (road.getDistrictId() == 1404) {
-                        road.setC14Score(0.0);
-                        road.setC14Id(107);
-                    } else if (road.getDistrictId() == 1408) {
-                        road.setC14Score(0.0);
-                        road.setC14Id(108);
-                    }
+                    road.setC14Score(road.getSecurity());
                     mca += road.getC14Score();
+
                 }
                 if (cm.getId() == 15) {
                     road.setC15Score(Double.valueOf(road.getEnvironmentalImpacts()));
@@ -1861,8 +1532,6 @@ public class RoadController {
             result.put("message", "Error while calculate criteria mca cbi rates");
             return result;
         }
-
-
     }
 
 
@@ -1916,9 +1585,7 @@ public class RoadController {
                 Integer elevationInMetres = json.findPath("elevationInMetres").asInt();
                 Integer facilitiesServed = json.findPath("facilitiesServed").asInt();
                 Double connectivity = json.findPath("connectivity").asDouble();
-
-
-
+                Double security = json.findPath("security").asDouble();
                 Double farmToTheMarket = json.findPath("farmToTheMarket").asDouble();
                 Double roadConditionCriterio = json.findPath("roadConditionCriterio").asDouble();
                 Double roadQualityAndNeeds = json.findPath("roadQualityAndNeeds").asDouble();
@@ -1947,6 +1614,7 @@ public class RoadController {
                 } else {
                     road.setBridge("F");
                 }
+                road.setSecurity(security);
 
                 road.setTrafficVolume(trafficVolume);
                 road.setRequirementsForEarthWorks(requirementsForEarthWorks);
@@ -1977,8 +1645,6 @@ public class RoadController {
                 road.setLinksToMajorActivityCentres(road.getFacilitiesServed()+road.getAccessToGCsRMs());
                 road.setConnectivity(connectivity);
                 RoadsEntity fixedRoad = removeNullsFromRoad(road);
-
-
                 JPA.em().merge(fixedRoad);
                 result.put("status", "ok");
                 result.put("lvrr_id", road.getLvrrId());
