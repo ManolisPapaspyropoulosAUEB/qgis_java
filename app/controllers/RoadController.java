@@ -1266,7 +1266,6 @@ public class RoadController {
     }
 
 
-
     @SuppressWarnings("Duplicates")
     private HashMap<String, Object> calculateCriteriaAfterImport(RoadsEntity road) {
         try {
@@ -1486,7 +1485,7 @@ public class RoadController {
                         road.setC3Id(25);
                     } else if (road.getAccessToGCsRMs() == 5) {
                         road.setC3Id(26);
-                    }else{
+                    } else {
                         road.setC3Id(116);
                     }
 
@@ -1542,7 +1541,7 @@ public class RoadController {
                     } else if (road.getNumberOfConnections() == 6) {
                         road.setNumberOfConnections(5.0);
                         road.setC8Id(44);
-                    }else if (road.getNumberOfConnections() == 0){
+                    } else if (road.getNumberOfConnections() == 0) {
                         road.setC8Id(117);
 
                     }
@@ -1558,7 +1557,7 @@ public class RoadController {
                         road.setC9Id(48);
                     } else if (road.getRoadConditionCriterio() == 1) {
                         road.setC9Id(49);
-                    }else if (road.getRoadConditionCriterio() == 0){
+                    } else if (road.getRoadConditionCriterio() == 0) {
                         road.setC9Id(118);
                     }
 
@@ -1736,7 +1735,8 @@ public class RoadController {
                     road.setTunnel("F");
                 }
                 road.setLinksToMajorActivityCentres(road.getFacilitiesServed() + road.getAccessToGCsRMs());
-                //criteria
+                /**-------------------------------------------UPDATE CRITERIA------------------------------------------------------**/
+                /**populationServed**/
                 road.setPopulationServed(populationServed.doubleValue());
                 if (populationServed == 0) {
                     road.setC1Id(1);
@@ -1749,6 +1749,7 @@ public class RoadController {
                 } else if (populationServed >= 3000) {
                     road.setC1Id(5);
                 }
+                /**facilitiesServed**/
                 road.setFacilitiesServed(facilitiesServed.doubleValue());
                 if (facilitiesServed == 0) {
                     road.setC2Id(10);
@@ -1773,13 +1774,15 @@ public class RoadController {
                 } else if (facilitiesServed >= 10) {
                     road.setC2Id(20);
                 }
+                /**accessToGCsRMs**/
                 CriteriaMasterDetailsEntity cmdAcc = JPA.em().find(CriteriaMasterDetailsEntity.class, accessToGCsRMs);
                 road.setAccessToGCsRMs(cmdAcc.getScore());
                 road.setC3Id(cmdAcc.getId());
-
+                /**farmToTheMarket**/
                 CriteriaMasterDetailsEntity cmdFarmTM = JPA.em().find(CriteriaMasterDetailsEntity.class, farmToTheMarket);
                 road.setFarmToTheMarket(cmdFarmTM.getScore());
                 road.setC4Id(cmdFarmTM.getId());
+                /**agriculturalFacilities**/
                 CriteriaMasterDetailsEntity cmdAgr = JPA.em().find(CriteriaMasterDetailsEntity.class, agricultureFacilitation);
                 road.setAgriculturalFacilities(cmdAgr.getScore());
                 if (cmdAgr.getScore() == 5) {
@@ -1788,9 +1791,11 @@ public class RoadController {
                     road.setAgricultureFacilitation("FALSE");
                 }
                 road.setC5Id(cmdAgr.getId());
+                /**roadConditionCriterio**/
                 CriteriaMasterDetailsEntity cmdRoadConditionCriterio = JPA.em().find(CriteriaMasterDetailsEntity.class, roadConditionCriterio);
-                road.setAccessToGCsRMs(cmdRoadConditionCriterio.getScore());
                 road.setC9Id(cmdRoadConditionCriterio.getId());
+                road.setRoadConditionCriterio(cmdRoadConditionCriterio.getScore());
+                /**connectivity**/
                 road.setConnectivity(connectivity);
                 if (connectivity == 0) {
                     road.setC6Id(35);
@@ -1840,6 +1845,7 @@ public class RoadController {
                 road.setEnvironmentalImpacts((int) cmdEnvironmentalImpacts.getScore());
                 road.setC15Id(cmdEnvironmentalImpacts.getId());
                 road.setEnvironmentalImpacts(environmentalImpacts);
+                /**-------------------------------------------END OF UPDATE CRITERIA------------------------------------------------------**/
                 RoadsEntity fixedRoad = removeNullsFromRoad(road);
                 JPA.em().merge(fixedRoad);
                 result.put("status", "ok");
