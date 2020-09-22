@@ -30,16 +30,19 @@ POST        /getAllCriteriaMaster                  GeneralApi.CoreDataController
 POST        /updateEstimatedMaintenanceCost        GeneralApi.CoreDataController.updateEstimatedMaintenanceCost()
 
 
-#RoadsController
+#RoadsController fill_C_id_columns_Roads
 POST        /importRoadsData                       controllers.RoadController.importRoadsData()
-POST        /getAllFromRoads                       controllers.RoadController.getAllFromRoads()
+POST        /getAllFromRoads                       controllers.RoadController.getAllFromRoadsView()
+POST        /fill_C_id_columns_Roads               controllers.RoadController.fill_C_id_columns_Roads()
+#POST        /getAllFromRoads2                       controllers.RoadController.getAllFromRoads2()
 POST        /getAllFromRoadsHistory                controllers.RoadController.getAllFromRoadsHistory()
 POST        /getRoadsForExporter                   controllers.RoadController.getRoadsForExporter()
 POST        /calculateCriteria                     controllers.RoadController.calculateCriteria()
 POST        /getAllSnapshotsRecords                controllers.RoadController.getAllSnapshotsRecords()
-POST        /resetCriteria                         controllers.RoadController.resetCriteria()
 POST        /updateRoad                            controllers.RoadController.updateRoad()
 POST        /deleteSnapshot                        controllers.RoadController.deleteSnapshot()
+POST        /getRoadsColumns                       controllers.RoadController.getRoadsColumns()
+POST        /getAllFromRoadsView                       controllers.RoadController.getAllFromRoadsView()
 
 
 #FacilitiesController
