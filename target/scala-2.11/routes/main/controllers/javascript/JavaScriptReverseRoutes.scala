@@ -1,7 +1,7 @@
 
 // @GENERATOR:play-routes-compiler
 // @SOURCE:C:/development/qgis/back/conf/routes
-// @DATE:Mon Sep 14 20:56:44 EEST 2020
+// @DATE:Wed Oct 14 20:37:30 EEST 2020
 
 import play.api.routing.JavaScriptReverseRoute
 import play.api.mvc.{ QueryStringBindable, PathBindable, Call, JavascriptLiteral }
@@ -35,7 +35,7 @@ package controllers.javascript {
   
   }
 
-  // @LINE:35
+  // @LINE:34
   class ReverseRoadController(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -53,7 +53,21 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:38
+    // @LINE:35
+    def getAllFromRoadsView: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.RoadController.getAllFromRoadsView",
+      """
+        function() {
+        
+          if (true) {
+            return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "getAllFromRoads"})
+          }
+        
+        }
+      """
+    )
+  
+    // @LINE:39
     def getRoadsForExporter: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.RoadController.getRoadsForExporter",
       """
@@ -63,7 +77,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:40
+    // @LINE:41
     def getAllSnapshotsRecords: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.RoadController.getAllSnapshotsRecords",
       """
@@ -73,17 +87,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:41
-    def resetCriteria: JavaScriptReverseRoute = JavaScriptReverseRoute(
-      "controllers.RoadController.resetCriteria",
-      """
-        function() {
-          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "resetCriteria"})
-        }
-      """
-    )
-  
-    // @LINE:37
+    // @LINE:38
     def getAllFromRoadsHistory: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.RoadController.getAllFromRoadsHistory",
       """
@@ -93,17 +97,27 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:36
-    def getAllFromRoads: JavaScriptReverseRoute = JavaScriptReverseRoute(
-      "controllers.RoadController.getAllFromRoads",
+    // @LINE:44
+    def getRoadsColumns: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.RoadController.getRoadsColumns",
       """
         function() {
-          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "getAllFromRoads"})
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "getRoadsColumns"})
         }
       """
     )
   
-    // @LINE:39
+    // @LINE:36
+    def fill_C_id_columns_Roads: JavaScriptReverseRoute = JavaScriptReverseRoute(
+      "controllers.RoadController.fill_C_id_columns_Roads",
+      """
+        function() {
+          return _wA({method:"POST", url:"""" + _prefix + { _defaultPrefix } + """" + "fill_C_id_columns_Roads"})
+        }
+      """
+    )
+  
+    // @LINE:40
     def calculateCriteria: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.RoadController.calculateCriteria",
       """
@@ -123,7 +137,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:35
+    // @LINE:34
     def importRoadsData: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.RoadController.importRoadsData",
       """
@@ -205,7 +219,7 @@ package controllers.javascript {
   
   }
 
-  // @LINE:78
+  // @LINE:77
   class ReverseUsersController(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -213,7 +227,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:82
+    // @LINE:81
     def addUser: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.UsersController.addUser",
       """
@@ -223,7 +237,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:85
+    // @LINE:83
     def deleteUser: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.UsersController.deleteUser",
       """
@@ -233,7 +247,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:81
+    // @LINE:80
     def getUsers: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.UsersController.getUsers",
       """
@@ -243,7 +257,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:79
+    // @LINE:78
     def register: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.UsersController.register",
       """
@@ -253,7 +267,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:84
+    // @LINE:82
     def editUser: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.UsersController.editUser",
       """
@@ -263,7 +277,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:80
+    // @LINE:79
     def forgotPwd: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.UsersController.forgotPwd",
       """
@@ -273,7 +287,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:78
+    // @LINE:77
     def login: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.UsersController.login",
       """
@@ -325,7 +339,7 @@ package controllers.javascript {
   
   }
 
-  // @LINE:48
+  // @LINE:49
   class ReverseFacilitiesController(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -333,7 +347,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:50
+    // @LINE:51
     def updateFacilitie: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.FacilitiesController.updateFacilitie",
       """
@@ -343,7 +357,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:57
+    // @LINE:58
     def updateDistrictCenter: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.FacilitiesController.updateDistrictCenter",
       """
@@ -353,7 +367,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:61
+    // @LINE:62
     def deleteSchool: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.FacilitiesController.deleteSchool",
       """
@@ -363,7 +377,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:60
+    // @LINE:61
     def updateSchool: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.FacilitiesController.updateSchool",
       """
@@ -373,7 +387,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:58
+    // @LINE:59
     def deleteDistrictCenter: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.FacilitiesController.deleteDistrictCenter",
       """
@@ -383,7 +397,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:49
+    // @LINE:50
     def addFacilitie: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.FacilitiesController.addFacilitie",
       """
@@ -393,7 +407,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:59
+    // @LINE:60
     def addSchool: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.FacilitiesController.addSchool",
       """
@@ -403,7 +417,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:48
+    // @LINE:49
     def importFacilitiesDataFromJson: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.FacilitiesController.importFacilitiesDataFromJson",
       """
@@ -413,7 +427,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:55
+    // @LINE:56
     def getAllFacilities: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.FacilitiesController.getAllFacilities",
       """
@@ -423,7 +437,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:51
+    // @LINE:52
     def deleteFacilitie: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.FacilitiesController.deleteFacilitie",
       """
@@ -433,7 +447,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:64
+    // @LINE:65
     def deleteMosque: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.FacilitiesController.deleteMosque",
       """
@@ -443,7 +457,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:62
+    // @LINE:63
     def addMosque: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.FacilitiesController.addMosque",
       """
@@ -453,7 +467,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:63
+    // @LINE:64
     def updateMosque: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.FacilitiesController.updateMosque",
       """
@@ -463,7 +477,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:56
+    // @LINE:57
     def addDistrictCenter: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.FacilitiesController.addDistrictCenter",
       """
@@ -495,7 +509,7 @@ package controllers.javascript {
   
   }
 
-  // @LINE:98
+  // @LINE:94
   class ReverseNotesController(_prefix: => String) {
 
     def _defaultPrefix: String = {
@@ -503,7 +517,7 @@ package controllers.javascript {
     }
 
   
-    // @LINE:100
+    // @LINE:96
     def editNote: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.NotesController.editNote",
       """
@@ -513,7 +527,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:99
+    // @LINE:95
     def getNoteByRoadId: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.NotesController.getNoteByRoadId",
       """
@@ -523,7 +537,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:98
+    // @LINE:94
     def addNote: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.NotesController.addNote",
       """
@@ -533,7 +547,7 @@ package controllers.javascript {
       """
     )
   
-    // @LINE:101
+    // @LINE:97
     def deleteNote: JavaScriptReverseRoute = JavaScriptReverseRoute(
       "controllers.NotesController.deleteNote",
       """

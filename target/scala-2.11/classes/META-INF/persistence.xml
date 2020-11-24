@@ -23,6 +23,7 @@
         <class>models.SnapshotEntity</class>
         <class>models.FacilitiesEntity</class>
         <class>models.UsersDistrictsEntity</class>
+        <class>models.RoadsCriteriaDetailsViewEntity</class>
 
 
         <properties>

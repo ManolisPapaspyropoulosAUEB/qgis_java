@@ -1144,6 +1144,7 @@ public class RoadController {
                                 JPA.em().persist(roadRevision);
                             }
                         }
+
                         for (RoadsEntity road : roadsList) {
                             Double mca = 0.0;
                             String opParamSql = "select * from `operetional_parameters` op ";
@@ -1153,10 +1154,17 @@ public class RoadController {
                             Double cbiPeriodic = 0.0;
                             Double cbiRoutine = 0.0;
                             if (road.getLengthInMetres() > 0) {
-                                cbiPeriodic = (estimatedPeriodicMaintenanceCost * (road.getLengthInMetres() / new Double(1000))) / road.getPopulationServed();
-                                cbiRoutine = (estimatedRoutineMaintenanceCost * (road.getLengthInMetres() / new Double(1000))) / road.getPopulationServed();
+                                if( road.getPopulationServed()==0){
+                                    cbiPeriodic = (estimatedPeriodicMaintenanceCost * (road.getLengthInMetres() / new Double(1000))) / 1;
+                                    cbiRoutine = (estimatedRoutineMaintenanceCost * (road.getLengthInMetres() / new Double(1000))) / 1;
+                                }else{
+                                    cbiPeriodic = (estimatedPeriodicMaintenanceCost * (road.getLengthInMetres() / new Double(1000))) / road.getPopulationServed();
+                                    cbiRoutine = (estimatedRoutineMaintenanceCost * (road.getLengthInMetres() / new Double(1000))) / road.getPopulationServed();
+                                }
+
                             }
                             if (cbiPeriodic > 0) {
+//                                System.out.println(cbiPeriodic);
                                 BigDecimal finalCbi = new BigDecimal(cbiPeriodic).setScale(2, RoundingMode.HALF_UP);
                                 road.setCbi1(finalCbi.doubleValue());//  value =Double.parseDouble(new DecimalFormat("##.####").format(value));
                             } else {
@@ -1282,8 +1290,13 @@ public class RoadController {
             Double cbiPeriodic = 0.0;
             Double cbiRoutine = 0.0;
             if (road.getLengthInMetres() > 0) {
-                cbiPeriodic = (estimatedPeriodicMaintenanceCost * (road.getLengthInMetres() / new Double(1000))) / road.getPopulationServed();
-                cbiRoutine = (estimatedRoutineMaintenanceCost * (road.getLengthInMetres() / new Double(1000))) / road.getPopulationServed();
+                if( road.getPopulationServed()==0){
+                    cbiPeriodic = (estimatedPeriodicMaintenanceCost * (road.getLengthInMetres() / new Double(1000))) / 1;
+                    cbiRoutine = (estimatedRoutineMaintenanceCost * (road.getLengthInMetres() / new Double(1000))) / 1;
+                }else{
+                    cbiPeriodic = (estimatedPeriodicMaintenanceCost * (road.getLengthInMetres() / new Double(1000))) / road.getPopulationServed();
+                    cbiRoutine = (estimatedRoutineMaintenanceCost * (road.getLengthInMetres() / new Double(1000))) / road.getPopulationServed();
+                }
             }
 
             if (cbiPeriodic > 0) {

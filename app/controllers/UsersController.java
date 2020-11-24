@@ -84,6 +84,7 @@ public class UsersController {
                     result.put("status", "ok");
                     result.put("id",  usList.get(0).getId());
                     result.put("email",  usList.get(0).getEmail());
+                    result.put("password",  usList.get(0).getPassword());
                     result.put("role", usList.get(0).getRole());
                     result.put("fullName", usList.get(0).getName()+" "+usList.get(0).getLastName());
                     result.put("message", "Success login!");
@@ -132,12 +133,13 @@ public class UsersController {
                 }
                 HashMap<String, Object> returnList = new HashMap<String, Object>();
                 Query q = JPA.em().createNativeQuery(sqlQuery, UsersEntity.class);
-                List<UsersEntity> distList = q.getResultList();
+                List<UsersEntity> usersEntityList = q.getResultList();
+
                 ObjectMapper ow = new ObjectMapper();
                 String jsonResult = "";
                 Integer total = q.getResultList().size();
                 List<HashMap<String, Object>> finalRoadsList = new ArrayList<HashMap<String, Object>>();
-                for (UsersEntity d: distList) {
+                for (UsersEntity d: usersEntityList) {
                     HashMap<String, Object> roadObject = new HashMap<String, Object>();
                     roadObject.put("id", d.getId());
                     roadObject.put("name", d.getName());

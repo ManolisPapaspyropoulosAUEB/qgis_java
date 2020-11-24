@@ -90,7 +90,7 @@ POST        /deleteImage                           documents.DocumentsController
 GET         /downloadFile                          documents.DocumentsController.downloadFile()
 GET         /downloadDocument                      documents.DocumentsController.downloadDocument()
 
-#UsersController
+#NotesController
 POST        /addNote                               controllers.NotesController.addNote()
 POST        /getNoteByRoadId                       controllers.NotesController.getNoteByRoadId()
 POST        /editNote                              controllers.NotesController.editNote()

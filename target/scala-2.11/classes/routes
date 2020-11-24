@@ -21,30 +21,31 @@ GET         /app/*file                             controllers.WebAppAssets.at(p
 
 
 #GeneralController
-
 POST        /getAllProvinces                       GeneralApi.GeneralController.getAllProvinces()
 POST        /getAllDistricts                       GeneralApi.GeneralController.getAllDistricts()
-POST        /updateMalakies                       GeneralApi.GeneralController.updateMalakies()
+POST        /updateMalakies                        GeneralApi.GeneralController.updateMalakies()
 
 #CoreDataController
 POST        /getAllCriteriaMaster                  GeneralApi.CoreDataController.getAllCriteriaMaster()
 POST        /updateEstimatedMaintenanceCost        GeneralApi.CoreDataController.updateEstimatedMaintenanceCost()
 
 
-#RoadsController
+#RoadsController fill_C_id_columns_Roads
 POST        /importRoadsData                       controllers.RoadController.importRoadsData()
-POST        /getAllFromRoads                       controllers.RoadController.getAllFromRoads()
+POST        /getAllFromRoads                       controllers.RoadController.getAllFromRoadsView()
+POST        /fill_C_id_columns_Roads               controllers.RoadController.fill_C_id_columns_Roads()
+#POST        /getAllFromRoads2                       controllers.RoadController.getAllFromRoads2()
 POST        /getAllFromRoadsHistory                controllers.RoadController.getAllFromRoadsHistory()
 POST        /getRoadsForExporter                   controllers.RoadController.getRoadsForExporter()
 POST        /calculateCriteria                     controllers.RoadController.calculateCriteria()
 POST        /getAllSnapshotsRecords                controllers.RoadController.getAllSnapshotsRecords()
-POST        /resetCriteria                         controllers.RoadController.resetCriteria()
 POST        /updateRoad                            controllers.RoadController.updateRoad()
 POST        /deleteSnapshot                        controllers.RoadController.deleteSnapshot()
+POST        /getRoadsColumns                       controllers.RoadController.getRoadsColumns()
+POST        /getAllFromRoadsView                       controllers.RoadController.getAllFromRoadsView()
 
 
 #FacilitiesController
-
 POST        /importFacilitiesDataFromJson          controllers.FacilitiesController.importFacilitiesDataFromJson()
 POST        /addFacilitie                          controllers.FacilitiesController.addFacilitie()
 POST        /updateFacilitie                       controllers.FacilitiesController.updateFacilitie()
@@ -66,7 +67,6 @@ POST        /deleteMosque                          controllers.FacilitiesControl
 
 
 #VillagesController
-
 POST        /getAllVillages                        controllers.VillageController.getAllVillages()
 POST        /addVillage                            controllers.VillageController.addVillage()
 POST        /updateVillage                         controllers.VillageController.updateVillage()
@@ -74,18 +74,15 @@ POST        /deleteVillage                         controllers.VillageController
 
 
 #UsersController updateUser
-
 POST        /login                                 controllers.UsersController.login()
 POST        /register                              controllers.UsersController.register()
 POST        /forgotPwd                             controllers.UsersController.forgotPwd()
 POST        /getUsers                              controllers.UsersController.getUsers()
 POST        /addUser                               controllers.UsersController.addUser()
-#POST        /updateUser                            controllers.UsersController.updateUser()
 POST        /editUser                              controllers.UsersController.editUser()
 POST        /deleteUser                            controllers.UsersController.deleteUser()
 
 #DocumentsController
-
 POST        /uploadPhotoTest                       documents.DocumentsController.uploadPhotoTest()
 POST        /getPhotoByRoadId                      documents.DocumentsController.getPhotoByRoadId()
 POST        /uploadFile                            documents.DocumentsController.uploadFile()
@@ -93,19 +90,8 @@ POST        /deleteImage                           documents.DocumentsController
 GET         /downloadFile                          documents.DocumentsController.downloadFile()
 GET         /downloadDocument                      documents.DocumentsController.downloadDocument()
 
-#UsersController
-
+#NotesController
 POST        /addNote                               controllers.NotesController.addNote()
 POST        /getNoteByRoadId                       controllers.NotesController.getNoteByRoadId()
 POST        /editNote                              controllers.NotesController.editNote()
 POST        /deleteNote                            controllers.NotesController.deleteNote()
-
-
-
-
-
-
-
-
-
-

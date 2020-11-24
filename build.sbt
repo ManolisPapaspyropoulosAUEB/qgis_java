@@ -20,6 +20,7 @@ libraryDependencies ++= Seq(
   "com.lowagie" % "itext" % "2.1.7",
   "net.sourceforge.jexcelapi" % "jxl" % "2.6.10",
   "org.codehaus.groovy" % "groovy-all" % "1.7.5",
+
   "org.apache.poi" % "poi" % "3.8",
   "org.apache.poi" % "poi-ooxml" % "3.9",
   "org.mindrot" % "jbcrypt" % "0.3m",
@@ -28,8 +29,8 @@ libraryDependencies ++= Seq(
   "org.modelmapper" % "modelmapper" % "2.3.0"
 
 )
+
 resolvers += Resolver.url("Objectify Play Repository", url("http://schaloner.github.com/releases/"))(Resolver.ivyStylePatterns)
 //routesGenerator := StaticRoutesGenerator
-
 libraryDependencies += filters
 //libraryDependencies += "com.typesafe.akka" %% "akka-actor" % "2.6.0"
